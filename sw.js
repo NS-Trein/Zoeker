@@ -1,6 +1,6 @@
 // Service worker: zorgt dat de app offline opent en plaatjes snel laden.
 // Verander VERSIE als je plaatjes vervangt met dezelfde bestandsnaam.
-const VERSIE = "trein-v12";
+const VERSIE = "trein-v13";
 const BESTANDEN = ["./", "index.html", "manifest.webmanifest", "icon-180.png", "icon-192.png", "icon-512.png",
   "plaatjes/ddz-4.png",
   "plaatjes/ddz-6.png",

@@ -776,8 +776,14 @@ function afstandM(a, b) {
 // Veldnamen gebaseerd op de NS-documentatie (Virtual Train API en Reisinformatie API). Klopt iets niet? Zie console.log.
 function leesNabij(j) {
   const p = j.payload || j;
-  return (p.treinen || []).map(t => ({nr: String(t.ritId || t.treinNummer || t.ritnummer || ""), soort: String(t.type || "").toUpperCase(), lat: t.lat, lng: t.lng, snelheid: (t.snelheid || 0) / 3.6}))
-    .filter(t => t.nr && typeof t.lat === "number" && typeof t.lng === "number");
+  const lijst = p.treinen || p.vehicles || p.trains || (Array.isArray(p) ? p : []);
+  return lijst.map(t => ({
+    nr: String(t.ritId || t.treinNummer || t.ritnummer || t.journeyId || t.nummer || ""),
+    soort: String(t.type || t.treinType || t.categorie || "").toUpperCase(),
+    lat: t.lat ?? t.latitude ?? (t.locatie && t.locatie.lat) ?? (t.location && t.location.lat),
+    lng: t.lng ?? t.longitude ?? (t.locatie && t.locatie.lng) ?? (t.location && t.location.lng),
+    snelheid: (t.snelheid ?? t.speed ?? 0) / 3.6
+  })).filter(t => t.nr && typeof t.lat === "number" && typeof t.lng === "number");
 }
 function leesRit(j) {
   const p = j.payload || j, ruw = p.stops || [];

@@ -13,6 +13,7 @@ Website: https://ns-trein.github.io/Zoeker/ (GitHub Pages)
 `index.html` (de app) · `sw.js` (offline) · `manifest.webmanifest` · `icon-*.png` · `plaatjes/` · `diagnose.html` (testpagina) · `worker.js` (Cloudflare, niet op GitHub)
 
 ## Log (nieuwste bovenaan)
+- **v13** · 10 okt 2026 · Claude A: eerste echte test gaf 500 op /nabij: de Worker gebruikte `/virtual-train-api/api/v1/...`, maar de Virtual Train API antwoordt alleen op `/v1/...` (bron: README van github.com/ultimatelemon/perron, die ook meldt dat het product Ns-App de Virtual Train API bevat). `worker.js` gebruikt nu `/v1/...`, probeert bij /nabij en /trein meerdere paden achter elkaar en meldt het werkende pad in de header `X-NS-Pad` (en bij falen alle geprobeerde paden in het antwoord); `diagnose.html` toont dat; `leesNabij` in `index.html` accepteert meer antwoordvormen.
 - **v12** · 10 okt 2026 · Claude A: `WORKER_URL` in `index.html` ingevuld (https://treinplek.cpqsws8cpg.workers.dev); de demo-balk verdwijnt daardoor en de app gebruikt echte NS-gegevens (met `?demo=1` in het adres krijg je nog steeds de demo). Verder niets veranderd.
 - **v11** · 10 okt 2026 · Claude A: website-adres bekend (https://ns-trein.github.io/Zoeker/); `TOEGESTAAN` in `worker.js` ingevuld met https://ns-trein.github.io; gecontroleerd dat de app werkt vanuit de submap /Zoeker/ (geen absolute paden, service worker en offline-cache OK). Verder niets in de app veranderd.
 - **v10** · 10 okt 2026 · Claude A: `diagnose.html` erbij (test Worker en NS-sleutel per route, met uitleg bij fout 401/403/404 en een Kopieer-knop); testuitleg in `worker.js` gecorrigeerd (de Worker-URL zelf in de browser openen geeft altijd 403). `index.html` is niet veranderd; de gebruiker vult zelf `WORKER_URL` in.
@@ -27,7 +28,8 @@ Website: https://ns-trein.github.io/Zoeker/ (GitHub Pages)
 - **v1** · gebruiker: eerste `index.html` met drie delen per trein.
 
 ## Open / niet getest
-- `worker.js` en de NS-veldnamen zijn niet met een echte NS-sleutel getest. Onbekend of het NS-product "Ns-App" ook de Virtual Train API (routes /nabij, /trein) bevat; controleer dat met `diagnose.html`.
+- Het exacte pad voor treinen in de buurt (/nabij) is nog niet bevestigd: de Worker probeert /v1/trein, /v1/vehicle en /api/vehicle. Zodra `diagnose.html` een werkend pad meldt (X-NS-Pad), alleen dat pad laten staan. De veldnamen van het antwoord zijn ook nog niet bevestigd. NS-limiet: 300 aanvragen per 5 minuten per sleutel (Automatisch ververst elke 12 s).
+- Eerder: `worker.js` en de NS-veldnamen zijn niet met een echte NS-sleutel getest. Onbekend of het NS-product "Ns-App" ook de Virtual Train API (routes /nabij, /trein) bevat; controleer dat met `diagnose.html`.
 - Vergrootglas alleen getest met nagebootste aanraking in Chromium, niet op een echte iPhone (houd-en-sleep, scrollen en het vergrootglas boven de vinger).
 - Animaties alleen getest in een gewone browser (ook met "beperk beweging" aan), niet op een echte iPhone.
 - Vragen: welke VIRM-nummers zijn oud/flow? ICNG-D (3351-3362) ook flow? R-net 2010-2015 = 3 bakken? SNG-4 boven 2750 (tot 2788)?

@@ -36,7 +36,8 @@ const UITLEG = {
   403: "De Worker weigert deze website (403). Pas TOEGESTAAN bovenin de Worker aan naar het adres van je website.",
   404: "NS kent dit pad niet (404). Kopieer het resultaat en stuur het naar Claude, dan pas ik het pad aan.",
   429: "Te veel aanvragen (429). Wacht even en probeer opnieuw.",
-  500: "De Worker mist iets (500). Staat NS_KEY als Secret in de Worker?"
+  500.1: "De Worker mist je NS-sleutel. Zet NS_KEY als Secret in Cloudflare (Settings, Variables and Secrets) en klik op Deploy.",
+  500: "NS gaf een interne fout (500). Meestal klopt het pad of een parameter niet. Onder het resultaat staat welke NS-paden de Worker probeerde. Kopieer het resultaat en stuur het naar Claude."
 };
 try { $("w").value = localStorage.getItem("diag-w") || ""; } catch (_) {}
 fetch("index.html").then(r => r.text()).then(t => { const m = t.match(/const WORKER_URL = "([^"]*)"/); if (m && m[1]) $("w").value = m[1]; }).catch(() => {});
@@ -53,7 +54,8 @@ async function test(naam, pad) {
   try {
     const t0 = performance.now(), r = await fetch(w + pad), tekst = await r.text();
     let net = tekst; try { net = JSON.stringify(JSON.parse(tekst), null, 2); } catch (_) {}
-    toon(r.status, `${naam}\n${pad}\n${r.status} ${r.statusText} (${Math.round(performance.now() - t0)} ms)\n\n` + net.slice(0, 6000) + (net.length > 6000 ? "\n…(ingekort)" : ""));
+    const nsPad = r.headers.get("x-ns-pad");
+    toon(/NS_KEY ontbreekt/.test(tekst) ? 500.1 : r.status, `${naam}\n${pad}\n${r.status} ${r.statusText} (${Math.round(performance.now() - t0)} ms)\n` + (nsPad ? `NS-pad dat werkte: ${nsPad}\n` : "") + "\n" + net.slice(0, 6000) + (net.length > 6000 ? "\n…(ingekort)" : ""));
   } catch (e) { toon(0, `${naam}\n${pad}\nGeen verbinding: ${e.message}\nControleer de Worker-URL (zonder / aan het eind) en TOEGESTAAN in de Worker.`); }
 }
 $("b1").onclick = () => {
