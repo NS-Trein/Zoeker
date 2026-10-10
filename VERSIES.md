@@ -8,9 +8,14 @@
 5. Zet open vragen en dingen die niet getest zijn onderaan.
 
 ## Bestanden
-`index.html` (de app) · `sw.js` (offline) · `manifest.webmanifest` · `icon-*.png` · `plaatjes/` · `worker.js` (Cloudflare, niet op GitHub)
+Website: https://ns-trein.github.io/Zoeker/ (GitHub Pages)
+
+`index.html` (de app) · `sw.js` (offline) · `manifest.webmanifest` · `icon-*.png` · `plaatjes/` · `diagnose.html` (testpagina) · `worker.js` (Cloudflare, niet op GitHub)
 
 ## Log (nieuwste bovenaan)
+- **v12** · 10 okt 2026 · Claude A: `WORKER_URL` in `index.html` ingevuld (https://treinplek.cpqsws8cpg.workers.dev); de demo-balk verdwijnt daardoor en de app gebruikt echte NS-gegevens (met `?demo=1` in het adres krijg je nog steeds de demo). Verder niets veranderd.
+- **v11** · 10 okt 2026 · Claude A: website-adres bekend (https://ns-trein.github.io/Zoeker/); `TOEGESTAAN` in `worker.js` ingevuld met https://ns-trein.github.io; gecontroleerd dat de app werkt vanuit de submap /Zoeker/ (geen absolute paden, service worker en offline-cache OK). Verder niets in de app veranderd.
+- **v10** · 10 okt 2026 · Claude A: `diagnose.html` erbij (test Worker en NS-sleutel per route, met uitleg bij fout 401/403/404 en een Kopieer-knop); testuitleg in `worker.js` gecorrigeerd (de Worker-URL zelf in de browser openen geeft altijd 403). `index.html` is niet veranderd; de gebruiker vult zelf `WORKER_URL` in.
 - **v9** · 10 okt 2026 · Claude A (gebaseerd op v8 van Claude B): vergrootglas bij het kiezen van je plek (kort tikken zet de cirkel meteen; vinger 0,23 s stilhouden en slepen toont een vergrootglas boven je vinger en de pagina scrolt dan niet mee); de melding "Tik eerst op je plek in de trein" staat nu in een rood vlak vlak boven de Deel-knop (schudt even, verdwijnt zodra je een plek kiest).
 - **v8** · 10 okt 2026 · Claude B: in het deelplaatje is elk treindeel een eigen trein: de eerste bak van elk deel heeft een afgeronde linkerbovenhoek en de laatste bak een afgeronde rechterbovenhoek (bij 6 bakken in 2 delen dus ronding bij 1, 3, 4 en 6). Het kopje "Voorkant ... Achterkant" bovenin is gewoon zoals het was.
 - **v7** · 10 okt 2026 · Claude B: tandwiel rechtsboven opent **Instellingen** (Animatie aan/uit + Zelf trein samenstellen verhuisd van het beginscherm); verversknop staat rechts als echte knop met tekst "Ververs" (hij zag er kapot uit door mijn eigen v6-stijl, die is weg); het grijze treinlogo staat er alleen nog als er niets anders op het scherm staat (puur CSS met `:has()`).
@@ -22,7 +27,7 @@
 - **v1** · gebruiker: eerste `index.html` met drie delen per trein.
 
 ## Open / niet getest
-- `worker.js` en de NS-veldnamen zijn niet met een echte NS-sleutel getest.
+- `worker.js` en de NS-veldnamen zijn niet met een echte NS-sleutel getest. Onbekend of het NS-product "Ns-App" ook de Virtual Train API (routes /nabij, /trein) bevat; controleer dat met `diagnose.html`.
 - Vergrootglas alleen getest met nagebootste aanraking in Chromium, niet op een echte iPhone (houd-en-sleep, scrollen en het vergrootglas boven de vinger).
 - Animaties alleen getest in een gewone browser (ook met "beperk beweging" aan), niet op een echte iPhone.
 - Vragen: welke VIRM-nummers zijn oud/flow? ICNG-D (3351-3362) ook flow? R-net 2010-2015 = 3 bakken? SNG-4 boven 2750 (tot 2788)?

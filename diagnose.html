@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="nl"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex">
+<title>Treinplek diagnose</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0 auto;max-width:520px;padding:16px 16px 48px;font:16px/1.45 system-ui,-apple-system,sans-serif;background:#e8edf3;color:#10213a}
+h1{margin:4px 0 8px} label{display:block;margin:14px 0 4px;font-weight:600}
+input{width:100%;font:inherit;font-size:17px;min-height:50px;padding:10px;border:2px solid #c4cdda;border-radius:14px}
+button{display:block;width:100%;margin-top:10px;min-height:52px;border:0;border-radius:14px;background:#0b3b8c;color:#fff;font:700 17px system-ui}
+button.licht{background:#fff;color:#0b3b8c;border:2px solid #0b3b8c}
+pre{white-space:pre-wrap;word-break:break-word;background:#fff;border-radius:14px;padding:12px;font-size:12.5px;max-height:55vh;overflow:auto}
+.ok{color:#1e6b34;font-weight:700}.fout{color:#9b1c1c;font-weight:700}
+</style></head><body>
+<h1>Diagnose</h1>
+<p>Test of je Worker en je NS-sleutel werken. Tik op een knop en kijk wat NS terugstuurt. Met "Kopieer" kun je het resultaat naar Claude sturen.</p>
+<label for="w">Worker-URL</label>
+<input id="w" placeholder="https://treinplek.jouwnaam.workers.dev" autocapitalize="off" autocorrect="off" spellcheck="false">
+<button id="b1">1. Treinen bij mij in de buurt</button>
+<label for="nr">Treinnummer (voor knop 2 en 3)</label>
+<input id="nr" inputmode="numeric" placeholder="bijv. 2150">
+<button id="b2">2. Haltes van deze rit</button>
+<button id="b3">3. Samenstelling van deze trein</button>
+<label for="st">Stationscode (voor knop 4)</label>
+<input id="st" value="UT" autocapitalize="characters" spellcheck="false">
+<button id="b4">4. Vertrektijden van dit station</button>
+<h2>Resultaat</h2>
+<div id="status"></div>
+<pre id="uit">Nog niets getest.</pre>
+<button class="licht" id="kopieer">Kopieer resultaat</button>
+<script>
+const $ = id => document.getElementById(id);
+const UITLEG = {
+  200: "Gelukt. De Worker en NS werken.",
+  401: "NS weigert je sleutel (401). Controleer NS_KEY in Cloudflare en of je op het product Ns-App bent geabonneerd.",
+  403: "De Worker weigert deze website (403). Pas TOEGESTAAN bovenin de Worker aan naar het adres van je website.",
+  404: "NS kent dit pad niet (404). Kopieer het resultaat en stuur het naar Claude, dan pas ik het pad aan.",
+  429: "Te veel aanvragen (429). Wacht even en probeer opnieuw.",
+  500: "De Worker mist iets (500). Staat NS_KEY als Secret in de Worker?"
+};
+try { $("w").value = localStorage.getItem("diag-w") || ""; } catch (_) {}
+fetch("index.html").then(r => r.text()).then(t => { const m = t.match(/const WORKER_URL = "([^"]*)"/); if (m && m[1]) $("w").value = m[1]; }).catch(() => {});
+function toon(code, tekst) {
+  $("status").className = code === 200 ? "ok" : "fout";
+  $("status").textContent = code === null ? "" : (UITLEG[code] || (code === 0 ? "Geen verbinding met de Worker." : `NS of de Worker gaf fout ${code}.`));
+  $("uit").textContent = tekst;
+}
+async function test(naam, pad) {
+  const w = $("w").value.trim().replace(/\/+$/, "");
+  if (!w) return toon(0, "Vul eerst de Worker-URL in.");
+  try { localStorage.setItem("diag-w", w); } catch (_) {}
+  $("status").textContent = ""; $("uit").textContent = "Bezig…";
+  try {
+    const t0 = performance.now(), r = await fetch(w + pad), tekst = await r.text();
+    let net = tekst; try { net = JSON.stringify(JSON.parse(tekst), null, 2); } catch (_) {}
+    toon(r.status, `${naam}\n${pad}\n${r.status} ${r.statusText} (${Math.round(performance.now() - t0)} ms)\n\n` + net.slice(0, 6000) + (net.length > 6000 ? "\n…(ingekort)" : ""));
+  } catch (e) { toon(0, `${naam}\n${pad}\nGeen verbinding: ${e.message}\nControleer de Worker-URL (zonder / aan het eind) en TOEGESTAAN in de Worker.`); }
+}
+$("b1").onclick = () => {
+  const gebruik = (lat, lng, noot) => test("Treinen in de buurt" + noot, `/nabij?lat=${lat.toFixed(5)}&lng=${lng.toFixed(5)}&radius=5000&limit=10`);
+  if (!navigator.geolocation) return gebruik(52.0894, 5.1105, " (Utrecht, geen locatie beschikbaar)");
+  navigator.geolocation.getCurrentPosition(p => gebruik(p.coords.latitude, p.coords.longitude, ""), () => gebruik(52.0894, 5.1105, " (Utrecht, locatie geweigerd)"), {timeout: 15000});
+};
+const nr = () => $("nr").value.replace(/\D/g, "");
+$("b2").onclick = () => nr() ? test("Haltes van rit " + nr(), `/rit?nummer=${nr()}`) : toon(0, "Vul eerst een treinnummer in.");
+$("b3").onclick = () => nr() ? test("Samenstelling van trein " + nr(), `/trein?nummer=${nr()}`) : toon(0, "Vul eerst een treinnummer in.");
+$("b4").onclick = () => test("Vertrektijden " + $("st").value, `/vertrek?station=${encodeURIComponent($("st").value.trim().toUpperCase())}&maxJourneys=5`);
+$("kopieer").onclick = async () => { try { await navigator.clipboard.writeText($("uit").textContent); $("kopieer").textContent = "Gekopieerd"; setTimeout(() => $("kopieer").textContent = "Kopieer resultaat", 1500); } catch (_) { alert("Selecteer de tekst en kopieer hem zelf."); } };
+</script></body></html>

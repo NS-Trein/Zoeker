@@ -255,7 +255,7 @@ body:has(#f-nummer:not([hidden])) #treinlogo,body:has(#f-station:not([hidden])) 
 // ====== INSTELLINGEN ======
 // Plak hier de URL van je Cloudflare Worker, zonder slash aan het eind.
 // Leeg laten = demomodus met nepdata. Voeg ?demo=1 toe aan de pagina-URL om demo af te dwingen.
-const WORKER_URL = "";
+const WORKER_URL = "https://treinplek.cpqsws8cpg.workers.dev";
 const DEMO = !WORKER_URL || location.search.includes("demo");
 
 const STATIONS = [["Utrecht Centraal","UT"],["Amsterdam Centraal","ASD"],["Rotterdam Centraal","RTD"],["Den Haag Centraal","GVC"],["Zwolle","ZL"],["Arnhem Centraal","AH"],["Eindhoven Centraal","EHV"],["Groningen","GN"],["Delft","DT"],["Zutphen","ZP"],["Leiden Centraal","LEDN"],["Amersfoort Centraal","AMF"]];
