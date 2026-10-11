@@ -263,7 +263,9 @@ const STATIONS = [["Utrecht Centraal","UT"],["Amsterdam Centraal","ASD"],["Rotte
 // ====== HULPFUNCTIES ======
 const $ = id => document.getElementById(id);
 const h = (tag, props = {}, ...kids) => { const e = Object.assign(document.createElement(tag), props); e.append(...kids); return e; };
-const fmt = t => /^\d\d:\d\d$/.test(t) ? t : new Date(t).toLocaleTimeString("nl-NL", {hour:"2-digit", minute:"2-digit"});
+// NS geeft tijden als 2026-10-10T23:33:00+0200. Safari begrijpt die "+0200" niet altijd, dus eerst "+02:00" van maken.
+const naarMs = t => Date.parse(String(t).replace(/([+-]\d\d)(\d\d)$/, "$1:$2"));
+const fmt = t => /^\d\d:\d\d$/.test(t) ? t : new Date(naarMs(t)).toLocaleTimeString("nl-NL", {hour:"2-digit", minute:"2-digit"});
 const pad = n => String(n).padStart(2, "0");
 function isoMetOffset(d) {
   const o = -d.getTimezoneOffset(), s = o >= 0 ? "+" : "-";
@@ -332,10 +334,11 @@ function leesVertrek(j) {
   })).filter(t => t.nr);
 }
 function leesTrein(j) {
-  const d = (j.payload || j).materieeldelen || [];
+  const p = j.payload || j, d = p.materieeldelen || [];
   const url = a => !a ? null : (typeof a === "string" ? a : a.url || null);
-  return {delen: d.map(x => ({
-    type: x.type || "", n: (x.bakken || []).length, img: url(x.afbeelding),
+  // rijrichting "RECHTS": de trein rijdt naar rechts in het NS-plaatje, dus de voorkant zit rechts (zie toonTrein)
+  return {richting: String(p.rijrichting || "").toUpperCase(), delen: d.map(x => ({
+    type: x.type || "", naam: x.type || "", nummer: x.materieelnummer ? String(x.materieelnummer) : "", n: (x.bakken || []).length, img: url(x.afbeelding), pw: x.breedte || 0,
     breedtes: (x.bakken || []).map(b => (b.afbeelding && b.afbeelding.breedte) || b.breedte || 1)
   })).filter(x => x.n > 0)};
 }
@@ -349,7 +352,7 @@ async function toonTrein(nr, meta = {}) {
   try {
     const t = DEMO ? demoTrein(Number(nr)) : leesTrein(await api(`/trein?nummer=${encodeURIComponent(nr)}`));
     if (!t.delen.length) { console.log("Geen bakken gevonden"); throw new Error("Geen samenstelling gevonden voor dit treinnummer. Het antwoord van NS heeft mogelijk een ander formaat."); }
-    trein = t; omgekeerd = false; keuze = null;
+    trein = t; omgekeerd = t.richting === "RECHTS"; keuze = null; // voorkant rechts in het NS-plaatje = omdraaien
     $("treinen").hidden = true; $("onder").hidden = true; $("kaart").hidden = false;
     tekenKaart(); kaartIn();
     $("kaart").scrollIntoView({behavior: "smooth"});
@@ -373,7 +376,11 @@ function samenstellen(d) {
 function stukkenVan(d) {
   if (d.img && !DEMO) {
     laadPlaatje(d.img); const src = bronCache.get(d.img);
-    if (src) { const som = d.breedtes.reduce((p, q) => p + q, 0); let acc = 0; return d.breedtes.map(g => { const st = {src, f0: acc / som, f1: (acc + g) / som}; acc += g; return st; }); }
+    if (src) {
+      const l = d.pw && PLAATJES.find(x => x.breedte === d.pw && x.n === d.n); // zelfde afmeting en aantal bakken = zelfde plaatje
+      if (l) return l.segmenten.map(([x0, x1]) => ({src, f0: x0 / l.breedte, f1: x1 / l.breedte}));
+      const som = d.breedtes.reduce((p, q) => p + q, 0); let acc = 0; return d.breedtes.map(g => { const st = {src, f0: acc / som, f1: (acc + g) / som}; acc += g; return st; });
+    }
   }
   const l = d.groep ? zoekPlaatjeGroep(d.groep, d.variant || "standaard", d.n) : zoekPlaatje(d.type, d.n);
   if (l) return uitSegmenten(l);
@@ -385,7 +392,7 @@ function stukkenVan(d) {
 function tekenKaart() {
   const totaal = trein.delen.reduce((s, d) => s + d.n, 0);
   $("k-titel").textContent = titel();
-  $("k-sub").textContent = `${info.tijd ? fmt(info.tijd) + (info.spoor ? ", spoor " + info.spoor + ". " : ". ") : ""}${trein.delen.every(d => d.naam) ? trein.delen.map(d => d.naam).join(" + ") : trein.delen[0].type}, ${trein.delen.length} ${trein.delen.length === 1 ? "deel" : "delen"}, ${totaal} bakken`;
+  $("k-sub").textContent = `${info.tijd ? fmt(info.tijd) + (info.spoor ? ", spoor " + info.spoor + ". " : ". ") : ""}${trein.delen.every(d => d.naam) ? (omgekeerd ? [...trein.delen].reverse() : trein.delen).map(d => d.naam).join(" + ") : trein.delen[0].type}, ${trein.delen.length} ${trein.delen.length === 1 ? "deel" : "delen"}, ${totaal} bakken`;
   let delen = trein.delen.map(d => ({type: d.type, naam: d.naam, nummer: d.nummer, stukken: stukkenVan(d)}));
   if (omgekeerd) { delen.reverse(); delen.forEach(d => d.stukken.reverse()); }
   const box = $("bakken"); box.replaceChildren();
@@ -803,7 +810,7 @@ function leesRit(j) {
 function ritStand(r, nu = Date.now()) {
   if (!r) return {};
   const st = r.stops.filter(x => !/PASSING/i.test(x.status));
-  let vi = -1; st.forEach((x, i) => { const t = x.vertrek && Date.parse(x.vertrek); if (t && t <= nu) vi = i; });
+  let vi = -1; st.forEach((x, i) => { const t = x.vertrek && naarMs(x.vertrek); if (t && t <= nu) vi = i; });
   return {vorig: vi >= 0 ? st[vi] : null, volgend: st[vi + 1] || null};
 }
 // --- demodata voor de automatische modus ---
