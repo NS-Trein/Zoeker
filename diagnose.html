@@ -2,6 +2,8 @@
 <html lang="nl"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex">
 <title>Treinplek diagnose</title>
+<link rel="icon" type="image/png" sizes="32x32" href="diagnose-32.png">
+<link rel="apple-touch-icon" href="diagnose-180.png">
 <style>
 *{box-sizing:border-box}
 body{margin:0 auto;max-width:520px;padding:16px 16px 48px;font:16px/1.45 system-ui,-apple-system,sans-serif;background:#e8edf3;color:#10213a}
@@ -24,6 +26,8 @@ pre{white-space:pre-wrap;word-break:break-word;background:#fff;border-radius:14p
 <label for="st">Stationscode (voor knop 4)</label>
 <input id="st" value="UT" autocapitalize="characters" spellcheck="false">
 <button id="b4">4. Vertrektijden van dit station</button>
+<button class="licht" id="b5">5. Ruwe treinlijst van NS (zonder gegevens)</button>
+<button class="licht" id="b6">6. Ruwe treinlijst met mijn plek (20 km)</button>
 <h2>Resultaat</h2>
 <div id="status"></div>
 <pre id="uit">Nog niets getest.</pre>
@@ -67,5 +71,11 @@ const nr = () => $("nr").value.replace(/\D/g, "");
 $("b2").onclick = () => nr() ? test("Haltes van rit " + nr(), `/rit?nummer=${nr()}`) : toon(0, "Vul eerst een treinnummer in.");
 $("b3").onclick = () => nr() ? test("Samenstelling van trein " + nr(), `/trein?nummer=${nr()}`) : toon(0, "Vul eerst een treinnummer in.");
 $("b4").onclick = () => test("Vertrektijden " + $("st").value, `/vertrek?station=${encodeURIComponent($("st").value.trim().toUpperCase())}&maxJourneys=5`);
+$("b5").onclick = () => test("Ruwe treinlijst van NS", "/ruw");
+$("b6").onclick = () => {
+  const gebruik = (lat, lng, noot) => test("Ruwe treinlijst met plek" + noot, `/ruw?lat=${lat.toFixed(5)}&lng=${lng.toFixed(5)}&radius=20000&limit=50`);
+  if (!navigator.geolocation) return gebruik(52.0894, 5.1105, " (Utrecht)");
+  navigator.geolocation.getCurrentPosition(p => gebruik(p.coords.latitude, p.coords.longitude, ""), () => gebruik(52.0894, 5.1105, " (Utrecht, locatie geweigerd)"), {timeout: 15000});
+};
 $("kopieer").onclick = async () => { try { await navigator.clipboard.writeText($("uit").textContent); $("kopieer").textContent = "Gekopieerd"; setTimeout(() => $("kopieer").textContent = "Kopieer resultaat", 1500); } catch (_) { alert("Selecteer de tekst en kopieer hem zelf."); } };
 </script></body></html>
