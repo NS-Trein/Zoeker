@@ -2,7 +2,7 @@
 <html lang="nl"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex">
 <title>Treinplek diagnose</title>
-<link rel="icon" type="image/png" href="icon-diagnose.png?v=22"><link rel="apple-touch-icon" href="icon-diagnose.png?v=22">
+<link rel="icon" type="image/png" href="icon-diagnose.png?v=23"><link rel="apple-touch-icon" href="icon-diagnose.png?v=23">
 <style>
 *{box-sizing:border-box}
 body{margin:0 auto;max-width:520px;padding:16px 16px 48px;font:16px/1.45 system-ui,-apple-system,sans-serif;background:#e8edf3;color:#10213a}
@@ -26,10 +26,12 @@ pre{white-space:pre-wrap;word-break:break-word;background:#fff;border-radius:14p
 <input id="st" value="UT" autocapitalize="characters" spellcheck="false">
 <button id="b4">4. Vertrektijden van dit station</button>
 <button class="licht" id="b5">5. Ruwe treinlijst van NS (zonder gegevens)</button>
+<button class="licht" id="b7">7. Plaatje van NS ophalen (ddz_6.png)</button>
 <button class="licht" id="b6">6. Ruwe treinlijst met mijn plek (20 km)</button>
 <h2>Resultaat</h2>
 <div id="status"></div>
 <pre id="uit">Nog niets getest.</pre>
+<div id="plaat"></div>
 <button class="licht" id="kopieer">Kopieer resultaat</button>
 <script>
 const $ = id => document.getElementById(id);
@@ -70,6 +72,19 @@ const nr = () => $("nr").value.replace(/\D/g, "");
 $("b2").onclick = () => nr() ? test("Haltes van rit " + nr(), `/rit?nummer=${nr()}`) : toon(0, "Vul eerst een treinnummer in.");
 $("b3").onclick = () => nr() ? test("Samenstelling van trein " + nr(), `/trein?nummer=${nr()}`) : toon(0, "Vul eerst een treinnummer in.");
 $("b4").onclick = () => test("Vertrektijden " + $("st").value, `/vertrek?station=${encodeURIComponent($("st").value.trim().toUpperCase())}&maxJourneys=5`);
+$("b7").onclick = async () => {
+  const w = $("w").value.trim().replace(/\/+$/, ""); if (!w) return toon(0, "Vul eerst de Worker-URL in.");
+  $("plaat").replaceChildren(); $("status").textContent = ""; $("uit").textContent = "Bezig…";
+  try {
+    const r = await fetch(`${w}/plaatje?url=${encodeURIComponent("https://vt.ns-mlab.nl/v1/images/ddz_6.png")}`);
+    if (!r.ok) return toon(r.status, `Plaatje van NS\n/plaatje\n${r.status} ${r.statusText}\n\n${(await r.text()).slice(0, 600)}\n\nStaat in Cloudflare de nieuwste worker.js (v17 of hoger)? Deze versie laat ook vt.ns-mlab.nl toe.`);
+    const blob = await r.blob(), u = URL.createObjectURL(blob), img = new Image();
+    await new Promise((ok, fout) => { img.onload = ok; img.onerror = () => fout(new Error("Het antwoord is geen plaatje.")); img.src = u; });
+    img.style.cssText = "max-width:100%;border:1px solid #c4cedb;border-radius:8px;background:#fff;margin-top:8px";
+    $("plaat").append(img);
+    toon(200, `Plaatje van NS\n/plaatje\n200 OK, ${blob.type}, ${Math.round(blob.size / 1024)} kB, ${img.naturalWidth} x ${img.naturalHeight} pixels\n(verwacht: 3215 x 108)`);
+  } catch (e) { toon(0, `Plaatje van NS\n/plaatje\nGeen verbinding of geen plaatje: ${e.message}`); }
+};
 $("b5").onclick = () => test("Ruwe treinlijst van NS", "/ruw");
 $("b6").onclick = () => {
   const gebruik = (lat, lng, noot) => test("Ruwe treinlijst met plek" + noot, `/ruw?lat=${lat.toFixed(5)}&lng=${lng.toFixed(5)}&radius=20000&limit=50`);
