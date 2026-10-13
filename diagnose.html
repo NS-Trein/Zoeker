@@ -2,7 +2,7 @@
 <html lang="nl"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex">
 <title>Treinplek diagnose</title>
-<link rel="icon" type="image/png" href="icon-diagnose.png?v=23"><link rel="apple-touch-icon" href="icon-diagnose.png?v=23">
+<link rel="icon" type="image/png" href="icon-diagnose.png?v=24"><link rel="apple-touch-icon" href="icon-diagnose.png?v=24">
 <style>
 *{box-sizing:border-box}
 body{margin:0 auto;max-width:520px;padding:16px 16px 48px;font:16px/1.45 system-ui,-apple-system,sans-serif;background:#e8edf3;color:#10213a}
@@ -26,6 +26,7 @@ pre{white-space:pre-wrap;word-break:break-word;background:#fff;border-radius:14p
 <input id="st" value="UT" autocapitalize="characters" spellcheck="false">
 <button id="b4">4. Vertrektijden van dit station</button>
 <button class="licht" id="b5">5. Ruwe treinlijst van NS (zonder gegevens)</button>
+<button class="licht" id="b8">8. Web-app controle (manifest, iconen, service worker)</button>
 <button class="licht" id="b7">7. Plaatje van NS ophalen (ddz_6.png)</button>
 <button class="licht" id="b6">6. Ruwe treinlijst met mijn plek (20 km)</button>
 <h2>Resultaat</h2>
@@ -85,6 +86,34 @@ $("b7").onclick = async () => {
     toon(200, `Plaatje van NS\n/plaatje\n200 OK, ${blob.type}, ${Math.round(blob.size / 1024)} kB, ${img.naturalWidth} x ${img.naturalHeight} pixels\n(verwacht: 3215 x 108)`);
   } catch (e) { toon(0, `Plaatje van NS\n/plaatje\nGeen verbinding of geen plaatje: ${e.message}`); }
 };
+$("b8").onclick = async () => {
+  const r = [], ok = (v, t) => r.push((v ? "OK  " : "FOUT ") + t), info = t => r.push("    " + t);
+  $("plaat").replaceChildren(); $("status").textContent = ""; $("uit").textContent = "Bezig…";
+  const app = matchMedia("(display-mode: standalone)").matches || navigator.standalone === true;
+  info("Adres: " + location.href);
+  ok(location.protocol === "https:", "Veilige verbinding (https)");
+  info(app ? "Je opent dit nu ALS APP (beginscherm of Dock)." : "Je opent dit nu in een gewoon browservenster, niet als app.");
+  try {
+    const mUrl = new URL("manifest.webmanifest", location.href).href, res = await fetch(mUrl + "?t=" + Date.now(), {cache: "no-store"});
+    ok(res.ok, `Manifest (${res.status}): ${mUrl}`);
+    if (res.ok) {
+      const m = await res.json(), start = new URL(m.start_url || ".", mUrl).href, scope = new URL(m.scope || ".", mUrl).href;
+      info(`naam: ${m.name} | display: ${m.display}`);
+      ok(start.startsWith(scope), `start_url ${start} ligt binnen scope ${scope}`);
+      ok(new URL(start).origin === location.origin, "start_url staat op dezelfde site als deze pagina");
+      for (const ic of m.icons || []) { const u = new URL(ic.src, mUrl).href, x = await fetch(u, {cache: "no-store"}); ok(x.ok, `Icoon ${ic.sizes}: ${x.status} ${ic.src}`); }
+    }
+    const t = await fetch(new URL("icon-180.png", location.href).href, {cache: "no-store"}); ok(t.ok, `Beginschermicoon icon-180.png: ${t.status}`);
+  } catch (e) { ok(false, "Manifest of icoon lezen mislukt: " + e.message); }
+  if ("serviceWorker" in navigator) {
+    const regs = await navigator.serviceWorker.getRegistrations();
+    ok(regs.length > 0, "Service worker: " + (regs.map(x => x.scope + (x.active ? " (actief)" : " (nog niet actief)")).join(", ") || "geen"));
+    info("Caches: " + ((await caches.keys()).join(", ") || "geen"));
+  } else ok(false, "Dit toestel kent geen service worker");
+  r.push("", "Staat de app al lang op je beginscherm, dus van vóór de nieuwe website? Dan opent hij nog de OUDE site. Verwijder hem en voeg hem opnieuw toe vanaf het nieuwe adres.");
+  toon(200, "Web-app controle\n" + r.join("\n"));
+};
+if (/[?&]app\b/.test(location.search)) setTimeout(() => $("b8").click(), 300);
 $("b5").onclick = () => test("Ruwe treinlijst van NS", "/ruw");
 $("b6").onclick = () => {
   const gebruik = (lat, lng, noot) => test("Ruwe treinlijst met plek" + noot, `/ruw?lat=${lat.toFixed(5)}&lng=${lng.toFixed(5)}&radius=20000&limit=50`);
