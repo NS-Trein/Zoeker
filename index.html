@@ -8,9 +8,9 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Treinplek">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<link rel="manifest" href="manifest.webmanifest?v=24">
-<link rel="apple-touch-icon" href="icon-180.png?v=24">
-<link rel="icon" type="image/png" href="icon-192.png?v=24">
+<link rel="manifest" href="manifest.webmanifest?v=25">
+<link rel="apple-touch-icon" href="icon-180.png?v=25">
+<link rel="icon" type="image/png" href="icon-192.png?v=25">
 <title>Waar zit ik in de trein?</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;600&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
@@ -134,6 +134,18 @@ body:has(#f-nummer:not([hidden])) #treinlogo,body:has(#f-station:not([hidden])) 
 #kaart .deel-melding{margin:12px 0 0;font-size:16px;padding:10px 12px;border-radius:12px;background:#fdecec;color:#9b1c1c;font-weight:700;text-align:center}
 #kaart .deel-melding.ok{background:#e6f4ea;color:#1e6b34}
 [hidden]{display:none!important}
+.zelf .diag{text-align:left;margin-top:10px;background:#fff;border-radius:18px;padding:14px}
+.diag h3{font:700 22px/1.1 'Barlow Condensed',sans-serif;margin:18px 0 6px}.diag h3:first-child{margin-top:2px}
+.d-uitleg{margin:0 0 6px;font-size:14px;color:var(--muted)}
+.d-samen{padding:10px 12px;border-radius:12px;font-weight:700;background:#eef2f8}.d-samen.goed{background:#e3f4e7;color:#1e6b34}.d-samen.slecht{background:#fdecec;color:#9b1c1c}
+.d-lijst{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:6px}
+.d-lijst li{display:flex;gap:10px;align-items:center;background:#f6f8fb;border-radius:12px;padding:8px 10px;border-left:6px solid #aaa;font-size:14px}
+.d-lijst li.ok{border-color:#1e8a3c}.d-lijst li.fout{border-color:#c62828}
+.d-lijst img{width:40px;height:40px;border-radius:9px;background:#dde3ec;flex:none}
+.d-lijst b{display:block}.d-lijst small{color:var(--muted);word-break:break-all}
+.d-b{width:100%;margin-top:8px}
+#d-status{margin:8px 0;font-weight:600}#d-status.ok{color:#1e6b34}#d-status.fout{color:#9b1c1c}
+#d-uit{margin:6px 0 0;padding:10px;background:#10213a;color:#e8edf3;border-radius:12px;font:12px/1.4 ui-monospace,Menlo,monospace;white-space:pre-wrap;word-break:break-word;max-height:50vh;overflow:auto}
 </style>
 </head>
 <body>
@@ -218,7 +230,34 @@ body:has(#f-nummer:not([hidden])) #treinlogo,body:has(#f-station:not([hidden])) 
 <div class="inst-in">
   <div class="inst-kop"><h2 id="inst-titel">Instellingen</h2><button class="knop" id="inst-sluit" type="button" style="width:auto;margin:0;padding:10px 20px">Klaar</button></div>
   <div class="inst-rij"><span>Animatie</span><button type="button" id="beweging" class="schakel" role="switch" aria-checked="true" aria-label="Animatie"></button></div>
-<a class="inst-rij" href="diagnose.html?app=1" style="margin-top:10px;text-decoration:none;color:inherit"><span>Controle van de web-app</span><span aria-hidden="true">&rsaquo;</span></a>
+<details id="diag" class="zelf">
+  <summary>Diagnose en controle</summary>
+  <div class="diag">
+    <h3>Web-app en iconen</h3>
+    <div id="d-samen" class="d-samen">Wordt getest…</div>
+    <ul id="d-lijst" class="d-lijst"></ul>
+    <button type="button" class="knop" id="d-app">Test opnieuw</button>
+    <button type="button" class="tekst" id="d-wis" style="width:100%;margin-top:8px">Wis de app-cache en begin schoon</button>
+    <h3>NS-koppeling</h3>
+    <p class="d-uitleg" id="d-worker"></p>
+    <button type="button" class="tekst d-b" id="d-1">1. Treinen bij mij in de buurt</button>
+    <label for="d-nr">Treinnummer (voor knop 2 en 3)</label>
+    <input id="d-nr" inputmode="numeric" placeholder="bijv. 2150">
+    <button type="button" class="tekst d-b" id="d-2">2. Haltes van deze rit</button>
+    <button type="button" class="tekst d-b" id="d-3">3. Samenstelling van deze trein</button>
+    <label for="d-st">Stationscode (voor knop 4)</label>
+    <input id="d-st" value="UT" autocapitalize="characters" spellcheck="false">
+    <button type="button" class="tekst d-b" id="d-4">4. Vertrektijden van dit station</button>
+    <button type="button" class="tekst d-b" id="d-5">5. Ruwe treinlijst van NS</button>
+    <button type="button" class="tekst d-b" id="d-6">6. Ruwe treinlijst met mijn plek (20 km)</button>
+    <button type="button" class="tekst d-b" id="d-7">7. Plaatje van NS ophalen (ddz_6.png)</button>
+    <h3>Resultaat</h3>
+    <div id="d-status"></div>
+    <pre id="d-uit">Nog niets getest.</pre>
+    <div id="d-plaat"></div>
+    <button type="button" class="knop" id="d-kopieer">Kopieer resultaat</button>
+  </div>
+</details>
 <details id="zelf" class="zelf">
   <summary>Zelf trein samenstellen</summary>
   <form id="f-zelf">
@@ -1073,6 +1112,120 @@ function toonOverlay(url, tekst) {
     h("button", {className: "knop", type: "button", textContent: "Sluiten", style: "max-width:300px", onclick: () => { o.remove(); wegRijden(); }}));
   document.body.append(o);
 }
+
+// ====== DIAGNOSE EN CONTROLE (staat in Instellingen) ======
+const D_UITLEG = {
+  200: "Gelukt. De Worker en NS werken.",
+  401: "NS weigert je sleutel (401). Controleer NS_KEY in Cloudflare en of je op het product Ns-App bent geabonneerd.",
+  403: "De Worker weigert deze website (403). Pas TOEGESTAAN bovenin de Worker aan naar het adres van je website.",
+  404: "NS kent dit pad niet (404). Kopieer het resultaat en stuur het naar Claude.",
+  429: "Te veel aanvragen (429). Wacht even en probeer opnieuw.",
+  500.1: "De Worker mist je NS-sleutel. Zet NS_KEY als Secret in Cloudflare (Settings, Variables and Secrets) en klik op Deploy.",
+  500: "NS gaf een interne fout (500). Onder het resultaat staat welke NS-paden de Worker probeerde. Kopieer het resultaat en stuur het naar Claude."
+};
+const dd = id => $("d-" + id);
+function dToon(code, tekst) {
+  dd("status").className = code === 200 ? "ok" : "fout";
+  dd("status").textContent = D_UITLEG[code] || (code === 0 ? "Geen verbinding met de Worker." : `NS of de Worker gaf fout ${code}.`);
+  dd("uit").textContent = tekst;
+}
+const dNr = () => dd("nr").value.replace(/\D/g, "");
+async function dTest(naam, pad) {
+  if (!WORKER_URL) return dToon(0, "Er is geen Worker ingesteld: dit is de testversie met nepdata.");
+  dd("plaat").replaceChildren(); dd("status").textContent = ""; dd("uit").textContent = "Bezig…";
+  try {
+    const t0 = performance.now(), r = await fetch(WORKER_URL + pad), tekst = await r.text();
+    let net = tekst; try { net = JSON.stringify(JSON.parse(tekst), null, 2); } catch (_) {}
+    const nsPad = r.headers.get("x-ns-pad");
+    dToon(/NS_KEY ontbreekt/.test(tekst) ? 500.1 : r.status, `${naam}\n${pad}\n${r.status} ${r.statusText} (${Math.round(performance.now() - t0)} ms)\n` + (nsPad ? `NS-pad dat werkte: ${nsPad}\n` : "") + "\n" + net.slice(0, 6000) + (net.length > 6000 ? "\n…(ingekort)" : ""));
+  } catch (e) { dToon(0, `${naam}\n${pad}\nGeen verbinding: ${e.message}\nControleer de Worker-URL en TOEGESTAAN in de Worker.`); }
+}
+function dMetPlek(naam, pad) { // pad bevat {lat} en {lng}
+  const gebruik = (lat, lng, noot) => dTest(naam + noot, pad.replace("{lat}", lat.toFixed(5)).replace("{lng}", lng.toFixed(5)));
+  if (!navigator.geolocation) return gebruik(52.0894, 5.1105, " (Utrecht, geen locatie beschikbaar)");
+  navigator.geolocation.getCurrentPosition(p => gebruik(p.coords.latitude, p.coords.longitude, ""), () => gebruik(52.0894, 5.1105, " (Utrecht, locatie geweigerd)"), {timeout: 15000});
+}
+dd("worker").textContent = WORKER_URL ? "Worker: " + WORKER_URL : "Er is geen Worker ingesteld: dit is de testversie met nepdata.";
+dd("1").onclick = () => dMetPlek("Treinen in de buurt", "/nabij?lat={lat}&lng={lng}&radius=5000&limit=10");
+dd("2").onclick = () => dNr() ? dTest("Haltes van rit " + dNr(), `/rit?nummer=${dNr()}`) : dToon(0, "Vul eerst een treinnummer in.");
+dd("3").onclick = () => dNr() ? dTest("Samenstelling van trein " + dNr(), `/trein?nummer=${dNr()}`) : dToon(0, "Vul eerst een treinnummer in.");
+dd("4").onclick = () => dTest("Vertrektijden " + dd("st").value, `/vertrek?station=${encodeURIComponent(dd("st").value.trim().toUpperCase())}&maxJourneys=5`);
+dd("5").onclick = () => dTest("Ruwe treinlijst van NS", "/ruw");
+dd("6").onclick = () => dMetPlek("Ruwe treinlijst met plek", "/ruw?lat={lat}&lng={lng}&radius=20000&limit=50");
+dd("7").onclick = async () => {
+  if (!WORKER_URL) return dToon(0, "Er is geen Worker ingesteld: dit is de testversie met nepdata.");
+  dd("plaat").replaceChildren(); dd("status").textContent = ""; dd("uit").textContent = "Bezig…";
+  try {
+    const r = await fetch(`${WORKER_URL}/plaatje?url=${encodeURIComponent("https://vt.ns-mlab.nl/v1/images/ddz_6.png")}`);
+    if (!r.ok) return dToon(r.status, `Plaatje van NS\n/plaatje\n${r.status} ${r.statusText}\n\n${(await r.text()).slice(0, 600)}\n\nStaat in Cloudflare de nieuwste worker.js (v17 of hoger)? Die laat ook vt.ns-mlab.nl toe.`);
+    const blob = await r.blob(), u = URL.createObjectURL(blob), img = new Image();
+    await new Promise((ok, fout) => { img.onload = ok; img.onerror = () => fout(new Error("Het antwoord is geen plaatje.")); img.src = u; });
+    img.style.cssText = "max-width:100%;border:1px solid #c4cedb;border-radius:8px;background:#fff;margin-top:8px";
+    dd("plaat").append(img);
+    dToon(200, `Plaatje van NS\n/plaatje\n200 OK, ${blob.type}, ${Math.round(blob.size / 1024)} kB, ${img.naturalWidth} x ${img.naturalHeight} pixels\n(verwacht: 3215 x 108)`);
+  } catch (e) { dToon(0, `Plaatje van NS\n/plaatje\nGeen verbinding of geen plaatje: ${e.message}`); }
+};
+dd("kopieer").onclick = async () => {
+  try { await navigator.clipboard.writeText(dd("uit").textContent); dd("kopieer").textContent = "Gekopieerd!"; } catch (_) { dd("kopieer").textContent = "Kopiëren lukte niet, selecteer de tekst zelf"; }
+  setTimeout(() => { dd("kopieer").textContent = "Kopieer resultaat"; }, 2500);
+};
+// Controle van de web-app en de iconen
+async function dControleer() {
+  const lijst = dd("lijst"); lijst.replaceChildren(); let fouten = 0;
+  const rij = (ok, titel, tekst, img) => {
+    if (ok === false) fouten++;
+    const li = h("li", {className: ok === false ? "fout" : "ok"});
+    if (img) li.append(h("img", {src: img, alt: ""}));
+    li.append(h("div", {}, h("b", {textContent: (ok === false ? "❌ " : ok === true ? "✅ " : "ℹ️ ") + titel}), h("small", {textContent: tekst})));
+    lijst.append(li);
+  };
+  const vers = () => "t=" + Date.now(), geen = {cache: "no-store"};
+  const app = matchMedia("(display-mode: standalone)").matches || navigator.standalone === true;
+  rij(location.protocol === "https:" || location.hostname === "localhost", "Veilige verbinding (https)", location.href);
+  rij(null, app ? "Je opent dit als app" : "Je opent dit in een browservenster, niet als app", app ? "Beginscherm of Dock." : "Staat de app op je beginscherm? Dan ben je nu niet in die app.");
+  let hrefs = [];
+  try { // wat staat er in de pagina op de website?
+    const t = await (await fetch("index.html?" + vers(), geen)).text(), links = [...t.matchAll(/<link[^>]+rel="(apple-touch-icon|icon|manifest)"[^>]*>/g)];
+    for (const m of links) { const x = (m[0].match(/href="([^"]+)"/) || [])[1]; if (x) hrefs.push(x); }
+    const heeft = n => links.some(m => m[1] === n);
+    rij(heeft("apple-touch-icon"), "Regel apple-touch-icon in de pagina", heeft("apple-touch-icon") ? "Gevonden." : "Ontbreekt! Zonder deze regel maakt de iPhone een letter T.");
+    rij(heeft("manifest"), "Regel manifest in de pagina", heeft("manifest") ? "Gevonden." : "Ontbreekt.");
+  } catch (e) { rij(false, "index.html niet te lezen", e.message); }
+  try { // manifest
+    const mUrl = new URL("manifest.webmanifest", location.href).href, r = await fetch(mUrl + "?" + vers(), geen);
+    rij(r.ok, `Manifest (${r.status})`, mUrl);
+    if (r.ok) {
+      const m = await r.json(), start = new URL(m.start_url || ".", mUrl).href, scope = new URL(m.scope || ".", mUrl).href;
+      rij(start.startsWith(scope) && new URL(start).origin === location.origin, "Startadres en bereik kloppen", `start_url ${start} | scope ${scope} | display ${m.display}`);
+    }
+  } catch (e) { rij(false, "Manifest lezen mislukt", e.message); }
+  for (const f of [...new Set(["icon-180.png", "icon-192.png", "icon-512.png", "manifest.webmanifest", "sw.js", ...hrefs.map(x => x.split("?")[0])])]) { // bestaan de bestanden?
+    try {
+      const r = await fetch(f + "?" + vers(), geen), ct = r.headers.get("content-type") || "", b = await r.blob();
+      rij(r.ok, f, r.ok ? `Gevonden (${Math.round(b.size / 102.4) / 10} KB, ${ct || "onbekend type"}).` : `NIET GEVONDEN (fout ${r.status}). Dit bestand staat niet in de map op GitHub.`, r.ok && /\.png$/.test(f) && /image/.test(ct) ? URL.createObjectURL(b) : null);
+    } catch (e) { rij(false, f, "Geen verbinding: " + e.message); }
+  }
+  if ("serviceWorker" in navigator) { // offline-cache
+    const regs = await navigator.serviceWorker.getRegistrations();
+    rij(regs.length ? true : null, regs.length ? `${regs.length} service worker actief` : "Geen service worker actief", regs.map(x => x.scope + (x.active ? " (actief)" : " (nog niet actief)")).join(" ") || "Er is nog geen offline-cache.");
+    for (const naam of await caches.keys()) {
+      const c = await caches.open(naam), slecht = []; let n = 0;
+      for (const k of await c.keys()) { n++; const r = await c.match(k); if (r && !r.ok) slecht.push(new URL(k.url).pathname.split("/").pop() + " (" + r.status + ")"); }
+      rij(!slecht.length, `Cache ${naam}: ${n} bestanden`, slecht.length ? "Bevat mislukte antwoorden: " + slecht.join(", ") + ". Tik op Wis de app-cache." : "Alles in de cache is in orde.");
+    }
+  }
+  dd("samen").className = "d-samen " + (fouten ? "slecht" : "goed");
+  dd("samen").textContent = fouten ? `Er ${fouten === 1 ? "is 1 probleem" : "zijn " + fouten + " problemen"} gevonden. Zie de rode regels.` : "Alles staat goed. Staat het oude icoon er nog? Verwijder de app van je beginscherm en voeg hem opnieuw toe.";
+}
+dd("app").onclick = dControleer;
+dd("wis").onclick = async () => {
+  for (const r of await navigator.serviceWorker.getRegistrations()) await r.unregister();
+  for (const n of await caches.keys()) await caches.delete(n);
+  dd("samen").className = "d-samen goed"; dd("samen").textContent = "Cache gewist. Sluit de app, open hem opnieuw en voeg hem daarna opnieuw toe aan je beginscherm.";
+};
+let dGestart = false;
+$("diag").addEventListener("toggle", () => { if ($("diag").open && !dGestart) { dGestart = true; dControleer(); } });
+if (location.hash === "#controle") { instOpen(); $("diag").open = true; }
 
 // ====== START ======
 STATIONS.forEach(s => $("stations").append(h("option", {value: s[0]})));
