@@ -8,9 +8,9 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Treinplek">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<link rel="manifest" href="manifest.webmanifest?v=25">
-<link rel="apple-touch-icon" href="icon-180.png?v=25">
-<link rel="icon" type="image/png" href="icon-192.png?v=25">
+<link rel="manifest" href="manifest.webmanifest?v=27">
+<link rel="apple-touch-icon" href="icon-180.png?v=27">
+<link rel="icon" type="image/png" href="icon-192.png?v=27">
 <title>Waar zit ik in de trein?</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;600&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
@@ -85,7 +85,6 @@ select{width:100%;font:inherit;font-size:17px;min-height:52px;padding:11px 8px;b
 .autokaart p{margin:0 0 6px}
 .autokaart small{display:block;margin-top:10px;color:var(--muted);font-size:13px}
 .auto-kop{display:flex;align-items:center;justify-content:space-between;gap:10px;color:var(--muted);font-size:14px;margin:2px 2px 6px}
-.klein{min-width:48px;min-height:44px;border:2px solid var(--blauw);border-radius:14px;background:#fff;color:var(--blauw);font-size:20px;font-weight:700}
 .chips{display:flex;gap:8px;overflow-x:auto;padding:4px 0 12px;margin:0 -2px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
 .chips::-webkit-scrollbar{display:none}
 .chip{flex:0 0 auto;min-height:46px;padding:0 18px;border:2px solid var(--blauw);border-radius:23px;background:#fff;color:var(--blauw);font-weight:700;font-size:16px}
@@ -146,6 +145,10 @@ body:has(#f-nummer:not([hidden])) #treinlogo,body:has(#f-station:not([hidden])) 
 .d-b{width:100%;margin-top:8px}
 #d-status{margin:8px 0;font-weight:600}#d-status.ok{color:#1e6b34}#d-status.fout{color:#9b1c1c}
 #d-uit{margin:6px 0 0;padding:10px;background:#10213a;color:#e8edf3;border-radius:12px;font:12px/1.4 ui-monospace,Menlo,monospace;white-space:pre-wrap;word-break:break-word;max-height:50vh;overflow:auto}
+.drukte{display:inline-flex;align-items:center;gap:8px;padding:4px 12px 4px 8px;border-radius:999px;background:#fff;background:color-mix(in srgb,var(--dk) 11%,#fff);border:2px solid var(--dk);color:var(--dk);font-size:15px;line-height:1}
+.drukte b{font-weight:700}.drukte svg{display:block;flex:none}
+.drukte.klein{padding:3px 9px 3px 6px;gap:6px;font-size:13px;border-width:1.5px;margin-top:4px}
+#k-drukte{margin:2px 0 10px}
 </style>
 </head>
 <body>
@@ -156,15 +159,15 @@ body:has(#f-nummer:not([hidden])) #treinlogo,body:has(#f-station:not([hidden])) 
 <div id="demo" class="demo" hidden>Demo met nepdata. Vul bovenin het script je Worker-URL in voor echte treinen.</div>
 
 <div class="modi" role="tablist" aria-label="Zo vind je je trein">
-  <button class="modus hoofd" role="tab" id="tab-auto" aria-selected="true">
+  <button type="button" class="modus hoofd" role="tab" id="tab-auto" aria-selected="true">
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0114 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.6"/></svg>
     <span>Automatisch<small>Treinen bij jou in de buurt</small></span>
   </button>
-  <button class="modus" role="tab" id="tab-nummer" aria-selected="false">
+  <button type="button" class="modus" role="tab" id="tab-nummer" aria-selected="false">
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 3L7.5 21M16.5 3l-2 18M4 9h17M3 15h17"/></svg>Treinnummer</button>
-  <button class="modus" role="tab" id="tab-station" aria-selected="false">
+  <button type="button" class="modus" role="tab" id="tab-station" aria-selected="false">
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 21h18M5 21V10l7-5 7 5v11M9.5 21v-6h5v6"/></svg>Station</button>
-  <button class="modus" role="tab" id="tab-stel" aria-selected="false">
+  <button type="button" class="modus" role="tab" id="tab-stel" aria-selected="false">
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h10a3 3 0 013 3v9a3 3 0 01-3 3H7a3 3 0 01-3-3V6a3 3 0 013-3zM4 11h16M8 21l2-3M16 21l-2-3"/><circle cx="8" cy="14.5" r=".6"/><circle cx="16" cy="14.5" r=".6"/></svg>Treinstel</button>
 </div>
 
@@ -279,15 +282,16 @@ body:has(#f-nummer:not([hidden])) #treinlogo,body:has(#f-station:not([hidden])) 
 <section id="kaart" hidden aria-live="polite">
   <h2 id="k-titel"></h2>
   <p id="k-sub"></p>
+  <div id="k-drukte" hidden></div>
   <div class="kop">Voorkant van de trein bovenaan. Tik op de plek waar je zit. Wil je het precies? Houd je vinger ingedrukt en sleep: je ziet dan een vergrootglas. Klopt de richting niet? Tik op Draai trein om.</div>
   <div id="bakken"></div>
   <div id="keuze"></div>
   <p id="deel-melding" class="deel-melding" role="alert" hidden></p>
   <div class="acties">
-    <button class="knop" id="deel">Deel mijn plek</button>
-    <button class="tekst" id="draai">Draai trein om</button>
+    <button type="button" class="knop" id="deel">Deel mijn plek</button>
+    <button type="button" class="tekst" id="draai">Draai trein om</button>
   </div>
-  <button class="tekst" id="terug" style="width:100%;margin-top:8px">Andere trein</button>
+  <button type="button" class="tekst" id="terug" style="width:100%;margin-top:8px">Andere trein</button>
   <p style="margin-top:12px;font-size:14px">Tik op Deel mijn plek om een overzichtelijk plaatje met je plek naar je vrienden te sturen.</p>
 </section>
 
@@ -362,9 +366,14 @@ function demoTrein(nr) { const t = DEMO_TYPES[nr % DEMO_TYPES.length]; return {d
 
 // ====== API (echt) ======
 async function api(pad) {
-  const r = await fetch(WORKER_URL + pad);
-  if (!r.ok) throw new Error(r.status === 403 ? "De Worker weigert dit domein (controleer TOEGESTAAN in de Worker)." : `NS antwoordde met fout ${r.status}.`);
-  return r.json();
+  let r;
+  try { r = await fetch(WORKER_URL + pad, {signal: AbortSignal.timeout ? AbortSignal.timeout(15000) : undefined}); }
+  catch (e) { throw new Error(e.name === "TimeoutError" ? "De server reageert niet. Probeer het zo opnieuw." : "Geen verbinding. Controleer je internet en probeer het opnieuw."); }
+  if (!r.ok) {
+    let fout = ""; try { fout = (await r.json()).fout || ""; } catch (_) {}
+    throw new Error(r.status === 403 ? "De Worker weigert dit domein (controleer TOEGESTAAN in de Worker)." : r.status === 429 ? "NS krijgt te veel aanvragen. Wacht even en probeer het opnieuw." : `NS antwoordde met fout ${r.status}${fout ? ": " + fout : "."}`);
+  }
+  try { return await r.json(); } catch (_) { throw new Error("NS gaf een antwoord dat de app niet begrijpt."); }
 }
 // Veldnamen gebaseerd op de NS-documentatie. Klopt iets niet? Zie console.log en stuur het antwoord door.
 function leesVertrek(j) {
@@ -387,7 +396,7 @@ function leesTrein(j) {
 let trein = null, info = {}, omgekeerd = false, keuze = null;
 const titel = () => `${info.soort || "Trein"}${info.nr ? " " + info.nr : ""}${info.naar ? " naar " + info.naar : ""}`;
 
-async function toonTrein(nr, meta = {}) {
+async function toonTrein(nr, meta = {}, stil = false) {
   melding(""); info = {nr, ...meta};
   try {
     const t = DEMO ? demoTrein(Number(nr)) : leesTrein(await api(`/trein?nummer=${encodeURIComponent(nr)}`));
@@ -396,9 +405,21 @@ async function toonTrein(nr, meta = {}) {
     $("treinen").hidden = true; $("onder").hidden = true; $("kaart").hidden = false;
     tekenKaart(); kaartIn();
     $("kaart").scrollIntoView({behavior: "smooth"});
-  } catch (e) { melding(e.message); }
+    if (!info.drukte) laadDrukte(String(nr));
+    return true;
+  } catch (e) {
+    if (stil) console.log("NS-samenstelling niet beschikbaar:", e.message); else melding(e.message);
+    return false;
+  }
 }
 
+// De drukte van een rit ophalen als we die nog niet hebben (bijvoorbeeld bij een ingetypt treinnummer).
+async function laadDrukte(nr) {
+  try {
+    const c = AUTO.ritten.get(nr), r = (c && c.r) || (DEMO ? demoRit(nr) : leesRit(await api(`/rit?nummer=${encodeURIComponent(nr)}`))), d = ritDrukte(r);
+    if (d && String(info.nr) === nr && !info.drukte) { info.drukte = d; tekenKaart(); }
+  } catch (e) { console.log("Drukte niet beschikbaar:", e.message); }
+}
 let baklijst = []; // alle bakken in getoonde volgorde
 const uitSegmenten = l => l.segmenten.map(([x0, x1]) => ({src: "plaatjes/" + l.bestand, f0: x0 / l.breedte, f1: x1 / l.breedte}));
 // Als er geen heel plaatje is voor dit aantal bakken: voorste bak + middenbakken + achterste bak uit het grootste plaatje van dit type.
@@ -432,6 +453,7 @@ function stukkenVan(d) {
 function tekenKaart() {
   const totaal = trein.delen.reduce((s, d) => s + d.n, 0);
   $("k-titel").textContent = titel();
+  const dk = $("k-drukte"); dk.replaceChildren(); dk.hidden = !info.drukte; if (info.drukte) dk.append(drukteLabel(info.drukte));
   $("k-sub").textContent = `${info.tijd ? fmt(info.tijd) + (info.spoor ? ", spoor " + info.spoor + ". " : ". ") : ""}${trein.delen.every(d => d.naam) ? (omgekeerd ? [...trein.delen].reverse() : trein.delen).map(d => d.naam).join(" + ") : trein.delen[0].type}, ${trein.delen.length} ${trein.delen.length === 1 ? "deel" : "delen"}, ${totaal} bakken`;
   let delen = trein.delen.map(d => ({type: d.type, naam: d.naam, nummer: d.nummer, stukken: stukkenVan(d)}));
   if (omgekeerd) { delen.reverse(); delen.forEach(d => d.stukken.reverse()); }
@@ -555,7 +577,7 @@ async function maakDeelplaatje() {
   const stripB = totaal * bw + gap * (totaal - perDeel.length) + deelgap * (perDeel.length - 1);
   const sx0 = P + (IW - stripB) / 2, sx1 = sx0 + stripB;
   const sub = [titel(), info.tijd ? `${fmt(info.tijd)}${info.spoor ? ", spoor " + info.spoor : ""}` : ""].filter(Boolean);
-  const H = 60 + 98 + 60 + sub.length * 44 + 28 + 36 + 16 + (meer ? 52 : 0) + BLH + 60 + bh + 24 + 14 + 40 + 36 + 26 + 56;
+  const H = 60 + 98 + 60 + sub.length * 44 + (info.drukte ? 72 : 0) + 28 + 36 + 16 + (meer ? 52 : 0) + BLH + 60 + bh + 24 + 14 + 40 + 36 + 26 + 56;
   const cv = document.createElement("canvas"); cv.width = W; cv.height = H;
   const c = cv.getContext("2d");
   const g = c.createLinearGradient(0, 0, 0, H); g.addColorStop(0, "#0d44a0"); g.addColorStop(1, "#08296a");
@@ -567,6 +589,18 @@ async function maakDeelplaatje() {
   c.fillStyle = GEEL; c.font = `600 44px ${kop}`; c.fillText(`van ${totaal}, ${positie()}`, P, y); y += 60;
   c.fillStyle = "#dbe5f5"; c.font = `400 34px ${tekst}`;
   sub.forEach(t => { c.fillText(t, P, y); y += 44; });
+  if (info.drukte) { // pilletje met drie poppetjes en het woord
+    const d = info.drukte, tk = `Drukte: ${d.tekst}`; c.font = `700 30px ${tekst}`;
+    const w = 22 + 3 * 38 + 10 + c.measureText(tk).width + 28, ph = 54, py = y + 8;
+    c.fillStyle = "#fff"; hoeken(c, P, py, w, ph, [27, 27, 27, 27]); c.fill();
+    for (let i = 0; i < 3; i++) {
+      const cx = P + 22 + 19 + i * 38; c.fillStyle = i < d.niveau ? d.kleur : "#c9d2e0";
+      c.beginPath(); c.arc(cx, py + 15, 7.5, 0, 7); c.fill();
+      c.beginPath(); c.moveTo(cx - 12, py + 45); c.lineTo(cx - 12, py + 34); c.arc(cx, py + 34, 12, Math.PI, 0); c.lineTo(cx + 12, py + 45); c.closePath(); c.fill();
+    }
+    c.fillStyle = d.kleur; c.textBaseline = "middle"; c.fillText(tk, P + 22 + 3 * 38 + 10, py + ph / 2 + 1); c.textBaseline = "top";
+    y += 72;
+  }
   y += 28;
 
   // --- Voorkant en achterkant ---
@@ -863,11 +897,36 @@ function leesNabij(j) {
     snelheid: (t.snelheid ?? t.speed ?? 0) / 3.6
   })).filter(t => t.nr && typeof t.lat === "number" && typeof t.lng === "number");
 }
+// ====== DRUKTE (verwachting van NS, per rit) ======
+const DRUKTE = {LOW: {niveau: 1, tekst: "Rustig", kleur: "#1e8a3c"}, MEDIUM: {niveau: 2, tekst: "Gemiddeld", kleur: "#e07b00"}, HIGH: {niveau: 3, tekst: "Druk", kleur: "#d6002a"}};
+const drukteVan = w => DRUKTE[String(w || "").toUpperCase()] || null;
+// Drukte op het stuk waar de trein nu rijdt: het vertrek van de vorige halte, anders dat van de volgende. Geen waarde? Dan laten we niets zien.
+function ritDrukte(r) {
+  if (!r) return null;
+  const st = ritStand(r), s = [st.vorig, st.volgend].find(x => x && drukteVan(x.drukte));
+  return s ? drukteVan(s.drukte) : null;
+}
+const SVGNS = "http://www.w3.org/2000/svg";
+function drukteIcoon(niveau, kleur, hoogte) { // drie poppetjes, zoveel gekleurd als het niveau
+  const svg = document.createElementNS(SVGNS, "svg"); svg.setAttribute("viewBox", "0 0 54 24"); svg.setAttribute("height", hoogte); svg.setAttribute("width", hoogte * 54 / 24); svg.setAttribute("aria-hidden", "true");
+  for (let i = 0; i < 3; i++) {
+    const g = document.createElementNS(SVGNS, "g"), c = document.createElementNS(SVGNS, "circle"), p = document.createElementNS(SVGNS, "path"), x = 9 + i * 18;
+    g.setAttribute("fill", i < niveau ? kleur : "#c9d2e0");
+    c.setAttribute("cx", x); c.setAttribute("cy", 5); c.setAttribute("r", 4);
+    p.setAttribute("d", `M${x - 6} 23 v-7 a6 6 0 0 1 12 0 v7 z`);
+    g.append(c, p); svg.append(g);
+  }
+  return svg;
+}
+function drukteLabel(d, klein) { // pilletje: poppetjes en het woord
+  const el = h("span", {className: "drukte" + (klein ? " klein" : ""), title: "Verwachte drukte (NS)", ariaLabel: "Verwachte drukte: " + d.tekst}, drukteIcoon(d.niveau, d.kleur, klein ? 15 : 20), h("b", {textContent: d.tekst}));
+  el.style.setProperty("--dk", d.kleur); return el;
+}
 function leesRit(j) {
   const p = j.payload || j, ruw = p.stops || [];
   const stops = ruw.map(s => {
     const dep = (s.departures || [])[0] || {}, arr = (s.arrivals || [])[0] || {};
-    return {naam: (s.stop && s.stop.name) || s.name || "", status: String(s.status || ""), vertrek: dep.actualTime || dep.plannedTime || null, aankomst: arr.actualTime || arr.plannedTime || null};
+    return {naam: (s.stop && s.stop.name) || s.name || "", status: String(s.status || ""), vertrek: dep.actualTime || dep.plannedTime || null, aankomst: arr.actualTime || arr.plannedTime || null, drukte: dep.crowdForecast || null};
   }).filter(x => x.naam);
   let stel = [];
   for (const s of ruw) {
@@ -903,7 +962,7 @@ function demoRit(nr) {
   const r = DEMO_RITTEN.find(x => x.nr === String(nr)), t = m => new Date(Date.now() + m * 60000).toISOString();
   if (!r) return {stops: [], stel: [], eind: ""};
   return {stel: r.stel, eind: r.naar, stops: [
-    {naam: r.vorig[0], status: "STOP", aankomst: t(r.vorig[1] - 1), vertrek: t(r.vorig[1])},
+    {naam: r.vorig[0], status: "STOP", aankomst: t(r.vorig[1] - 1), vertrek: t(r.vorig[1]), drukte: ["LOW", "MEDIUM", "HIGH"][parseInt(nr, 10) % 3]},
     {naam: r.volgend[0], status: "STOP", aankomst: t(r.volgend[1]), vertrek: t(r.volgend[1] + 1)},
     {naam: r.naar, status: "DESTINATION", aankomst: t(r.volgend[1] + 25)}]};
 }
@@ -978,15 +1037,20 @@ function autoTekenLijst() {
       h("span", {}, jouw ? h("span", {className: "jouwtag", textContent: "Waarschijnlijk jouw trein"}) : "",
         h("strong", {textContent: r && r.eind ? `naar ${r.eind}` : `Trein ${t.nr}`}),
         st.vorig ? h("small", {textContent: `Vertrok ${tijd(st.vorig)} uit ${st.vorig.naam}`}) : "",
-        st.volgend ? h("small", {textContent: `Volgende: ${st.volgend.naam} ${fmt(st.volgend.aankomst || st.volgend.vertrek)}`}) : ""),
+        st.volgend ? h("small", {textContent: `Volgende: ${st.volgend.naam} ${fmt(st.volgend.aankomst || st.volgend.vertrek)}`}) : "",
+        ritDrukte(r) ? drukteLabel(ritDrukte(r), true) : ""),
       h("span", {className: "afst", textContent: t.afstand < 150 ? "bij jou" : kmTekst(t.afstand)}))));
   });
 }
-function autoKies(t) {
+async function autoKies(t) {
   const c = AUTO.ritten.get(t.nr), r = c && c.r, meta = {soort: t.soort, naar: (r && r.eind) || ""};
-  autoStop(); $("f-auto").hidden = true;
-  if (r && r.stel.length) { try { return toonStellen(r.stel, {nr: t.nr, ...meta}); } catch (e) { console.log("Stelnummers niet bruikbaar, ik gebruik de NS-samenstelling:", e.message); } }
-  toonTrein(t.nr, meta).then(() => { if ($("kaart").hidden && modus === "auto") { $("f-auto").hidden = false; autoStart(); } });
+  autoStop(); $("f-auto").hidden = true; meta.drukte = ritDrukte(r);
+  // Eerst de samenstelling van NS: die heeft het NS-plaatje en de rijrichting. (In de demo werkt dat niet, daar zijn de stelnummers de nepgegevens.)
+  if (!DEMO && await toonTrein(t.nr, meta, true)) return;
+  if (r && r.stel.length) { try { return toonStellen(r.stel, {nr: t.nr, ...meta}); } catch (e) { console.log("Stelnummers niet bruikbaar:", e.message); } }
+  if (!DEMO) melding("Geen samenstelling gevonden voor deze trein.");
+  else await toonTrein(t.nr, meta);
+  if ($("kaart").hidden && modus === "auto") { $("f-auto").hidden = false; autoStart(); }
 }
 // --- locatie ---
 function autoStart() {
@@ -1137,7 +1201,12 @@ async function dTest(naam, pad) {
     const t0 = performance.now(), r = await fetch(WORKER_URL + pad), tekst = await r.text();
     let net = tekst; try { net = JSON.stringify(JSON.parse(tekst), null, 2); } catch (_) {}
     const nsPad = r.headers.get("x-ns-pad");
-    dToon(/NS_KEY ontbreekt/.test(tekst) ? 500.1 : r.status, `${naam}\n${pad}\n${r.status} ${r.statusText} (${Math.round(performance.now() - t0)} ms)\n` + (nsPad ? `NS-pad dat werkte: ${nsPad}\n` : "") + "\n" + net.slice(0, 6000) + (net.length > 6000 ? "\n…(ingekort)" : ""));
+    let extra = "";
+    if (pad.startsWith("/rit")) try { // drukte uit de rit samenvatten
+      const stops = (JSON.parse(tekst).payload || {}).stops || [];
+      extra = "Drukte per halte: " + (stops.map(x => ((x.departures || [])[0] || {}).crowdForecast ? `${x.stop && x.stop.name}=${x.departures[0].crowdForecast}` : null).filter(Boolean).join(", ") || "geen") + "\ncoachCrowdForecast (per bak): " + (stops.filter(x => (x.coachCrowdForecast || []).length).map(x => `${x.stop && x.stop.name}: ${x.coachCrowdForecast.length} items`).join(", ") || "leeg bij alle haltes") + "\n";
+    } catch (_) {}
+    dToon(/NS_KEY ontbreekt/.test(tekst) ? 500.1 : r.status, `${naam}\n${pad}\n${r.status} ${r.statusText} (${Math.round(performance.now() - t0)} ms)\n` + (nsPad ? `NS-pad dat werkte: ${nsPad}\n` : "") + extra + "\n" + net.slice(0, 6000) + (net.length > 6000 ? "\n…(ingekort)" : ""));
   } catch (e) { dToon(0, `${naam}\n${pad}\nGeen verbinding: ${e.message}\nControleer de Worker-URL en TOEGESTAAN in de Worker.`); }
 }
 function dMetPlek(naam, pad) { // pad bevat {lat} en {lng}
