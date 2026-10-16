@@ -132,6 +132,16 @@ body:has(#f-nummer:not([hidden])) #treinlogo,body:has(#f-station:not([hidden])) 
 #loep .loep-ring{position:absolute;left:50%;top:50%;width:120px;height:120px;margin:-60px 0 0 -60px;border-radius:50%;border:20px solid #e4002b;background:rgba(255,255,255,.3);box-shadow:0 0 0 3px #fff,inset 0 0 0 3px #fff}
 #kaart .deel-melding{margin:12px 0 0;font-size:16px;padding:10px 12px;border-radius:12px;background:#fdecec;color:#9b1c1c;font-weight:700;text-align:center}
 #kaart .deel-melding.ok{background:#e6f4ea;color:#1e6b34}
+.kopknoppen{display:flex;gap:8px;flex:none}
+.tand{position:relative}
+.teller{position:absolute;top:-6px;right:-6px;min-width:22px;height:22px;padding:0 5px;border-radius:11px;background:#e4002b;color:#fff;font:700 13px/22px system-ui,sans-serif;text-align:center}
+.r-uitleg{margin:0 0 12px;color:var(--muted);font-size:14px}
+.r-leeg{margin:18px 0;padding:16px;border-radius:16px;background:#fff;text-align:center;color:var(--muted)}
+.r-lijst{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.r-item{display:flex;gap:8px;align-items:stretch}
+.r-item .rit{flex:1;grid-template-columns:62px 1fr}
+.r-weg{flex:none;width:48px;border:2px solid var(--lijn);border-radius:16px;background:#fff;color:#9b1c1c;font-size:20px}
+.r-melding{min-height:22px;margin:12px 2px 0;font-weight:700;color:var(--blauw)}
 [hidden]{display:none!important}
 .zelf .diag{text-align:left;margin-top:10px;background:#fff;border-radius:18px;padding:14px}
 .diag h3{font:700 22px/1.1 'Barlow Condensed',sans-serif;margin:18px 0 6px}.diag h3:first-child{margin-top:2px}
@@ -154,7 +164,7 @@ body:has(#f-nummer:not([hidden])) #treinlogo,body:has(#f-station:not([hidden])) 
 <body>
 <header class="kopbalk">
   <h1>Waar zit ik in de trein?</h1>
-  <button type="button" class="tand" id="inst-knop" aria-label="Instellingen"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></button>
+  <div class="kopknoppen"><button type="button" class="tand" id="reizen-knop" aria-label="Mijn reizen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12a1 1 0 011 1v17l-7-4-7 4V4a1 1 0 011-1z"/></svg><span id="reizen-teller" class="teller" hidden>0</span></button><button type="button" class="tand" id="inst-knop" aria-label="Instellingen"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></button></div>
 </header>
 <div id="demo" class="demo" hidden>Demo met nepdata. Vul bovenin het script je Worker-URL in voor echte treinen.</div>
 
@@ -229,6 +239,25 @@ body:has(#f-nummer:not([hidden])) #treinlogo,body:has(#f-station:not([hidden])) 
 </svg>
 </div>
 
+<div id="reizen" class="inst" role="dialog" aria-modal="true" aria-labelledby="reizen-titel" hidden>
+<div class="inst-in">
+  <div class="inst-kop"><h2 id="reizen-titel">Mijn reizen</h2><button class="knop" id="reizen-sluit" type="button" style="width:auto;margin:0;padding:10px 20px">Klaar</button></div>
+  <p class="r-uitleg">Je reizen staan alleen op dit toestel, in deze app. Verwijder je de app of wis je de websitegegevens, dan zijn ze weg. Maak daarom af en toe een back-up.</p>
+  <div id="r-leeg" class="r-leeg" hidden>Je hebt nog geen reizen bewaard.<br>Open een trein, tik op je plek en kies <b>Bewaar deze reis</b>.</div>
+  <ul class="r-lijst" id="r-lijst"></ul>
+  <div id="r-melding" class="r-melding" role="status" aria-live="polite"></div>
+  <details class="zelf" id="r-beheer">
+    <summary>Back-up en beheer</summary>
+    <div class="diag">
+      <button type="button" class="knop" id="r-export">Maak een back-up</button>
+      <button type="button" class="tekst" id="r-imp-knop" style="width:100%;margin-top:8px">Zet een back-up terug</button>
+      <input id="r-import" type="file" accept="application/json,.json" hidden>
+      <button type="button" class="tekst" id="r-wis" style="width:100%;margin-top:8px;color:#9b1c1c;border-color:#9b1c1c">Verwijder alle reizen</button>
+    </div>
+  </details>
+</div>
+</div>
+
 <div id="inst" class="inst" role="dialog" aria-modal="true" aria-labelledby="inst-titel" hidden>
 <div class="inst-in">
   <div class="inst-kop"><h2 id="inst-titel">Instellingen</h2><button class="knop" id="inst-sluit" type="button" style="width:auto;margin:0;padding:10px 20px">Klaar</button></div>
@@ -291,6 +320,7 @@ body:has(#f-nummer:not([hidden])) #treinlogo,body:has(#f-station:not([hidden])) 
     <button type="button" class="knop" id="deel">Deel mijn plek</button>
     <button type="button" class="tekst" id="draai">Draai trein om</button>
   </div>
+  <button type="button" class="tekst" id="bewaar" style="width:100%;margin-top:8px">Bewaar deze reis</button>
   <button type="button" class="tekst" id="terug" style="width:100%;margin-top:8px">Andere trein</button>
   <p style="margin-top:12px;font-size:14px">Tik op Deel mijn plek om een overzichtelijk plaatje met je plek naar je vrienden te sturen.</p>
 </section>
@@ -1123,6 +1153,123 @@ const bewTekst = () => $("beweging").setAttribute("aria-checked", String(bewLees
 $("beweging").onclick = () => { try { localStorage.setItem(BEW, bewLees() === "aan" ? "uit" : "aan"); } catch (_) {} bewTekst(); };
 bewTekst();
 // Instellingen: tandwiel rechtsboven.
+// ====== MIJN REIZEN (bewaard op dit toestel in localStorage, geen account nodig) ======
+const REIZEN_SLEUTEL = "treinplek-reizen", REIZEN_MAX = 300;
+const reizenLees = () => { try { const a = JSON.parse(localStorage.getItem(REIZEN_SLEUTEL)); return Array.isArray(a) ? a : []; } catch (_) { return []; } };
+const reizenSchrijf = a => { try { localStorage.setItem(REIZEN_SLEUTEL, JSON.stringify(a)); return true; } catch (_) { return false; } };
+let HUIDIGE = {trein: null, id: null}; // welke bewaarde reis hoort bij de trein op het scherm (opnieuw bewaren = bijwerken)
+const posTekst = x => x < 1/3 ? "voorin" : x > 2/3 ? "achterin" : "in het midden";
+const reisTotaal = r => r.delen.reduce((s, d) => s + d.n, 0);
+function reizenTel() {
+  const n = reizenLees().length, b = $("reizen-teller");
+  b.textContent = n > 99 ? "99+" : String(n); b.hidden = !n;
+  $("reizen-knop").setAttribute("aria-label", n ? `Mijn reizen, ${n} bewaard` : "Mijn reizen");
+}
+function reisBewaren() {
+  if (!keuze) return deelMelding("Tik eerst op je plek in de trein.");
+  if (HUIDIGE.trein !== trein) HUIDIGE = {trein, id: null};
+  const nu = Date.now();
+  const reis = {
+    id: HUIDIGE.id || nu.toString(36) + Math.random().toString(36).slice(2, 6),
+    opgeslagen: nu, titel: titel(),
+    info: {nr: String(info.nr || ""), soort: String(info.soort || ""), naar: String(info.naar || ""), tijd: String(info.tijd || ""), spoor: String(info.spoor || "")},
+    delen: trein.delen.map(d => { const o = {type: String(d.type || ""), n: d.n}; for (const k of ["groep", "variant", "naam", "nummer"]) if (d[k]) o[k] = String(d[k]); return o; }),
+    omgekeerd: !!omgekeerd, keuze: {bak: keuze.bak, x: +keuze.x.toFixed(4), y: +keuze.y.toFixed(4)}
+  };
+  const oud = reizenLees(), bijgewerkt = oud.some(r => r.id === reis.id);
+  const lijst = [reis, ...oud.filter(r => r.id !== reis.id)].slice(0, REIZEN_MAX);
+  if (!reizenSchrijf(lijst)) return deelMelding("Bewaren lukt niet: de opslag van dit toestel is vol of uitgeschakeld.");
+  HUIDIGE.id = reis.id; reizenTel();
+  try { navigator.storage && navigator.storage.persist && navigator.storage.persist(); } catch (_) {}
+  deelMelding(bijgewerkt ? "Reis bijgewerkt in Mijn reizen." : "Reis bewaard in Mijn reizen.", true);
+}
+function reizenTeken() {
+  const lijst = reizenLees().sort((a, b) => b.opgeslagen - a.opgeslagen), ul = $("r-lijst");
+  ul.replaceChildren(); $("r-leeg").hidden = lijst.length > 0;
+  for (const r of lijst) {
+    const d = new Date(r.opgeslagen), wanneer = d.toLocaleDateString("nl-NL", {weekday: "short", day: "numeric", month: "short", year: "numeric"}) + ", " + d.toLocaleTimeString("nl-NL", {hour: "2-digit", minute: "2-digit"});
+    const soort = r.info.soort && r.info.soort.length <= 4 ? r.info.soort : "TR";
+    const stellen = r.delen.map(x => x.naam ? x.naam + (x.nummer ? ` (${x.nummer})` : "") : x.type).join(" + ");
+    ul.append(h("li", {className: "r-item"},
+      h("button", {type: "button", className: "rit", onclick: () => reisOpenen(r.id)},
+        h("span", {className: "soort s-" + soort.toLowerCase(), textContent: soort}),
+        h("span", {}, h("strong", {textContent: r.titel}), h("small", {textContent: `Bak ${r.keuze.bak} van ${reisTotaal(r)}, ${posTekst(r.keuze.x)}`}),
+          h("small", {textContent: stellen}), h("small", {textContent: wanneer}))),
+      h("button", {type: "button", className: "r-weg", ariaLabel: "Verwijder reis " + r.titel, textContent: "✕", onclick: () => reisVerwijderen(r.id)})));
+  }
+}
+function reisOpenen(id) {
+  const r = reizenLees().find(x => x.id === id); if (!r) return;
+  reizenSluit(); autoStop(); $("f-auto").hidden = true; melding("");
+  trein = {delen: r.delen.map(d => ({...d, img: null, breedtes: Array(d.n).fill(1)}))};
+  info = {...r.info}; omgekeerd = !!r.omgekeerd; keuze = {...r.keuze};
+  HUIDIGE = {trein, id: r.id};
+  $("treinen").hidden = true; $("onder").hidden = true; $("kaart").hidden = false;
+  deelMelding(""); tekenKaart(); kaartIn(); $("kaart").scrollIntoView({behavior: "smooth"});
+}
+function reisVerwijderen(id) {
+  if (!confirm("Deze reis verwijderen?")) return;
+  reizenSchrijf(reizenLees().filter(r => r.id !== id));
+  if (HUIDIGE.id === id) HUIDIGE.id = null;
+  reizenTel(); reizenTeken();
+}
+const reizenMelding = t => { $("r-melding").textContent = t || ""; };
+async function reizenExport() {
+  const lijst = reizenLees(); if (!lijst.length) return reizenMelding("Er zijn nog geen reizen om te bewaren.");
+  const blob = new Blob([JSON.stringify({app: "treinplek", versie: 1, gemaakt: new Date().toISOString(), reizen: lijst}, null, 1)], {type: "application/json"});
+  const naam = `treinplek-reizen-${new Date().toISOString().slice(0, 10)}.json`, file = new File([blob], naam, {type: "application/json"});
+  try { if (navigator.canShare && navigator.canShare({files: [file]})) { await navigator.share({files: [file], title: "Mijn treinreizen"}); return reizenMelding("Back-up gedeeld."); } }
+  catch (e) { if (e.name === "AbortError") return; }
+  const a = h("a", {href: URL.createObjectURL(blob), download: naam}); document.body.append(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 4000); reizenMelding("Back-up gedownload als " + naam + ".");
+}
+// Controleert en schoont één reis uit een back-up; geeft null als hij niet klopt.
+function reisSchoon(r) {
+  if (!r || typeof r !== "object" || typeof r.id !== "string" || !r.id || r.id.length > 40) return null;
+  if (!Array.isArray(r.delen) || !r.delen.length || r.delen.length > 6) return null;
+  const delen = [];
+  for (const d of r.delen) {
+    if (!d || typeof d.type !== "string" || !Number.isInteger(d.n) || d.n < 1 || d.n > 14) return null;
+    const o = {type: d.type.slice(0, 40), n: d.n};
+    for (const k of ["groep", "variant", "naam", "nummer"]) if (typeof d[k] === "string") o[k] = d[k].slice(0, 60);
+    delen.push(o);
+  }
+  const totaal = delen.reduce((p, d) => p + d.n, 0), k = r.keuze || {}, i = r.info || {};
+  if (!Number.isInteger(k.bak) || k.bak < 1 || k.bak > totaal || !(k.x >= 0 && k.x <= 1) || !(k.y >= 0 && k.y <= 1)) return null;
+  return {id: r.id, opgeslagen: Number.isFinite(r.opgeslagen) ? r.opgeslagen : Date.now(), titel: String(r.titel || "Reis").slice(0, 120),
+    info: {nr: String(i.nr || "").slice(0, 20), soort: String(i.soort || "").slice(0, 30), naar: String(i.naar || "").slice(0, 60), tijd: String(i.tijd || "").slice(0, 40), spoor: String(i.spoor || "").slice(0, 8)},
+    delen, omgekeerd: !!r.omgekeerd, keuze: {bak: k.bak, x: k.x, y: k.y}};
+}
+async function reizenImport(file) {
+  try {
+    const j = JSON.parse(await file.text()), ruw = Array.isArray(j) ? j : j.reizen;
+    if (!Array.isArray(ruw)) throw new Error("geen reizen");
+    const kaart = new Map(reizenLees().map(r => [r.id, r])); let nieuw = 0, bijgewerkt = 0, fout = 0;
+    for (const x of ruw) {
+      const r = reisSchoon(x); if (!r) { fout++; continue; }
+      const oud = kaart.get(r.id);
+      if (!oud) nieuw++; else if (r.opgeslagen > oud.opgeslagen) bijgewerkt++; else continue;
+      kaart.set(r.id, r);
+    }
+    const alles = [...kaart.values()].sort((a, b) => b.opgeslagen - a.opgeslagen).slice(0, REIZEN_MAX);
+    if (!reizenSchrijf(alles)) throw new Error("opslag vol");
+    reizenTel(); reizenTeken();
+    reizenMelding(`Back-up gelezen: ${nieuw} nieuw, ${bijgewerkt} bijgewerkt${fout ? `, ${fout} overgeslagen (ongeldig)` : ""}.`);
+  } catch (e) { reizenMelding("Dit bestand kan ik niet lezen. Kies een back-up van Treinplek (.json)."); }
+}
+function reizenWis() {
+  const n = reizenLees().length;
+  if (!n || !confirm(`Alle ${n} bewaarde reizen verwijderen? Dit kan niet ongedaan worden gemaakt.`)) return;
+  reizenSchrijf([]); HUIDIGE.id = null; reizenTel(); reizenTeken(); reizenMelding("Alles verwijderd.");
+}
+const reizenOpen = () => { reizenTeken(); reizenMelding(""); $("reizen").hidden = false; document.body.style.overflow = "hidden"; $("reizen-sluit").focus(); };
+const reizenSluit = () => { $("reizen").hidden = true; document.body.style.overflow = ""; };
+$("reizen-knop").onclick = reizenOpen; $("reizen-sluit").onclick = reizenSluit; $("bewaar").onclick = reisBewaren;
+$("r-export").onclick = reizenExport; $("r-wis").onclick = reizenWis; $("r-imp-knop").onclick = () => $("r-import").click();
+$("r-import").onchange = e => { const f = e.target.files[0]; e.target.value = ""; if (f) reizenImport(f); };
+document.addEventListener("keydown", e => { if (e.key === "Escape" && !$("reizen").hidden) reizenSluit(); });
+reizenTel();
+
 const instOpen = () => { $("inst").hidden = false; document.body.style.overflow = "hidden"; $("inst-sluit").focus(); };
 const instSluit = () => { $("inst").hidden = true; document.body.style.overflow = ""; };
 $("inst-knop").onclick = instOpen; $("inst-sluit").onclick = instSluit;
