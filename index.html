@@ -3,281 +3,204 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" media="(prefers-color-scheme: light)" content="#F7F7F8">
-<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000000">
-<meta name="color-scheme" content="light dark">
-<script id="vroeg">try{var t=localStorage.getItem("treinplek-thema");if(t==="licht"||t==="donker")document.documentElement.dataset.thema=t}catch(e){}</script>
+<meta name="theme-color" content="#ffffff">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Treinplek">
-<link rel="icon" href="data:image/png;base64,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">
+<link rel="manifest" href="manifest.webmanifest?v=31">
 <link rel="apple-touch-icon" sizes="180x180" href="data:image/png;base64,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">
-<link rel="manifest" href="manifest.webmanifest?v=30">
+<link rel="icon" type="image/png" sizes="64x64" href="data:image/png;base64,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">
 <title>Waar zit ik in de trein?</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<script>(function(){try{var w=localStorage.getItem("treinplek-thema"),d=w==="donker"||(w!=="licht"&&matchMedia("(prefers-color-scheme: dark)").matches);document.documentElement.setAttribute("data-thema",d?"donker":"licht")}catch(e){}})()</script>
 <style>
-/* ===== Tractie: basis (bron: tractie.ns.nl, pagina's Typography, Spacings, Borders, Elevation, Motion) ===== */
+@font-face{font-family:Roboto;font-style:normal;font-weight:400;font-display:swap;src:url(lettertype/roboto-latin-400-normal.woff2) format("woff2")}
+@font-face{font-family:Roboto;font-style:normal;font-weight:500;font-display:swap;src:url(lettertype/roboto-latin-500-normal.woff2) format("woff2")}
+@font-face{font-family:Roboto;font-style:normal;font-weight:700;font-display:swap;src:url(lettertype/roboto-latin-700-normal.woff2) format("woff2")}
+:root{--c-content-default:#333438;--c-content-default-inverse:#ffffff;--c-content-emphasis:#0a3680;--c-content-subtle:#00010d8c;--c-content-placeholder:#00010f6e;--c-content-interactive-default:#0062d1;--c-content-interactive-default-inverse:#ffffff;--c-content-interactive-hover:#0c44a1;--c-content-interactive-pressed:#0a3680;--c-content-selected:#0062d1;--c-content-info:#0062d1;--c-content-success:#3e7f67;--c-content-warning:#f05c00;--c-content-warning-inverse:#ff9544;--c-content-error:#ce092d;--c-content-error-inverse:#ff9496;--c-content-destructive-default:#ce092d;--c-content-destructive-hover:#b30525;--c-content-destructive-pressed:#9a041f;--c-content-on-accent-subtle:#040409b5;--c-content-on-accent-yellow-default:#040409b5;--c-content-logo:#0a3680;--c-background-default:#ffffff;--c-background-default-inverse:#4d4e51;--c-background-elevated-1:#ffffff;--c-background-elevated-2:#ffffff;--c-background-elevated-sunken:#f5f5f7;--c-background-emphasis-primary:#ebf5ff;--c-background-emphasis-secondary:#f0f1f3;--c-background-brand-primary:#ffc70f;--c-background-brand-secondary:#0a3680;--c-background-hover:#060f2e0f;--c-background-hover-inverse:#ffffff14;--c-background-pressed:#060f2e1c;--c-background-pressed-inverse:#ffffff29;--c-background-selected-default:#dbeaff;--c-background-selected-hover:#c4dbf7;--c-background-selected-pressed:#9ac5f1;--c-background-selected-emphasis-default:#0062d1;--c-background-selected-emphasis-hover:#0c44a1;--c-background-selected-emphasis-pressed:#0a3680;--c-background-interactive-default:#0062d1;--c-background-interactive-default-inverse:#ffffff;--c-background-interactive-hover:#0c44a1;--c-background-interactive-hover-inverse:#f0f1f3;--c-background-interactive-pressed:#0a3680;--c-background-interactive-pressed-inverse:#eaebee;--c-background-input:#ffffff;--c-background-alpha-default:#00021b3b;--c-background-alpha-subtle:#060f2e14;--c-background-alpha-emphasis-default:#00010f6e;--c-background-alpha-emphasis-hover:#00010d8c;--c-background-alpha-emphasis-pressed:#040409b5;--c-background-overlay:#00010d8c;--c-background-info-default:#0062d1;--c-background-info-hover:#0c44a1;--c-background-info-pressed:#0a3680;--c-background-info-subtle:#ebf5ff;--c-background-success-default:#3e7f67;--c-background-success-hover:#2f6656;--c-background-success-pressed:#244c40;--c-background-success-subtle:#dafbf0;--c-background-warning-default:#f05c00;--c-background-warning-hover:#ca4f02;--c-background-warning-pressed:#a03f02;--c-background-warning-subtle:#fbf1e7;--c-background-error-default:#ce092d;--c-background-error-hover:#b30525;--c-background-error-pressed:#9a041f;--c-background-error-subtle:#fceaeb;--c-background-destructive-default:#ce092d;--c-background-destructive-hover:#b30525;--c-background-destructive-pressed:#9a041f;--c-background-discovery:#885dd0;--c-background-accent-gray-default:#00010d8c;--c-background-accent-gray-subtle:#060f2e1c;--c-background-accent-blue-default:#0062d1;--c-background-accent-blue-subtle:#dbeaff;--c-background-accent-orange-default:#f05c00;--c-background-accent-orange-subtle:#f7e9d4;--c-background-accent-green-default:#3e7f67;--c-background-accent-green-subtle:#b9f4db;--c-background-accent-red-default:#eb0f38;--c-background-accent-red-subtle:#fadcdd;--c-background-accent-yellow-default:#ffc70f;--c-background-accent-yellow-subtle:#fff2c8;--c-background-accent-purple-default:#885dd0;--c-background-accent-purple-subtle:#ebdefd;--c-background-accent-pink-default:#d53483;--c-background-accent-pink-subtle:#ffdbf0;--c-border-default:#060f2e1c;--c-border-default-inverse:#ffffff29;--c-border-subtle:#060f2e14;--c-border-emphasis:#00021b3b;--c-border-interactive-default:#0062d1;--c-border-interactive-default-inverse:#ffffff;--c-border-interactive-hover:#0c44a1;--c-border-interactive-pressed:#0a3680;--c-border-input-default:#00010f6e;--c-border-input-hover:#00010d8c;--c-border-info:#0062d1;--c-border-success:#3e7f67;--c-border-warning:#f05c00;--c-border-error:#ce092d;--c-border-destructive-default:#ce092d;--c-border-destructive-hover:#b30525;--c-border-destructive-pressed:#9a041f;--c-border-logo:transparent;--c-border-selected-default:#0062d1;--c-border-selected-emphasis:#0a3680;--c-border-focus:#0062d1;--c-border-focus-inverse:#9ac5f1;--marker:#eb0f38;color-scheme:light}
+:root[data-thema="donker"]{--c-content-default:#d6d7dc;--c-content-default-inverse:#333438;--c-content-emphasis:#eaebee;--c-content-subtle:#ffffff91;--c-content-placeholder:#ffffff6e;--c-content-interactive-default:#5d9fea;--c-content-interactive-default-inverse:#0a3680;--c-content-interactive-hover:#9ac5f1;--c-content-interactive-pressed:#c4dbf7;--c-content-selected:#ffffff;--c-content-info:#5d9fea;--c-content-success:#4ecda6;--c-content-warning:#ff9544;--c-content-warning-inverse:#a03f02;--c-content-error:#ff9496;--c-content-error-inverse:#b30525;--c-content-destructive-default:#ff9496;--c-content-destructive-hover:#ffbdbe;--c-content-destructive-pressed:#fadcdd;--c-content-on-accent-subtle:#ffffff;--c-content-on-accent-yellow-default:#333438;--c-content-logo:#fed652;--c-background-default:#191a1c;--c-background-default-inverse:#e4e5e8;--c-background-elevated-1:#252528;--c-background-elevated-2:#333438;--c-background-elevated-sunken:#000000;--c-background-emphasis-primary:#1f2c42;--c-background-emphasis-secondary:#4d4e51;--c-background-brand-primary:#333438;--c-background-brand-secondary:#9ac5f1;--c-background-hover:#ffffff14;--c-background-hover-inverse:#060f2e0f;--c-background-pressed:#ffffff29;--c-background-pressed-inverse:#060f2e1c;--c-background-selected-default:#ffffff29;--c-background-selected-hover:#ffffff3b;--c-background-selected-pressed:#ffffff52;--c-background-selected-emphasis-default:#9ac5f1;--c-background-selected-emphasis-hover:#c4dbf7;--c-background-selected-emphasis-pressed:#dbeaff;--c-background-interactive-default:#5d9fea;--c-background-interactive-default-inverse:#1b3460;--c-background-interactive-hover:#9ac5f1;--c-background-interactive-hover-inverse:#0a3680;--c-background-interactive-pressed:#c4dbf7;--c-background-interactive-pressed-inverse:#0c44a1;--c-background-input:#000000;--c-background-alpha-default:#ffffff52;--c-background-alpha-subtle:#ffffff1c;--c-background-alpha-emphasis-default:#ffffff6e;--c-background-alpha-emphasis-hover:#ffffff91;--c-background-alpha-emphasis-pressed:#ffffffb5;--c-background-overlay:#00010d8c;--c-background-info-default:#5d9fea;--c-background-info-hover:#9ac5f1;--c-background-info-pressed:#c4dbf7;--c-background-info-subtle:#ffffff1c;--c-background-success-default:#4ecda6;--c-background-success-hover:#9ae0c4;--c-background-success-pressed:#b9f4db;--c-background-success-subtle:#ffffff1c;--c-background-warning-default:#ff9544;--c-background-warning-hover:#ffbb7a;--c-background-warning-pressed:#f7d7b2;--c-background-warning-subtle:#ffffff1c;--c-background-error-default:#ff9496;--c-background-error-hover:#ffbdbe;--c-background-error-pressed:#fadcdd;--c-background-error-subtle:#ffffff1c;--c-background-destructive-default:#ff9496;--c-background-destructive-hover:#ffbdbe;--c-background-destructive-pressed:#fadcdd;--c-background-discovery:#a880ef;--c-background-accent-gray-default:#ffffff91;--c-background-accent-gray-subtle:#ffffff29;--c-background-accent-blue-default:#5d9fea;--c-background-accent-blue-subtle:#1b3460;--c-background-accent-orange-default:#ff9544;--c-background-accent-orange-subtle:#6a3718;--c-background-accent-green-default:#47bd99;--c-background-accent-green-subtle:#244c40;--c-background-accent-red-default:#f06666;--c-background-accent-red-subtle:#9a041f;--c-background-accent-yellow-default:#fed652;--c-background-accent-yellow-subtle:#8c7321;--c-background-accent-purple-default:#a880ef;--c-background-accent-purple-subtle:#472f6f;--c-background-accent-pink-default:#ea66aa;--c-background-accent-pink-subtle:#84244b;--c-border-default:#ffffff29;--c-border-default-inverse:#060f2e1c;--c-border-subtle:#ffffff1c;--c-border-emphasis:#ffffff52;--c-border-interactive-default:#5d9fea;--c-border-interactive-default-inverse:#0c44a1;--c-border-interactive-hover:#9ac5f1;--c-border-interactive-pressed:#c4dbf7;--c-border-input-default:#ffffff6e;--c-border-input-hover:#ffffff91;--c-border-info:#5d9fea;--c-border-success:#4ecda6;--c-border-warning:#ff9544;--c-border-error:#ff9496;--c-border-destructive-default:#ff9496;--c-border-destructive-hover:#ffbdbe;--c-border-destructive-pressed:#fadcdd;--c-border-logo:#ffffff29;--c-border-selected-default:#fed652;--c-border-selected-emphasis:#fed652;--c-border-focus:#5d9fea;--c-border-focus-inverse:#0c44a1;--marker:#f06666;color-scheme:dark}
 :root{
-/* typografie: Roboto, drie gewichten */
---typography-family:Roboto,system-ui,sans-serif;
---typography-size-xxxl:clamp(1.375rem,1.125rem + .8333vi,1.75rem);--typography-size-xxl:clamp(1.25rem,1.0833rem + .5556vi,1.5rem);
---typography-size-xl:clamp(1.125rem,1.0417rem + .2778vi,1.25rem);--typography-size-l:clamp(1rem,.9167rem + .2778vi,1.125rem);
---typography-size-m:1rem;--typography-size-s:.875rem;--typography-size-xs:.75rem;
---typography-leading-l:1.5;--typography-leading-m:1.25;--typography-leading-s:1;
---typography-weight-normal:400;--typography-weight-medium:500;--typography-weight-bold:700;
-/* ruimte: stappen van 4px */
---spacing-spacer-0-5:2px;--spacing-spacer-1:4px;--spacing-spacer-2:8px;--spacing-spacer-3:12px;--spacing-spacer-4:16px;--spacing-spacer-5:20px;--spacing-spacer-6:24px;--spacing-spacer-8:32px;--spacing-spacer-10:40px;--spacing-spacer-12:48px;--spacing-spacer-14:56px;--spacing-spacer-16:64px;
---spacing-inset-xs:var(--spacing-spacer-2);--spacing-inset-s:var(--spacing-spacer-3);--spacing-inset-m:var(--spacing-spacer-4);--spacing-inset-l:var(--spacing-spacer-4);
---spacing-gap-xs:var(--spacing-spacer-1);--spacing-gap-s:var(--spacing-spacer-2);--spacing-gap-m:var(--spacing-spacer-4);--spacing-gap-l:var(--spacing-spacer-6);--spacing-gap-xl:var(--spacing-spacer-8);
-/* randen */
---border-width-thin:1px;--border-width-medium:2px;--border-width-thick:4px;
---border-radius-s:3px;--border-radius-m:6px;--border-radius-l:12px;--border-radius-full:9999px;
-/* verhoging (web) */
---web-shadow-elevated-1:0 1px 4px 0 rgba(0,0,0,.08),0 1px 2px 0 rgba(0,0,0,.08);
---web-shadow-elevated-2:0 8px 20px 0 rgba(0,0,0,.04),0 1px 1px 0 rgba(0,0,0,.03);
-/* beweging: exit en standaard komen van de pagina Motion; duur voor web */
---motion-enter:cubic-bezier(0,0,.2,1);--motion-exit:cubic-bezier(.8,0,1,1);--motion-standard:cubic-bezier(.5,0,.2,1);
---motion-50:50ms;--motion-100:100ms;--motion-150:150ms;--motion-200:200ms;--motion-250:250ms;--motion-400:400ms;
-}
-/* ===== Tractie: kleuren. Semantische tokens letterlijk uit tractie.ns.nl (Colors). Palet: schattingen, zie VERSIES.md ===== */
-:root{--color-palette-white:#FFFFFF;
---color-palette-black:#000000;
---color-palette-gray-25:#F7F7F8;
---color-palette-gray-50:#F0F1F3;
---color-palette-gray-100:#E4E6EA;
---color-palette-gray-200:#CDD0D7;
---color-palette-gray-300:#B1B6C0;
---color-palette-gray-400:#8C93A1;
---color-palette-gray-500:#6A7080;
---color-palette-gray-600:#4D5262;
---color-palette-gray-700:#363A47;
---color-palette-gray-800:#22252F;
---color-palette-gray-900:#15171E;
---color-palette-gray-950:#0B0C10;
---color-palette-blue-50:#EEF3FD;
---color-palette-blue-100:#E1ECFC;
---color-palette-blue-200:#B1CDF6;
---color-palette-blue-300:#7DAAEE;
---color-palette-blue-400:#5593E8;
---color-palette-blue-500:#0063D3;
---color-palette-blue-600:#0A4EAA;
---color-palette-blue-700:#212B5C;
---color-palette-blue-800:#171F46;
---color-palette-blue-900:#0F1531;
---color-palette-yellow-50:#FBF7DB;
---color-palette-yellow-100:#FAEFB5;
---color-palette-yellow-200:#F9E38A;
---color-palette-yellow-300:#FBD866;
---color-palette-yellow-400:#FDCF4D;
---color-palette-yellow-500:#FCC63E;
---color-palette-yellow-600:#E0A71A;
---color-palette-yellow-700:#B58100;
---color-palette-yellow-800:#7A5600;
---color-palette-yellow-900:#473200;
---color-palette-green-50:#E8F5EC;
---color-palette-green-100:#CBE9D4;
---color-palette-green-200:#A2D8B3;
---color-palette-green-300:#6FC48A;
---color-palette-green-400:#3FAE66;
---color-palette-green-500:#1F9A50;
---color-palette-green-600:#15803D;
---color-palette-green-700:#106330;
---color-palette-green-800:#0B4A24;
---color-palette-orange-50:#FFF2E5;
---color-palette-orange-100:#FFDFBF;
---color-palette-orange-200:#FFC58F;
---color-palette-orange-300:#FFA95C;
---color-palette-orange-400:#FF8F2E;
---color-palette-orange-500:#E8700A;
---color-palette-orange-600:#C25800;
---color-palette-orange-700:#8F3F00;
---color-palette-orange-800:#5E2900;
---color-palette-red-50:#FDECEC;
---color-palette-red-100:#FAD3D3;
---color-palette-red-200:#F5A9A9;
---color-palette-red-300:#EF7B7B;
---color-palette-red-400:#E85555;
---color-palette-red-500:#DE3333;
---color-palette-red-600:#BE1E1E;
---color-palette-red-700:#961717;
---color-palette-red-800:#6D1010;
---color-palette-purple-400:#8F6BD6;
---color-palette-purple-500:#7048C6;
---color-palette-purple-100:#E9E0F8;
---color-palette-purple-800:#3A2370;
---color-palette-alpha-black-50:rgba(0,0,0,.04);
---color-palette-alpha-black-75:rgba(0,0,0,.06);
---color-palette-alpha-black-100:rgba(0,0,0,.10);
---color-palette-alpha-black-200:rgba(0,0,0,.16);
---color-palette-alpha-black-300:rgba(0,0,0,.24);
---color-palette-alpha-black-400:rgba(0,0,0,.46);
---color-palette-alpha-black-500:rgba(0,0,0,.60);
---color-palette-alpha-black-600:rgba(0,0,0,.72);
---color-palette-alpha-white-50:rgba(255,255,255,.06);
---color-palette-alpha-white-75:rgba(255,255,255,.08);
---color-palette-alpha-white-100:rgba(255,255,255,.12);
---color-palette-alpha-white-200:rgba(255,255,255,.18);
---color-palette-alpha-white-300:rgba(255,255,255,.26);
---color-palette-alpha-white-400:rgba(255,255,255,.46);
---color-palette-alpha-white-500:rgba(255,255,255,.64);
---color-palette-alpha-white-600:rgba(255,255,255,.78);
---color-content-default:var(--color-palette-gray-800);--color-content-default-inverse:var(--color-palette-white);--color-content-emphasis:var(--color-palette-blue-700);--color-content-subtle:var(--color-palette-alpha-black-500);--color-content-placeholder:var(--color-palette-alpha-black-400);--color-content-interactive-default:var(--color-palette-blue-500);--color-content-interactive-hover:var(--color-palette-blue-600);--color-content-interactive-pressed:var(--color-palette-blue-700);--color-content-selected:var(--color-palette-blue-500);--color-content-info:var(--color-palette-blue-500);--color-content-success:var(--color-palette-green-600);--color-content-warning:var(--color-palette-orange-500);--color-content-error:var(--color-palette-red-600);--color-content-destructive-default:var(--color-palette-red-600);--color-content-on-accent-subtle:var(--color-palette-alpha-black-600);--color-content-on-accent-yellow-default:var(--color-palette-alpha-black-600);--color-content-logo:var(--color-palette-blue-700);--color-background-default:var(--color-palette-white);--color-background-default-inverse:var(--color-palette-gray-700);--color-background-elevated-1:var(--color-palette-white);--color-background-elevated-2:var(--color-palette-white);--color-background-elevated-sunken:var(--color-palette-gray-25);--color-background-emphasis-primary:var(--color-palette-blue-50);--color-background-emphasis-secondary:var(--color-palette-gray-50);--color-background-brand-primary:var(--color-palette-yellow-500);--color-background-brand-secondary:var(--color-palette-blue-700);--color-background-hover:var(--color-palette-alpha-black-50);--color-background-pressed:var(--color-palette-alpha-black-100);--color-background-selected-default:var(--color-palette-blue-100);--color-background-selected-hover:var(--color-palette-blue-200);--color-background-selected-pressed:var(--color-palette-blue-300);--color-background-selected-emphasis-default:var(--color-palette-blue-500);--color-background-selected-emphasis-hover:var(--color-palette-blue-600);--color-background-selected-emphasis-pressed:var(--color-palette-blue-700);--color-background-interactive-default:var(--color-palette-blue-500);--color-background-interactive-hover:var(--color-palette-blue-600);--color-background-interactive-pressed:var(--color-palette-blue-700);--color-background-input:var(--color-palette-white);--color-background-alpha-default:var(--color-palette-alpha-black-300);--color-background-alpha-subtle:var(--color-palette-alpha-black-75);--color-background-alpha-emphasis-default:var(--color-palette-alpha-black-400);--color-background-overlay:var(--color-palette-alpha-black-500);--color-background-info-default:var(--color-palette-blue-500);--color-background-info-subtle:var(--color-palette-blue-50);--color-background-success-default:var(--color-palette-green-600);--color-background-success-subtle:var(--color-palette-green-50);--color-background-warning-default:var(--color-palette-orange-500);--color-background-warning-subtle:var(--color-palette-orange-50);--color-background-error-default:var(--color-palette-red-600);--color-background-error-subtle:var(--color-palette-red-50);--color-background-destructive-default:var(--color-palette-red-600);--color-background-accent-gray-default:var(--color-palette-alpha-black-500);--color-background-accent-gray-subtle:var(--color-palette-alpha-black-100);--color-background-accent-blue-default:var(--color-palette-blue-500);--color-background-accent-blue-subtle:var(--color-palette-blue-100);--color-background-accent-orange-default:var(--color-palette-orange-500);--color-background-accent-orange-subtle:var(--color-palette-orange-100);--color-background-accent-green-default:var(--color-palette-green-600);--color-background-accent-green-subtle:var(--color-palette-green-100);--color-background-accent-red-default:var(--color-palette-red-500);--color-background-accent-red-subtle:var(--color-palette-red-100);--color-background-accent-yellow-default:var(--color-palette-yellow-500);--color-background-accent-yellow-subtle:var(--color-palette-yellow-100);--color-background-discovery:var(--color-palette-purple-500);--color-border-default:var(--color-palette-alpha-black-100);--color-border-subtle:var(--color-palette-alpha-black-75);--color-border-emphasis:var(--color-palette-alpha-black-300);--color-border-interactive-default:var(--color-palette-blue-500);--color-border-interactive-hover:var(--color-palette-blue-600);--color-border-interactive-pressed:var(--color-palette-blue-700);--color-border-input-default:var(--color-palette-alpha-black-400);--color-border-input-hover:var(--color-palette-alpha-black-500);--color-border-info:var(--color-palette-blue-500);--color-border-success:var(--color-palette-green-600);--color-border-warning:var(--color-palette-orange-500);--color-border-error:var(--color-palette-red-600);--color-border-destructive-default:var(--color-palette-red-600);--color-border-selected-default:var(--color-palette-blue-500);--color-border-selected-emphasis:var(--color-palette-blue-700);--color-border-focus:var(--color-palette-blue-500);color-scheme:light}
-@media (prefers-color-scheme:dark){:root:not([data-thema]){--color-content-default:var(--color-palette-gray-300);--color-content-default-inverse:var(--color-palette-gray-800);--color-content-emphasis:var(--color-palette-gray-100);--color-content-subtle:var(--color-palette-alpha-white-500);--color-content-placeholder:var(--color-palette-alpha-white-400);--color-content-interactive-default:var(--color-palette-blue-400);--color-content-interactive-hover:var(--color-palette-blue-300);--color-content-interactive-pressed:var(--color-palette-blue-200);--color-content-selected:var(--color-palette-white);--color-content-info:var(--color-palette-blue-400);--color-content-success:var(--color-palette-green-300);--color-content-warning:var(--color-palette-orange-400);--color-content-error:var(--color-palette-red-300);--color-content-destructive-default:var(--color-palette-red-300);--color-content-on-accent-subtle:var(--color-palette-white);--color-content-on-accent-yellow-default:var(--color-palette-gray-800);--color-content-logo:var(--color-palette-yellow-400);--color-background-default:var(--color-palette-gray-950);--color-background-default-inverse:var(--color-palette-gray-200);--color-background-elevated-1:var(--color-palette-gray-900);--color-background-elevated-2:var(--color-palette-gray-800);--color-background-elevated-sunken:var(--color-palette-black);--color-background-emphasis-primary:var(--color-palette-blue-900);--color-background-emphasis-secondary:var(--color-palette-gray-700);--color-background-brand-primary:var(--color-palette-gray-800);--color-background-brand-secondary:var(--color-palette-blue-300);--color-background-hover:var(--color-palette-alpha-white-50);--color-background-pressed:var(--color-palette-alpha-white-100);--color-background-selected-default:var(--color-palette-alpha-white-100);--color-background-selected-hover:var(--color-palette-alpha-white-200);--color-background-selected-pressed:var(--color-palette-alpha-white-300);--color-background-selected-emphasis-default:var(--color-palette-blue-300);--color-background-selected-emphasis-hover:var(--color-palette-blue-200);--color-background-selected-emphasis-pressed:var(--color-palette-blue-100);--color-background-interactive-default:var(--color-palette-blue-400);--color-background-interactive-hover:var(--color-palette-blue-300);--color-background-interactive-pressed:var(--color-palette-blue-200);--color-background-input:var(--color-palette-black);--color-background-alpha-default:var(--color-palette-alpha-white-300);--color-background-alpha-subtle:var(--color-palette-alpha-white-75);--color-background-alpha-emphasis-default:var(--color-palette-alpha-white-400);--color-background-overlay:var(--color-palette-alpha-black-500);--color-background-info-default:var(--color-palette-blue-400);--color-background-info-subtle:var(--color-palette-alpha-white-75);--color-background-success-default:var(--color-palette-green-300);--color-background-success-subtle:var(--color-palette-alpha-white-75);--color-background-warning-default:var(--color-palette-orange-400);--color-background-warning-subtle:var(--color-palette-alpha-white-75);--color-background-error-default:var(--color-palette-red-300);--color-background-error-subtle:var(--color-palette-alpha-white-75);--color-background-destructive-default:var(--color-palette-red-300);--color-background-accent-gray-default:var(--color-palette-alpha-white-500);--color-background-accent-gray-subtle:var(--color-palette-alpha-white-100);--color-background-accent-blue-default:var(--color-palette-blue-400);--color-background-accent-blue-subtle:var(--color-palette-blue-800);--color-background-accent-orange-default:var(--color-palette-orange-400);--color-background-accent-orange-subtle:var(--color-palette-orange-800);--color-background-accent-green-default:var(--color-palette-green-400);--color-background-accent-green-subtle:var(--color-palette-green-800);--color-background-accent-red-default:var(--color-palette-red-400);--color-background-accent-red-subtle:var(--color-palette-red-800);--color-background-accent-yellow-default:var(--color-palette-yellow-400);--color-background-accent-yellow-subtle:var(--color-palette-yellow-800);--color-background-discovery:var(--color-palette-purple-400);--color-border-default:var(--color-palette-alpha-white-100);--color-border-subtle:var(--color-palette-alpha-white-75);--color-border-emphasis:var(--color-palette-alpha-white-300);--color-border-interactive-default:var(--color-palette-blue-400);--color-border-interactive-hover:var(--color-palette-blue-300);--color-border-interactive-pressed:var(--color-palette-blue-200);--color-border-input-default:var(--color-palette-alpha-white-400);--color-border-input-hover:var(--color-palette-alpha-white-500);--color-border-info:var(--color-palette-blue-400);--color-border-success:var(--color-palette-green-300);--color-border-warning:var(--color-palette-orange-400);--color-border-error:var(--color-palette-red-300);--color-border-destructive-default:var(--color-palette-red-300);--color-border-selected-default:var(--color-palette-yellow-400);--color-border-selected-emphasis:var(--color-palette-yellow-400);--color-border-focus:var(--color-palette-blue-400);color-scheme:dark}}
-:root[data-thema=donker]{--color-content-default:var(--color-palette-gray-300);--color-content-default-inverse:var(--color-palette-gray-800);--color-content-emphasis:var(--color-palette-gray-100);--color-content-subtle:var(--color-palette-alpha-white-500);--color-content-placeholder:var(--color-palette-alpha-white-400);--color-content-interactive-default:var(--color-palette-blue-400);--color-content-interactive-hover:var(--color-palette-blue-300);--color-content-interactive-pressed:var(--color-palette-blue-200);--color-content-selected:var(--color-palette-white);--color-content-info:var(--color-palette-blue-400);--color-content-success:var(--color-palette-green-300);--color-content-warning:var(--color-palette-orange-400);--color-content-error:var(--color-palette-red-300);--color-content-destructive-default:var(--color-palette-red-300);--color-content-on-accent-subtle:var(--color-palette-white);--color-content-on-accent-yellow-default:var(--color-palette-gray-800);--color-content-logo:var(--color-palette-yellow-400);--color-background-default:var(--color-palette-gray-950);--color-background-default-inverse:var(--color-palette-gray-200);--color-background-elevated-1:var(--color-palette-gray-900);--color-background-elevated-2:var(--color-palette-gray-800);--color-background-elevated-sunken:var(--color-palette-black);--color-background-emphasis-primary:var(--color-palette-blue-900);--color-background-emphasis-secondary:var(--color-palette-gray-700);--color-background-brand-primary:var(--color-palette-gray-800);--color-background-brand-secondary:var(--color-palette-blue-300);--color-background-hover:var(--color-palette-alpha-white-50);--color-background-pressed:var(--color-palette-alpha-white-100);--color-background-selected-default:var(--color-palette-alpha-white-100);--color-background-selected-hover:var(--color-palette-alpha-white-200);--color-background-selected-pressed:var(--color-palette-alpha-white-300);--color-background-selected-emphasis-default:var(--color-palette-blue-300);--color-background-selected-emphasis-hover:var(--color-palette-blue-200);--color-background-selected-emphasis-pressed:var(--color-palette-blue-100);--color-background-interactive-default:var(--color-palette-blue-400);--color-background-interactive-hover:var(--color-palette-blue-300);--color-background-interactive-pressed:var(--color-palette-blue-200);--color-background-input:var(--color-palette-black);--color-background-alpha-default:var(--color-palette-alpha-white-300);--color-background-alpha-subtle:var(--color-palette-alpha-white-75);--color-background-alpha-emphasis-default:var(--color-palette-alpha-white-400);--color-background-overlay:var(--color-palette-alpha-black-500);--color-background-info-default:var(--color-palette-blue-400);--color-background-info-subtle:var(--color-palette-alpha-white-75);--color-background-success-default:var(--color-palette-green-300);--color-background-success-subtle:var(--color-palette-alpha-white-75);--color-background-warning-default:var(--color-palette-orange-400);--color-background-warning-subtle:var(--color-palette-alpha-white-75);--color-background-error-default:var(--color-palette-red-300);--color-background-error-subtle:var(--color-palette-alpha-white-75);--color-background-destructive-default:var(--color-palette-red-300);--color-background-accent-gray-default:var(--color-palette-alpha-white-500);--color-background-accent-gray-subtle:var(--color-palette-alpha-white-100);--color-background-accent-blue-default:var(--color-palette-blue-400);--color-background-accent-blue-subtle:var(--color-palette-blue-800);--color-background-accent-orange-default:var(--color-palette-orange-400);--color-background-accent-orange-subtle:var(--color-palette-orange-800);--color-background-accent-green-default:var(--color-palette-green-400);--color-background-accent-green-subtle:var(--color-palette-green-800);--color-background-accent-red-default:var(--color-palette-red-400);--color-background-accent-red-subtle:var(--color-palette-red-800);--color-background-accent-yellow-default:var(--color-palette-yellow-400);--color-background-accent-yellow-subtle:var(--color-palette-yellow-800);--color-background-discovery:var(--color-palette-purple-400);--color-border-default:var(--color-palette-alpha-white-100);--color-border-subtle:var(--color-palette-alpha-white-75);--color-border-emphasis:var(--color-palette-alpha-white-300);--color-border-interactive-default:var(--color-palette-blue-400);--color-border-interactive-hover:var(--color-palette-blue-300);--color-border-interactive-pressed:var(--color-palette-blue-200);--color-border-input-default:var(--color-palette-alpha-white-400);--color-border-input-hover:var(--color-palette-alpha-white-500);--color-border-info:var(--color-palette-blue-400);--color-border-success:var(--color-palette-green-300);--color-border-warning:var(--color-palette-orange-400);--color-border-error:var(--color-palette-red-300);--color-border-destructive-default:var(--color-palette-red-300);--color-border-selected-default:var(--color-palette-yellow-400);--color-border-selected-emphasis:var(--color-palette-yellow-400);--color-border-focus:var(--color-palette-blue-400);color-scheme:dark}
-:root{--bg:var(--color-background-elevated-sunken);--ink:var(--color-content-default);--muted:var(--color-content-subtle);--lijn:var(--color-border-default);--blauw:var(--color-background-interactive-default);--tb:var(--color-content-interactive-default);--accent:var(--color-background-accent-yellow-default);--kaart:var(--color-background-elevated-1);--zacht:var(--color-background-emphasis-secondary);--zacht2:var(--color-background-emphasis-secondary);--zacht3:var(--color-background-accent-gray-subtle);--plaat:var(--color-palette-gray-50);--plaatgekozen:var(--color-palette-yellow-100);--fout:var(--color-content-error);--foutbg:var(--color-background-error-subtle);--goed:var(--color-content-success);--goedbg:var(--color-background-success-subtle);--logo:var(--color-border-emphasis)}
-/* ===== Treinplek op Tractie-tokens ===== */
+--font:Roboto,system-ui,-apple-system,"Segoe UI",sans-serif;
+--fs-xxxl:clamp(1.375rem,1.125rem + .8333vi,1.75rem);--fs-xxl:clamp(1.25rem,1.0833rem + .5556vi,1.5rem);--fs-xl:clamp(1.125rem,1.0417rem + .2778vi,1.25rem);--fs-l:clamp(1rem,.9167rem + .2778vi,1.125rem);--fs-m:1rem;--fs-s:.875rem;--fs-xs:.75rem;
+--sp-1:4px;--sp-2:8px;--sp-3:12px;--sp-4:16px;--sp-5:20px;--sp-6:24px;--sp-8:32px;--sp-10:40px;--sp-12:48px;
+--r-s:3px;--r-m:6px;--r-l:12px;--r-full:9999px;--bw-1:1px;--bw-2:2px;--bw-4:4px;
+--shadow-1:0 1px 4px 0 rgba(0,0,0,.08),0 1px 2px 0 rgba(0,0,0,.08);--shadow-2:0 8px 20px 0 rgba(0,0,0,.04),0 1px 1px 0 rgba(0,0,0,.03);
+--ease-enter:cubic-bezier(0,0,.2,1);--ease-exit:cubic-bezier(.8,0,1,1);--ease-std:cubic-bezier(.5,0,.2,1);
+--t-50:50ms;--t-100:100ms;--t-150:150ms;--t-200:200ms;--t-250:250ms;--t-400:400ms}
 *{box-sizing:border-box}
-body{margin:0 auto;max-width:520px;padding:calc(var(--spacing-spacer-4) + env(safe-area-inset-top)) calc(var(--spacing-spacer-4) + env(safe-area-inset-right)) calc(48px + env(safe-area-inset-bottom)) calc(var(--spacing-spacer-4) + env(safe-area-inset-left));-webkit-tap-highlight-color:transparent;background:var(--bg);color:var(--ink);font:var(--typography-weight-normal) var(--typography-size-m)/var(--typography-leading-l) var(--typography-family)}
-h1{font:var(--typography-weight-medium) var(--typography-size-xxl)/var(--typography-leading-m) var(--typography-family);color:var(--color-content-emphasis);margin:0}
-.demo{background:var(--color-background-warning-subtle);border:var(--border-width-thin) solid var(--color-border-warning);padding:var(--spacing-spacer-2) var(--spacing-spacer-3);border-radius:var(--border-radius-m);font-size:var(--typography-size-s);margin-bottom:var(--spacing-spacer-4)}
-button{font:inherit;cursor:pointer;transition:background-color var(--motion-100) var(--motion-standard),border-color var(--motion-100) var(--motion-standard),color var(--motion-100) var(--motion-standard)}
-label{display:block;font-weight:var(--typography-weight-medium);font-size:var(--typography-size-s);margin:var(--spacing-spacer-3) 0 var(--spacing-spacer-1)}
-input{width:100%;font:inherit;min-height:48px;padding:var(--spacing-spacer-3);border:var(--border-width-thin) solid var(--color-border-input-default);border-radius:var(--border-radius-m);background:var(--color-background-input);color:var(--ink)}
-input:hover,select:hover{border-color:var(--color-border-input-hover)}
-.rij{display:grid;grid-template-columns:2fr 1fr;gap:8px}
-.knop{width:100%;margin-top:var(--spacing-spacer-3);min-height:48px;padding:var(--spacing-spacer-3) var(--spacing-spacer-4);border:0;border-radius:var(--border-radius-m);background:var(--color-background-interactive-default);color:var(--color-content-default-inverse);font-weight:var(--typography-weight-medium);font-size:var(--typography-size-m)}
-.knop:hover{background:var(--color-background-interactive-hover)}.knop:active{background:var(--color-background-interactive-pressed)}
-.tekst{min-height:48px;padding:10px var(--spacing-spacer-4);border:var(--border-width-medium) solid var(--color-border-interactive-default);border-radius:var(--border-radius-m);font-size:var(--typography-size-m);background:transparent;color:var(--color-content-interactive-default);font-weight:var(--typography-weight-medium)}
-.tekst:hover{background:var(--color-background-hover);border-color:var(--color-border-interactive-hover)}.tekst:active{background:var(--color-background-pressed)}
-:focus-visible{outline:var(--border-width-medium) solid var(--color-border-focus);outline-offset:2px}
-.melding{margin-top:12px;color:var(--fout);font-weight:600}
-.lijst{list-style:none;margin:var(--spacing-spacer-4) 0 0;padding:0;display:grid;gap:var(--spacing-spacer-2)}
-.lijst button{width:100%;display:grid;grid-template-columns:64px 1fr auto;gap:var(--spacing-spacer-3);align-items:center;text-align:left;padding:var(--spacing-spacer-3);border:var(--border-width-thin) solid var(--lijn);border-radius:var(--border-radius-l);box-shadow:var(--web-shadow-elevated-1);background:var(--kaart);color:var(--ink)}
-.lijst .t{font:var(--typography-weight-bold) var(--typography-size-xl)/1.1 var(--typography-family)}
-.lijst small{display:block;color:var(--muted)}
-.lijst .vervalt{text-decoration:line-through;opacity:.55}
-#kaart{margin-top:var(--spacing-spacer-4);background:var(--kaart);border-radius:var(--border-radius-l);box-shadow:var(--web-shadow-elevated-1);padding:var(--spacing-spacer-4)}
-#kaart h2{font:var(--typography-weight-medium) var(--typography-size-xxl)/var(--typography-leading-m) var(--typography-family);color:var(--color-content-emphasis);margin:0}
-#kaart p{margin:2px 0 10px;color:var(--muted)}
-.kop{font-size:14px;color:var(--muted);margin-bottom:4px}
-.deelnaam{font-size:14px;color:var(--muted);margin:14px 0 4px}
-.bak{margin:12px 0 0}
-.baktitel{font:var(--typography-weight-medium) var(--typography-size-l)/1.25 var(--typography-family);margin:0 0 4px 2px;color:var(--ink)}
-.bak.gekozen .baktitel{color:var(--color-content-selected)}
-.vlak{position:relative;border:var(--border-width-medium) solid var(--lijn);border-radius:var(--border-radius-l);background:var(--plaat);touch-action:manipulation;cursor:crosshair}
-.bak.gekozen .vlak{border-color:var(--color-border-selected-emphasis);background:var(--plaatgekozen)}
-.knip{position:relative;display:block;overflow:hidden;line-height:0;border-radius:calc(var(--border-radius-l) - 2px);aspect-ratio:4/1;width:100%}
-.knip.spiegel{transform:scaleX(-1)}
-.knip img{position:absolute;top:0;height:auto;max-width:none;user-select:none;-webkit-user-drag:none;pointer-events:none}
-.stip{position:absolute;width:48px;height:48px;margin:-24px 0 0 -24px;border-radius:50%;border:8px solid #e4002b;background:rgba(255,255,255,.35);box-shadow:0 0 0 2px #fff,inset 0 0 0 2px #fff;pointer-events:none}
-.deelnaam{font-size:14px;color:var(--muted);margin:18px 0 0}
-#overlay{position:fixed;inset:0;z-index:10;background:rgba(16,33,58,.88);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:16px;overflow:auto}
-#overlay img{max-width:100%;max-height:70vh;border-radius:12px;background:#fff}
-#overlay p{color:#fff;margin:0;text-align:center}
-select{width:100%;font:inherit;min-height:48px;padding:var(--spacing-spacer-3) var(--spacing-spacer-2);border:var(--border-width-thin) solid var(--color-border-input-default);border-radius:var(--border-radius-m);background:var(--color-background-input);color:var(--ink)}
-.zdeel{margin-top:10px}
-.rij3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.stelhulp{margin:12px 0 0;font-size:14px;color:var(--muted);line-height:1.5}
-.stelhulp b{color:var(--ink)}
-.stelrij{margin-bottom:10px}
-.stelrij select{display:block;margin-top:6px}
-.stelhulp .nok{color:var(--fout)}
-.reeksen{margin-top:10px;font-size:13px;color:var(--muted)}
-.reeksen summary{cursor:pointer}
-.reeksen ul{margin:6px 0 0;padding-left:18px}
-.ztot{margin:12px 0 0;font-weight:600;color:var(--ink)}
-.zelf small{display:block;margin-top:8px;color:var(--muted)}
-#keuze{margin:14px 0 0;font:var(--typography-weight-medium) var(--typography-size-xxl)/1.25 var(--typography-family);color:var(--color-content-emphasis)}
-.acties{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
-.acties .knop{margin:0}
-.modi{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
-.modus{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--spacing-spacer-2);min-height:96px;padding:var(--spacing-spacer-3) var(--spacing-spacer-1);border:var(--border-width-medium) solid var(--lijn);border-radius:var(--border-radius-l);background:var(--kaart);box-shadow:var(--web-shadow-elevated-1);color:var(--color-content-default);font-weight:var(--typography-weight-medium);font-size:var(--typography-size-s);line-height:1.25;text-align:center}
-.modus svg{width:32px;height:32px;stroke:currentColor;color:var(--color-content-interactive-default);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
-.modus[aria-selected=true]{background:var(--color-background-selected-default);border-color:var(--color-border-selected-default);color:var(--color-content-selected)}
-.modus[aria-selected=true] svg{color:var(--color-content-selected)}
-.modus.hoofd{grid-column:1/-1;flex-direction:row;justify-content:flex-start;gap:var(--spacing-spacer-4);min-height:80px;padding:var(--spacing-spacer-3) var(--spacing-spacer-5);font-size:var(--typography-size-xl);text-align:left}
-.modus.hoofd small{display:block;margin-top:2px;font-weight:var(--typography-weight-normal);font-size:var(--typography-size-s);color:var(--muted)}
-.zelf{margin-top:18px}
-.zelf summary{list-style:none;display:flex;align-items:center;justify-content:center;gap:var(--spacing-spacer-2);min-height:56px;padding:var(--spacing-spacer-3) var(--spacing-spacer-4);border:var(--border-width-thin) solid var(--lijn);border-radius:var(--border-radius-l);box-shadow:var(--web-shadow-elevated-1);background:var(--kaart);color:var(--color-content-interactive-default);font-weight:var(--typography-weight-medium);font-size:var(--typography-size-m);cursor:pointer}
-.zelf summary::-webkit-details-marker{display:none}
-.zelf summary::after{content:"›";font-size:26px;line-height:1;transform:rotate(90deg);transition:transform .15s}
-.zelf[open] summary::after{transform:rotate(-90deg)}
-.zelf form{text-align:left;margin-top:var(--spacing-spacer-3);background:var(--kaart);border-radius:var(--border-radius-l);box-shadow:var(--web-shadow-elevated-1);padding:var(--spacing-spacer-4)}
-#treinlogo{display:block;margin:28px auto 4px;width:190px;max-width:60%;color:var(--logo)}
-#treinlogo .u{fill:var(--bg)}
-.autokaart{background:var(--kaart);border-radius:var(--border-radius-l);box-shadow:var(--web-shadow-elevated-1);padding:var(--spacing-spacer-5);text-align:center}
-.autokaart p{margin:0 0 6px}
-.autokaart small{display:block;margin-top:10px;color:var(--muted);font-size:13px}
-.auto-kop{display:flex;align-items:center;justify-content:space-between;gap:10px;color:var(--muted);font-size:14px;margin:2px 2px 6px}
-.chips{display:flex;gap:8px;overflow-x:auto;padding:4px 0 12px;margin:0 -2px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
-.chips::-webkit-scrollbar{display:none}
-.chip{flex:0 0 auto;min-height:44px;padding:0 var(--spacing-spacer-4);border:var(--border-width-medium) solid var(--color-border-interactive-default);border-radius:var(--border-radius-full);background:var(--kaart);color:var(--color-content-interactive-default);font-weight:var(--typography-weight-medium);font-size:var(--typography-size-m)}
-.chip[aria-pressed=true]{background:var(--color-background-selected-emphasis-default);border-color:var(--color-background-selected-emphasis-default);color:var(--color-content-default-inverse)}
-.chip small{font-weight:400;opacity:.8;margin-left:4px}
-.ritten{list-style:none;margin:0;padding:0;display:grid;gap:10px}
-.rit{width:100%;display:grid;grid-template-columns:62px 1fr auto;gap:var(--spacing-spacer-3);align-items:center;text-align:left;padding:var(--spacing-spacer-3);border:var(--border-width-thin) solid var(--lijn);border-radius:var(--border-radius-l);box-shadow:var(--web-shadow-elevated-1);background:var(--kaart);color:var(--ink);min-height:84px}
-.rit.jouw{border-color:var(--color-border-selected-default);box-shadow:0 0 0 var(--border-width-medium) var(--color-border-selected-default)}
-.rit strong{display:block;font:var(--typography-weight-medium) var(--typography-size-xl)/1.25 var(--typography-family)}
-.rit small{display:block;color:var(--muted);font-size:14px;line-height:1.35;margin-top:2px}
-.rit .afst{font-weight:var(--typography-weight-medium);color:var(--tb);white-space:nowrap;align-self:start}
-.jouwtag{display:inline-block;margin-bottom:4px;padding:2px var(--spacing-spacer-2);border-radius:var(--border-radius-s);background:var(--color-background-accent-blue-subtle);color:var(--color-content-on-accent-subtle);font-size:var(--typography-size-xs);font-weight:var(--typography-weight-medium)}
-.soort{padding:10px 4px;border-radius:var(--border-radius-m);text-align:center;font:var(--typography-weight-bold) var(--typography-size-m)/1 var(--typography-family);background:var(--color-background-accent-gray-subtle);color:var(--ink)}
-.s-ic{background:var(--color-background-accent-yellow-default);color:var(--color-content-on-accent-yellow-default)}
-.s-spr{background:var(--kaart);border:var(--border-width-medium) solid var(--color-border-interactive-default);color:var(--color-content-interactive-default)}
-.s-ice{background:var(--kaart);border:var(--border-width-medium) solid var(--color-border-error);color:var(--color-content-error)}
-.s-icd{background:var(--color-background-accent-blue-default);color:var(--color-content-default-inverse)}
-html.rijdt,html.rijdt body{overflow-x:hidden}
-.rij-in{animation:rijIn .8s cubic-bezier(.15,.85,.25,1) both}
-.rij-uit{animation:rijUit .75s cubic-bezier(.55,0,.9,.45) both}
-@keyframes rijIn{from{transform:translateX(115vw)}to{transform:none}}
-@keyframes rijUit{from{transform:none}to{transform:translateX(-125vw)}}
-.kopbalk{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:var(--spacing-spacer-3);margin:calc(-1*(var(--spacing-spacer-4) + env(safe-area-inset-top))) calc(-1*(var(--spacing-spacer-4) + env(safe-area-inset-right))) var(--spacing-spacer-4) calc(-1*(var(--spacing-spacer-4) + env(safe-area-inset-left)));padding:calc(var(--spacing-spacer-3) + env(safe-area-inset-top)) var(--spacing-spacer-4) var(--spacing-spacer-3);background:var(--color-background-elevated-2);box-shadow:var(--web-shadow-elevated-2)}
-.applogo{width:32px;height:32px;border-radius:8px;flex:none}
-.kopbalk h1{flex:1;min-width:0}
-.tand{flex:none;width:48px;height:48px;display:grid;place-items:center;padding:0;border:0;border-radius:var(--border-radius-full);background:transparent;color:var(--color-content-interactive-default)}
-.tand:hover{background:var(--color-background-hover)}.tand:active{background:var(--color-background-pressed)}
+html{-webkit-text-size-adjust:100%}
+body{margin:0 auto;max-width:520px;padding:calc(var(--sp-4) + env(safe-area-inset-top)) calc(var(--sp-4) + env(safe-area-inset-right)) calc(var(--sp-12) + env(safe-area-inset-bottom)) calc(var(--sp-4) + env(safe-area-inset-left));font:400 var(--fs-m)/1.5 var(--font);color:var(--c-content-default);background:var(--c-background-elevated-sunken);-webkit-tap-highlight-color:transparent}
+h1,h2,h3{font-family:var(--font);font-weight:500;line-height:1.25;color:var(--c-content-emphasis);margin:0}
+button{font:inherit;cursor:pointer}
+label{display:block;font-weight:500;font-size:var(--fs-s);line-height:1.5;margin:var(--sp-3) 0 var(--sp-1)}
+:focus-visible{outline:var(--bw-2) solid var(--c-border-focus);outline-offset:2px}
+/* knoppen */
+.knop{display:flex;align-items:center;justify-content:center;width:100%;margin-top:var(--sp-4);min-height:48px;padding:var(--sp-3) var(--sp-4);border:0;border-radius:var(--r-m);background:var(--c-background-interactive-default);color:var(--c-content-interactive-default-inverse);font-weight:500;font-size:var(--fs-m);line-height:1.25}
+.knop:active{background:var(--c-background-interactive-pressed)}
+.tekst{display:flex;align-items:center;justify-content:center;min-height:48px;padding:var(--sp-3) var(--sp-4);border:var(--bw-2) solid var(--c-border-interactive-default);border-radius:var(--r-m);background:transparent;color:var(--c-content-interactive-default);font-weight:500;font-size:var(--fs-m);line-height:1.25}
+.tekst:active{background:var(--c-background-pressed);border-color:var(--c-border-interactive-pressed)}
+.tekst.gevaar{color:var(--c-content-destructive-default);border-color:var(--c-border-destructive-default)}
+.tekst.gevaar:active{border-color:var(--c-border-destructive-pressed);color:var(--c-content-destructive-pressed)}
+@media (hover:hover){.knop:hover{background:var(--c-background-interactive-hover)}.tekst:hover{background:var(--c-background-hover);border-color:var(--c-border-interactive-hover)}.tekst.gevaar:hover{border-color:var(--c-border-destructive-hover);color:var(--c-content-destructive-hover)}}
+/* invoer */
+input,select{width:100%;font:inherit;font-size:var(--fs-m);min-height:48px;padding:var(--sp-3);border:var(--bw-1) solid var(--c-border-input-default);border-radius:var(--r-m);background:var(--c-background-input);color:var(--c-content-default)}
+input::placeholder{color:var(--c-content-placeholder)}
+input:hover,select:hover{border-color:var(--c-border-input-hover)}
+input:focus-visible,select:focus-visible{border-color:var(--c-border-focus)}
+.rij{display:grid;grid-template-columns:2fr 1fr;gap:var(--sp-2)}
+.rij3{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-2)}
+.zdeel{margin-top:var(--sp-3)}
+/* meldingen */
+.melding{margin-top:var(--sp-3);padding:var(--sp-3);border:var(--bw-1) solid var(--c-border-error);border-left:var(--bw-4) solid var(--c-border-error);border-radius:var(--r-m);background:var(--c-background-error-subtle);color:var(--c-content-default);font-weight:500}
+.demo{background:var(--c-background-info-subtle);border:var(--bw-1) solid var(--c-border-info);color:var(--c-content-default);padding:var(--sp-3);border-radius:var(--r-m);font-size:var(--fs-s);margin-bottom:var(--sp-4)}
+#kaart .deel-melding{margin:var(--sp-3) 0 0;padding:var(--sp-3);border:var(--bw-1) solid var(--c-border-error);border-left:var(--bw-4) solid var(--c-border-error);border-radius:var(--r-m);background:var(--c-background-error-subtle);color:var(--c-content-default);font-weight:500;text-align:center}
+#kaart .deel-melding.ok{border-color:var(--c-border-success);background:var(--c-background-success-subtle);color:var(--c-content-default)}
+/* kop */
+.kopbalk{display:flex;align-items:center;justify-content:space-between;gap:var(--sp-3);margin:calc(-1*(var(--sp-4) + env(safe-area-inset-top))) calc(-1*(var(--sp-4) + env(safe-area-inset-right))) var(--sp-4) calc(-1*(var(--sp-4) + env(safe-area-inset-left)));padding:calc(var(--sp-2) + env(safe-area-inset-top)) calc(var(--sp-4) + env(safe-area-inset-right)) var(--sp-2) calc(var(--sp-4) + env(safe-area-inset-left));background:var(--c-background-elevated-2);border-bottom:var(--bw-1) solid var(--c-border-default);box-shadow:var(--shadow-2)}
+.merk{display:flex;align-items:center;gap:var(--sp-3);min-width:0}
+.merk-icoon{width:40px;height:40px;border-radius:var(--r-m);flex:none;display:block}
+.kopbalk h1{font-size:var(--fs-xl)}
+.kopknoppen{display:flex;gap:var(--sp-2);flex:none}
+.tand{position:relative;flex:none;width:48px;height:48px;display:grid;place-items:center;padding:0;border:0;border-radius:var(--r-m);background:transparent;color:var(--c-content-interactive-default)}
+.tand:active{background:var(--c-background-pressed)}
+@media (hover:hover){.tand:hover{background:var(--c-background-hover)}}
 .tand svg,.ververs svg{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .tand svg{width:26px;height:26px}
-.ververs{flex:none;display:inline-flex;align-items:center;gap:var(--spacing-spacer-2);min-height:44px;padding:var(--spacing-spacer-2) var(--spacing-spacer-4) var(--spacing-spacer-2) var(--spacing-spacer-3);border:var(--border-width-medium) solid var(--color-border-interactive-default);border-radius:var(--border-radius-full);background:var(--kaart);color:var(--color-content-interactive-default);font-weight:var(--typography-weight-medium);font-size:var(--typography-size-m)}
-.ververs svg{width:20px;height:20px;stroke-width:2.4}
-.inst{position:fixed;inset:0;z-index:50;overflow:auto;background:var(--bg);padding:calc(16px + env(safe-area-inset-top)) calc(16px + env(safe-area-inset-right)) calc(32px + env(safe-area-inset-bottom)) calc(16px + env(safe-area-inset-left))}
+.teller{position:absolute;top:2px;right:2px;min-width:20px;height:20px;padding:0 5px;border-radius:var(--r-full);background:var(--c-background-error-default);color:var(--c-content-default-inverse);font:500 var(--fs-xs)/20px var(--font);text-align:center}
+/* keuzetegels */
+.modi{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-3);margin-bottom:var(--sp-4)}
+.modus{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--sp-2);min-height:96px;padding:var(--sp-3) var(--sp-1);border:var(--bw-2) solid var(--c-border-default);border-radius:var(--r-l);background:var(--c-background-elevated-1);box-shadow:var(--shadow-1);color:var(--c-content-emphasis);font-weight:500;font-size:var(--fs-s);line-height:1.25;text-align:center}
+.modus svg{width:32px;height:32px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.modus[aria-selected=true]{background:var(--c-background-selected-default);border-color:var(--c-border-selected-default)}
+.modus:active{background-image:linear-gradient(var(--c-background-pressed),var(--c-background-pressed))}
+@media (hover:hover){.modus:hover{background-image:linear-gradient(var(--c-background-hover),var(--c-background-hover))}}
+.modus.hoofd{grid-column:1/-1;flex-direction:row;justify-content:flex-start;gap:var(--sp-4);min-height:80px;padding:var(--sp-3) var(--sp-5);font-size:var(--fs-xl);text-align:left}
+.modus.hoofd small{display:block;margin-top:2px;font-weight:400;font-size:var(--fs-s);color:var(--c-content-subtle)}
+/* kaarten */
+.autokaart,.r-leeg,.zelf form,.zelf .diag,.inst-rij,#kaart{background:var(--c-background-elevated-1);border:var(--bw-1) solid var(--c-border-default);border-radius:var(--r-l);box-shadow:var(--shadow-1)}
+.autokaart{padding:var(--sp-5);text-align:center}
+.autokaart p{margin:0 0 var(--sp-2)}
+.autokaart small{display:block;margin-top:var(--sp-3);color:var(--c-content-subtle);font-size:var(--fs-s)}
+#kaart{margin-top:var(--sp-4);padding:var(--sp-4)}
+#kaart h2{font-size:var(--fs-xxl)}
+#kaart p{margin:var(--sp-1) 0 var(--sp-3);color:var(--c-content-subtle)}
+.kop{font-size:var(--fs-s);color:var(--c-content-subtle);margin-bottom:var(--sp-1)}
+.deelnaam{font-size:var(--fs-s);color:var(--c-content-subtle);margin:var(--sp-5) 0 0}
+.bak{margin:var(--sp-3) 0 0}
+.baktitel{font-weight:500;font-size:var(--fs-m);line-height:1.25;margin:0 0 var(--sp-1) 2px;color:var(--c-content-default)}
+.bak.gekozen .baktitel{color:var(--c-content-emphasis)}
+.vlak{position:relative;border:var(--bw-2) solid var(--c-border-default);border-radius:var(--r-l);background:var(--c-background-emphasis-primary);touch-action:manipulation;cursor:crosshair;-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
+.bak.gekozen .vlak{border-color:var(--c-border-selected-default);background:var(--c-background-selected-default)}
+.knip{position:relative;display:block;overflow:hidden;line-height:0;border-radius:10px;aspect-ratio:4/1;width:100%}
+.knip.spiegel{transform:scaleX(-1)}
+.knip img{position:absolute;top:0;height:auto;max-width:none;user-select:none;-webkit-user-drag:none;pointer-events:none}
+.stip{position:absolute;width:48px;height:48px;margin:-24px 0 0 -24px;border-radius:50%;border:8px solid var(--marker);background:rgba(255,255,255,.35);box-shadow:0 0 0 2px #fff,inset 0 0 0 2px #fff;pointer-events:none}
+#keuze{margin:var(--sp-4) 0 0;font-weight:500;font-size:var(--fs-xl);line-height:1.25;color:var(--c-content-emphasis)}
+.acties{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-2);margin-top:var(--sp-3)}
+.acties .knop{margin:0}
+/* lijsten */
+.lijst{list-style:none;margin:var(--sp-4) 0 0;padding:0;display:grid;gap:var(--sp-2)}
+.lijst button,.rit{width:100%;display:grid;gap:var(--sp-3);align-items:center;text-align:left;padding:var(--sp-3);border:var(--bw-2) solid var(--c-border-default);border-radius:var(--r-l);background:var(--c-background-elevated-1);box-shadow:var(--shadow-1);color:var(--c-content-default);min-height:56px}
+.lijst button{grid-template-columns:56px 1fr auto}
+.lijst button:active,.rit:active{background-image:linear-gradient(var(--c-background-pressed),var(--c-background-pressed))}
+@media (hover:hover){.lijst button:hover,.rit:hover{background-image:linear-gradient(var(--c-background-hover),var(--c-background-hover))}}
+.lijst .t{font-weight:500;font-size:var(--fs-xl);line-height:1.25;color:var(--c-content-emphasis)}
+.lijst small{display:block;color:var(--c-content-subtle);font-size:var(--fs-s)}
+.lijst .vervalt{text-decoration:line-through;opacity:.55}
+.ritten{list-style:none;margin:0;padding:0;display:grid;gap:var(--sp-2)}
+.rit{grid-template-columns:auto 1fr auto;min-height:84px}
+.rit.jouw{border-color:var(--c-border-selected-default);background-color:var(--c-background-selected-default)}
+.rit strong{display:block;font-weight:500;font-size:var(--fs-l);line-height:1.25;color:var(--c-content-emphasis)}
+.rit small{display:block;color:var(--c-content-subtle);font-size:var(--fs-s);line-height:1.5;margin-top:2px}
+.rit .afst{font-weight:500;color:var(--c-content-interactive-default);white-space:nowrap;align-self:start}
+.jouwtag{display:inline-block;margin-bottom:var(--sp-1);padding:2px var(--sp-2);border-radius:var(--r-full);background:var(--c-background-selected-emphasis-default);color:var(--c-content-default-inverse);font-size:var(--fs-xs);font-weight:500;line-height:1.5}
+.soort{align-self:start;min-width:52px;padding:var(--sp-1) var(--sp-3);border-radius:var(--r-full);text-align:center;font-weight:500;font-size:var(--fs-s);line-height:1.25;background:var(--c-background-accent-gray-subtle);color:var(--c-content-on-accent-subtle)}
+.s-ic{background:var(--c-background-accent-yellow-default);color:var(--c-content-on-accent-yellow-default)}
+.s-spr{background:var(--c-background-accent-blue-subtle);color:var(--c-content-on-accent-subtle)}
+.s-ice{background:var(--c-background-accent-red-subtle);color:var(--c-content-on-accent-subtle)}
+.s-icd{background:var(--c-background-accent-purple-subtle);color:var(--c-content-on-accent-subtle)}
+.auto-kop{display:flex;align-items:center;justify-content:space-between;gap:var(--sp-3);color:var(--c-content-subtle);font-size:var(--fs-s);margin:2px 2px var(--sp-2)}
+.ververs{flex:none;display:inline-flex;align-items:center;gap:var(--sp-2);min-height:48px;padding:var(--sp-2) var(--sp-4) var(--sp-2) var(--sp-3);border:var(--bw-2) solid var(--c-border-interactive-default);border-radius:var(--r-m);background:transparent;color:var(--c-content-interactive-default);font-weight:500;font-size:var(--fs-m)}
+.ververs svg{width:20px;height:20px}
+.chips{display:flex;gap:var(--sp-2);overflow-x:auto;padding:var(--sp-1) 2px var(--sp-3);margin:0 -2px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:0 0 auto;min-height:48px;padding:0 var(--sp-4);border:var(--bw-2) solid var(--c-border-emphasis);border-radius:var(--r-m);background:transparent;color:var(--c-content-default);font-weight:500;font-size:var(--fs-m)}
+.chip[aria-pressed=true]{background:var(--c-background-selected-default);border-color:var(--c-border-selected-default);color:var(--c-content-emphasis)}
+.chip small{font-weight:400;color:var(--c-content-subtle);margin-left:var(--sp-1)}
+/* stel zoeken en samenstellen */
+.stelhulp{margin:var(--sp-3) 0 0;font-size:var(--fs-s);color:var(--c-content-subtle);line-height:1.5}
+.stelhulp b{color:var(--c-content-default)}
+.stelrij{margin-bottom:var(--sp-3)}
+.stelrij select{display:block;margin-top:var(--sp-2)}
+.stelhulp .nok{color:var(--c-content-error)}
+.reeksen{margin-top:var(--sp-3);font-size:var(--fs-s);color:var(--c-content-subtle)}
+.reeksen summary{cursor:pointer;min-height:48px;display:flex;align-items:center}
+.reeksen ul{margin:var(--sp-2) 0 0;padding-left:var(--sp-5)}
+.ztot{margin:var(--sp-3) 0 0;font-weight:500;color:var(--c-content-default)}
+.zelf small{display:block;margin-top:var(--sp-2);color:var(--c-content-subtle)}
+.zelf{margin-top:var(--sp-5)}
+.zelf summary{list-style:none;display:flex;align-items:center;justify-content:center;gap:var(--sp-2);min-height:48px;padding:var(--sp-3) var(--sp-4);border:var(--bw-2) solid var(--c-border-interactive-default);border-radius:var(--r-m);background:var(--c-background-elevated-1);color:var(--c-content-interactive-default);font-weight:500;cursor:pointer}
+.zelf summary::-webkit-details-marker{display:none}
+.zelf summary::after{content:"›";font-size:26px;line-height:1;transform:rotate(90deg)}
+.zelf[open] summary::after{transform:rotate(-90deg)}
+.zelf form,.zelf .diag{text-align:left;margin-top:var(--sp-3);padding:var(--sp-4)}
+#treinlogo{display:block;margin:var(--sp-8) auto var(--sp-1);width:190px;max-width:60%;color:var(--c-background-alpha-subtle)}
+#treinlogo .u{fill:var(--c-background-elevated-sunken)}
+/* deelvenster en pop-ups */
+#overlay{position:fixed;inset:0;z-index:10;background:var(--c-background-overlay);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--sp-3);padding:var(--sp-4);overflow:auto}
+#overlay img{max-width:100%;max-height:70vh;border-radius:var(--r-l);background:#fff}
+#overlay p{color:#fff;margin:0;text-align:center}
+.inst{position:fixed;inset:0;z-index:50;overflow:auto;background:var(--c-background-elevated-sunken);padding:calc(var(--sp-4) + env(safe-area-inset-top)) calc(var(--sp-4) + env(safe-area-inset-right)) calc(var(--sp-8) + env(safe-area-inset-bottom)) calc(var(--sp-4) + env(safe-area-inset-left))}
 .inst-in{max-width:520px;margin:0 auto}
-.inst-kop{display:flex;align-items:center;justify-content:space-between;margin:8px 0 16px}
-.inst-kop h2{font:var(--typography-weight-medium) var(--typography-size-xxl)/var(--typography-leading-m) var(--typography-family);color:var(--color-content-emphasis);margin:0}
-.inst-rij{display:flex;align-items:center;justify-content:space-between;gap:var(--spacing-spacer-3);min-height:56px;padding:var(--spacing-spacer-2) var(--spacing-spacer-4);background:var(--kaart);border-radius:var(--border-radius-l);box-shadow:var(--web-shadow-elevated-1);font-weight:var(--typography-weight-medium)}
-.schakel{flex:none;position:relative;width:56px;height:32px;padding:0;border:0;border-radius:16px;background:var(--color-background-accent-gray-default)}
-.schakel::after{content:"";position:absolute;top:3px;left:3px;width:26px;height:26px;border-radius:50%;background:#fff;transition:transform .15s}
-.schakel[aria-checked=true]{background:var(--color-background-interactive-default)}
-.schakel[aria-checked=true]::after{transform:translateX(24px)}
-/* De trein onderaan staat er alleen als er niets anders op het scherm staat */
+.inst-kop{display:flex;align-items:center;justify-content:space-between;margin:var(--sp-2) 0 var(--sp-4)}
+.inst-kop h2{font-size:var(--fs-xxl)}
+.inst-rij{display:flex;align-items:center;justify-content:space-between;gap:var(--sp-3);min-height:56px;padding:var(--sp-2) var(--sp-4);font-weight:500;margin-bottom:var(--sp-2)}
+.inst-rij select{width:auto;min-width:10.5rem}
+.inst-noot{margin:var(--sp-3) 2px 0;font-size:var(--fs-s);color:var(--c-content-subtle)}
+.r-uitleg{margin:0 0 var(--sp-3);color:var(--c-content-subtle);font-size:var(--fs-s)}
+.r-leeg{margin:var(--sp-5) 0;padding:var(--sp-4);text-align:center;color:var(--c-content-subtle)}
+.r-lijst{list-style:none;margin:0;padding:0;display:grid;gap:var(--sp-2)}
+.r-item{display:flex;gap:var(--sp-2);align-items:stretch}
+.r-item .rit{flex:1;grid-template-columns:auto 1fr}
+.r-weg{flex:none;width:48px;border:var(--bw-2) solid var(--c-border-destructive-default);border-radius:var(--r-l);background:var(--c-background-elevated-1);color:var(--c-content-destructive-default);font-size:20px}
+.r-melding{min-height:22px;margin:var(--sp-3) 2px 0;font-weight:500;color:var(--c-content-interactive-default)}
+/* animatie: Tractie-waarden. Binnen 400 ms met aankomst-curve, weg 200 ms met vertrek-curve */
+html.rijdt,html.rijdt body{overflow-x:hidden}
+.rij-in{animation:rijIn var(--t-400) var(--ease-enter) both}
+.rij-uit{animation:rijUit var(--t-200) var(--ease-exit) both}
+@keyframes rijIn{from{transform:translateX(115vw)}to{transform:none}}
+@keyframes rijUit{from{transform:none}to{transform:translateX(-125vw)}}
+@media (prefers-reduced-motion:no-preference){.knop,.tekst,.chip,.tand,.modus,.rit,.lijst button{transition:background-color var(--t-50) linear,border-color var(--t-50) linear}.zelf summary::after{transition:transform var(--t-100) var(--ease-std)}}
+/* de trein onderaan staat er alleen als er niets anders op het scherm staat */
 body:has(#auto-lijst:not([hidden])) #treinlogo,body:has(#treinen:not([hidden])) #treinlogo,body:has(#kaart:not([hidden])) #treinlogo,body:has(#melding:not([hidden])) #treinlogo,
 body:has(#f-nummer:not([hidden])) #treinlogo,body:has(#f-station:not([hidden])) #treinlogo,body:has(#f-stel:not([hidden])) #treinlogo{display:none!important}
-.vlak{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
-#loep{position:fixed;z-index:30;width:176px;height:176px;border-radius:50%;overflow:hidden;border:4px solid #fff;background:var(--plaat);box-shadow:0 8px 28px rgba(16,33,58,.5);pointer-events:none}
+/* vergrootglas */
+#loep{position:fixed;z-index:30;width:176px;height:176px;border-radius:50%;overflow:hidden;border:4px solid var(--c-background-elevated-2);background:var(--c-background-emphasis-primary);box-shadow:0 8px 28px rgba(0,0,0,.4);pointer-events:none}
 #loep .loep-in{position:absolute;left:0;top:0;transform-origin:0 0}
-#loep .loep-ring{position:absolute;left:50%;top:50%;width:120px;height:120px;margin:-60px 0 0 -60px;border-radius:50%;border:20px solid #e4002b;background:rgba(255,255,255,.3);box-shadow:0 0 0 3px #fff,inset 0 0 0 3px #fff}
-#kaart .deel-melding{margin:var(--spacing-spacer-3) 0 0;padding:10px var(--spacing-spacer-3);border-radius:var(--border-radius-m);background:var(--foutbg);color:var(--fout);font-weight:var(--typography-weight-medium);text-align:center}
-#kaart .deel-melding.ok{background:var(--goedbg);color:var(--goed)}
+#loep .loep-ring{position:absolute;left:50%;top:50%;width:120px;height:120px;margin:-60px 0 0 -60px;border-radius:50%;border:20px solid var(--marker);background:rgba(255,255,255,.3);box-shadow:0 0 0 3px #fff,inset 0 0 0 3px #fff}
+/* controle */
+.diag h3{font-size:var(--fs-l);margin:var(--sp-5) 0 var(--sp-2)}.diag h3:first-child{margin-top:2px}
+.d-uitleg{margin:0 0 var(--sp-2);font-size:var(--fs-s);color:var(--c-content-subtle)}
+.d-samen{padding:var(--sp-3);border-radius:var(--r-m);font-weight:500;background:var(--c-background-emphasis-secondary)}.d-samen.goed{background:var(--c-background-success-subtle);color:var(--c-content-success)}.d-samen.slecht{background:var(--c-background-error-subtle);color:var(--c-content-error)}
+.d-lijst{list-style:none;margin:var(--sp-3) 0 0;padding:0;display:grid;gap:var(--sp-2)}
+.d-lijst li{display:flex;gap:var(--sp-3);align-items:center;background:var(--c-background-emphasis-secondary);border-radius:var(--r-m);padding:var(--sp-2) var(--sp-3);border-left:6px solid var(--c-border-emphasis);font-size:var(--fs-s)}
+.d-lijst li.ok{border-color:var(--c-border-success)}.d-lijst li.fout{border-color:var(--c-border-error)}
+.d-lijst img{width:40px;height:40px;border-radius:var(--r-m);background:var(--c-background-emphasis-primary);flex:none}
+.d-lijst b{display:block}.d-lijst small{color:var(--c-content-subtle);word-break:break-all}
+.d-b{width:100%;margin-top:var(--sp-2)}
+#d-status{margin:var(--sp-2) 0;font-weight:500}#d-status.ok{color:var(--c-content-success)}#d-status.fout{color:var(--c-content-error)}
+#d-uit{margin:var(--sp-2) 0 0;padding:var(--sp-3);background:var(--c-background-default-inverse);color:var(--c-content-default-inverse);border-radius:var(--r-m);font:12px/1.4 ui-monospace,Menlo,monospace;white-space:pre-wrap;word-break:break-word;max-height:50vh;overflow:auto}
+.drukte{display:inline-flex;align-items:center;gap:var(--sp-2);padding:var(--sp-1) var(--sp-3) var(--sp-1) var(--sp-2);border-radius:var(--r-full);background:var(--c-background-elevated-1);border:var(--bw-2) solid var(--dk);color:var(--c-content-default);font-size:var(--fs-s);line-height:1.25}
+.drukte b{font-weight:500}.drukte svg{display:block;flex:none}
+.drukte.klein{padding:2px var(--sp-2) 2px 6px;gap:6px;font-size:var(--fs-xs);margin-top:var(--sp-1)}
+#k-drukte{margin:2px 0 var(--sp-3)}
 [hidden]{display:none!important}
-.zelf .diag{text-align:left;margin-top:var(--spacing-spacer-3);background:var(--kaart);border-radius:var(--border-radius-l);box-shadow:var(--web-shadow-elevated-1);padding:var(--spacing-spacer-4)}
-.diag h3{font:var(--typography-weight-medium) var(--typography-size-l)/1.25 var(--typography-family);margin:18px 0 6px}.diag h3:first-child{margin-top:2px}
-.d-uitleg{margin:0 0 6px;font-size:14px;color:var(--muted)}
-.d-samen{padding:10px var(--spacing-spacer-3);border-radius:var(--border-radius-m);font-weight:var(--typography-weight-medium);background:var(--zacht)}.d-samen.goed{background:var(--goedbg);color:var(--goed)}.d-samen.slecht{background:var(--foutbg);color:var(--fout)}
-.d-lijst{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:6px}
-.d-lijst li{display:flex;gap:10px;align-items:center;background:var(--zacht2);border-radius:var(--border-radius-m);padding:var(--spacing-spacer-2) 10px;border-left:6px solid var(--color-border-emphasis);font-size:var(--typography-size-s)}
-.d-lijst li.ok{border-color:var(--color-border-success)}.d-lijst li.fout{border-color:var(--color-border-error)}
-.d-lijst img{width:40px;height:40px;border-radius:9px;background:var(--zacht3);flex:none}
-.d-lijst b{display:block}.d-lijst small{color:var(--muted);word-break:break-all}
-.d-b{width:100%;margin-top:8px}
-#d-status{margin:8px 0;font-weight:600}#d-status.ok{color:var(--goed)}#d-status.fout{color:var(--fout)}
-#d-uit{margin:6px 0 0;padding:10px;background:var(--color-background-default-inverse);color:var(--color-content-default-inverse);border-radius:var(--border-radius-m);font:12px/1.4 ui-monospace,Menlo,monospace;white-space:pre-wrap;word-break:break-word;max-height:50vh;overflow:auto}
-.drukte{display:inline-flex;align-items:center;gap:var(--spacing-spacer-2);padding:4px var(--spacing-spacer-3) 4px var(--spacing-spacer-2);border-radius:var(--border-radius-full);background:var(--kaart);background:color-mix(in srgb,var(--dk) 11%,var(--kaart));border:var(--border-width-thin) solid var(--dk);color:var(--dk);font-size:var(--typography-size-s);line-height:1}
-.drukte b{font-weight:var(--typography-weight-medium)}.drukte svg{display:block;flex:none}
-.drukte.klein{padding:3px 9px 3px 6px;gap:6px;font-size:var(--typography-size-xs);margin-top:4px}
-#k-drukte{margin:2px 0 10px}
-.seg{display:flex;background:var(--color-background-accent-gray-subtle);border-radius:var(--border-radius-m);padding:3px;flex:none}
-.seg button{border:0;background:none;color:var(--ink);padding:var(--spacing-spacer-2) var(--spacing-spacer-3);border-radius:var(--border-radius-s);font-weight:var(--typography-weight-medium);font-size:var(--typography-size-s);min-height:36px}
-.seg button[aria-pressed=true]{background:var(--kaart);box-shadow:var(--web-shadow-elevated-1)}
-.inst-rij+.inst-rij{margin-top:10px}
 
 </style>
 </head>
 <body>
 <header class="kopbalk">
-  <img class="applogo" id="applogo" alt="" width="32" height="32">
-  <h1>Waar zit ik in de trein?</h1>
-  <button type="button" class="tand" id="inst-knop" aria-label="Instellingen"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></button>
+  <div class="merk"><img class="merk-icoon" src="icon-180.png" alt="" width="40" height="40"><h1>Waar zit ik in de trein?</h1></div>
+  <div class="kopknoppen"><button type="button" class="tand" id="reizen-knop" aria-label="Mijn reizen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12a1 1 0 011 1v17l-7-4-7 4V4a1 1 0 011-1z"/></svg><span id="reizen-teller" class="teller" hidden>0</span></button><button type="button" class="tand" id="inst-knop" aria-label="Instellingen"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></button></div>
 </header>
 <div id="demo" class="demo" hidden>Demo met nepdata. Vul bovenin het script je Worker-URL in voor echte treinen.</div>
 
@@ -352,12 +275,32 @@ body:has(#f-nummer:not([hidden])) #treinlogo,body:has(#f-station:not([hidden])) 
 </svg>
 </div>
 
+<div id="reizen" class="inst" role="dialog" aria-modal="true" aria-labelledby="reizen-titel" hidden>
+<div class="inst-in">
+  <div class="inst-kop"><h2 id="reizen-titel">Mijn reizen</h2><button class="knop" id="reizen-sluit" type="button" style="width:auto;margin:0;padding:10px 20px">Klaar</button></div>
+  <p class="r-uitleg">Je reizen staan alleen op dit toestel, in deze app. Verwijder je de app of wis je de websitegegevens, dan zijn ze weg. Maak daarom af en toe een back-up.</p>
+  <div id="r-leeg" class="r-leeg" hidden>Je hebt nog geen reizen bewaard.<br>Open een trein, tik op je plek en kies <b>Bewaar deze reis</b>.</div>
+  <ul class="r-lijst" id="r-lijst"></ul>
+  <div id="r-melding" class="r-melding" role="status" aria-live="polite"></div>
+  <details class="zelf" id="r-beheer">
+    <summary>Back-up en beheer</summary>
+    <div class="diag">
+      <button type="button" class="knop" id="r-export">Maak een back-up</button>
+      <button type="button" class="tekst" id="r-imp-knop" style="width:100%;margin-top:8px">Zet een back-up terug</button>
+      <input id="r-import" type="file" accept="application/json,.json" hidden>
+      <button type="button" class="tekst gevaar" id="r-wis" style="width:100%;margin-top:8px">Verwijder alle reizen</button>
+    </div>
+  </details>
+</div>
+</div>
+
 <div id="inst" class="inst" role="dialog" aria-modal="true" aria-labelledby="inst-titel" hidden>
 <div class="inst-in">
   <div class="inst-kop"><h2 id="inst-titel">Instellingen</h2><button class="knop" id="inst-sluit" type="button" style="width:auto;margin:0;padding:10px 20px">Klaar</button></div>
-  <div class="inst-rij"><span>Weergave</span><div class="seg" role="group" aria-label="Weergave">
-    <button type="button" data-thema="systeem" aria-pressed="true">Auto</button><button type="button" data-thema="licht" aria-pressed="false">Licht</button><button type="button" data-thema="donker" aria-pressed="false">Donker</button></div></div>
-  <div class="inst-rij"><span>Animatie</span><button type="button" id="beweging" class="schakel" role="switch" aria-checked="true" aria-label="Animatie"></button></div>
+  <div class="inst-rij"><label for="thema" style="margin:0">Thema</label><select id="thema"><option value="volg">Volg mijn toestel</option><option value="licht">Licht</option><option value="donker">Donker</option></select></div>
+<div class="inst-rij"><label for="beweging" style="margin:0">Animatie</label><select id="beweging"><option value="aan">Altijd aan</option><option value="volg">Volg mijn toestel</option><option value="uit">Uit</option></select></div>
+<p class="inst-noot">Standaard rijdt de trein altijd binnen, ook als je iPhone &ldquo;Beperk beweging&rdquo; aan heeft. Kies &ldquo;Volg mijn toestel&rdquo; om die instelling te respecteren.</p>
+<p class="inst-noot">Onofficiële app, niet van NS.</p>
 <details id="diag" class="zelf">
   <summary>Diagnose en controle</summary>
   <div class="diag">
@@ -416,6 +359,7 @@ body:has(#f-nummer:not([hidden])) #treinlogo,body:has(#f-station:not([hidden])) 
     <button type="button" class="knop" id="deel">Deel mijn plek</button>
     <button type="button" class="tekst" id="draai">Draai trein om</button>
   </div>
+  <button type="button" class="tekst" id="bewaar" style="width:100%;margin-top:8px">Bewaar deze reis</button>
   <button type="button" class="tekst" id="terug" style="width:100%;margin-top:8px">Andere trein</button>
   <p style="margin-top:12px;font-size:14px">Tik op Deel mijn plek om een overzichtelijk plaatje met je plek naar je vrienden te sturen.</p>
 </section>
@@ -669,7 +613,7 @@ function knip(src, f0, f1, spiegel) {
   img.onload = () => { doos.style.aspectRatio = `${breedte * img.naturalWidth} / ${img.naturalHeight}`; };
   img.onerror = () => {
     console.warn("Plaatje niet gevonden:", src, "(staat het in de map plaatjes/ ?)");
-    doos.style.cssText = "aspect-ratio:auto;line-height:1.2;color:var(--fout);padding:12px"; doos.textContent = "Plaatje ontbreekt: " + src;
+    doos.style.cssText = "aspect-ratio:auto;line-height:1.2;color:#9b1c1c;padding:12px"; doos.textContent = "Plaatje ontbreekt: " + src;
   };
   doos.append(img); return doos;
 }
@@ -693,7 +637,7 @@ async function maakDeelplaatje() {
   const img = await laadImg(b.src);
   const W = 1080, P = 56, IW = W - 2 * P;
   const kop = "Roboto, system-ui, sans-serif", tekst = "Roboto, system-ui, sans-serif";
-  const GEEL = "#FCC63E", LICHT = "#B1CDF6", ROOD = "#e4002b"; // geel en blauw uit het Tractie-palet
+  const GEEL = "#ffc70f", LICHT = "#c4dbf7", ROOD = "#eb0f38";
   const sw = (b.f1 - b.f0) * img.naturalWidth, sh = img.naturalHeight, bh = Math.round(IW * sh / sw);
   const perDeel = []; baklijst.forEach(x => (perDeel[x.deelnr] = perDeel[x.deelnr] || []).push(x));
   const meer = perDeel.length > 1;
@@ -705,31 +649,32 @@ async function maakDeelplaatje() {
   const H = 60 + 98 + 60 + sub.length * 44 + (info.drukte ? 72 : 0) + 28 + 36 + 16 + (meer ? 52 : 0) + BLH + 60 + bh + 24 + 14 + 40 + 36 + 26 + 56;
   const cv = document.createElement("canvas"); cv.width = W; cv.height = H;
   const c = cv.getContext("2d");
-  c.fillStyle = "#212B5C"; c.fillRect(0, 0, W, H); // effen blauw (brand.secondary)
+  const g = c.createLinearGradient(0, 0, 0, H); g.addColorStop(0, "#0a3680"); g.addColorStop(1, "#0a3680");
+  c.fillStyle = g; c.fillRect(0, 0, W, H);
   c.fillStyle = GEEL; c.fillRect(0, 0, W, 14);
   c.textBaseline = "top"; c.textAlign = "left";
   let y = 60;
-  c.fillStyle = "#fff"; c.font = `500 88px ${kop}`; c.fillText(`Ik zit in bak ${keuze.bak}`, P, y); y += 98;
+  c.fillStyle = "#fff"; c.font = `500 84px ${kop}`; c.fillText(`Ik zit in bak ${keuze.bak}`, P, y); y += 98;
   c.fillStyle = GEEL; c.font = `500 44px ${kop}`; c.fillText(`van ${totaal}, ${positie()}`, P, y); y += 60;
-  c.fillStyle = "#dbe5f5"; c.font = `400 34px ${tekst}`;
+  c.fillStyle = "#dbeaff"; c.font = `400 34px ${tekst}`;
   sub.forEach(t => { c.fillText(t, P, y); y += 44; });
   if (info.drukte) { // pilletje met drie poppetjes en het woord
-    const d = info.drukte, tk = `Drukte: ${d.tekst}`; c.font = `700 30px ${tekst}`;
+    const d = info.drukte, tk = `Drukte: ${d.tekst}`; c.font = `500 30px ${tekst}`;
     const w = 22 + 3 * 38 + 10 + c.measureText(tk).width + 28, ph = 54, py = y + 8;
     c.fillStyle = "#fff"; hoeken(c, P, py, w, ph, [27, 27, 27, 27]); c.fill();
     for (let i = 0; i < 3; i++) {
-      const cx = P + 22 + 19 + i * 38; c.fillStyle = i < d.niveau ? d.hex : "#c9d2e0";
+      const cx = P + 22 + 19 + i * 38; c.fillStyle = i < d.niveau ? d.kleur : "#c4c5cb";
       c.beginPath(); c.arc(cx, py + 15, 7.5, 0, 7); c.fill();
       c.beginPath(); c.moveTo(cx - 12, py + 45); c.lineTo(cx - 12, py + 34); c.arc(cx, py + 34, 12, Math.PI, 0); c.lineTo(cx + 12, py + 45); c.closePath(); c.fill();
     }
-    c.fillStyle = d.hex; c.textBaseline = "middle"; c.fillText(tk, P + 22 + 3 * 38 + 10, py + ph / 2 + 1); c.textBaseline = "top";
+    c.fillStyle = d.kleur; c.textBaseline = "middle"; c.fillText(tk, P + 22 + 3 * 38 + 10, py + ph / 2 + 1); c.textBaseline = "top";
     y += 72;
   }
   y += 28;
 
   // --- Voorkant en achterkant ---
   const ly = y + 4, lm = ly + 13;
-  c.font = `600 24px ${tekst}`;
+  c.font = `500 24px ${tekst}`;
   c.strokeStyle = GEEL; c.fillStyle = GEEL; c.lineWidth = 5; c.lineCap = "round"; c.lineJoin = "round";
   c.beginPath(); c.moveTo(sx0 + 30, lm); c.lineTo(sx0 + 2, lm); c.moveTo(sx0 + 14, lm - 12); c.lineTo(sx0 + 2, lm); c.lineTo(sx0 + 14, lm + 12); c.stroke();
   c.fillText("Voorkant", sx0 + 42, ly);
@@ -744,15 +689,15 @@ async function maakDeelplaatje() {
     let bx = sx0;
     perDeel.forEach(deel => {
       const w = deel.length * bw + gap * (deel.length - 1), x0 = bx, x1 = bx + w, by = y + 8, ty = by - 12;
-      c.font = `600 21px ${tekst}`;
+      c.font = `500 21px ${tekst}`;
       const dn = deel[0].deelnr + 1, nm = deel[0].naam ? `${deel[0].naam}${deel[0].nummer ? " " + deel[0].nummer : ""}` : "";
-      const opties = [nm && `DEEL ${dn}  ·  ${nm}`, nm && `${nm}`, `DEEL ${dn}  ·  ${deel.length} BAKKEN`, `DEEL ${dn}`].filter(Boolean);
+      const opties = [nm && `Deel ${dn}  ·  ${nm}`, nm && `${nm}`, `Deel ${dn}  ·  ${deel.length} bakken`, `Deel ${dn}`].filter(Boolean);
       let label = opties.find(t => c.measureText(t).width + 70 <= w) || opties[opties.length - 1];
       const tw = c.measureText(label).width, cx = (x0 + x1) / 2;
       c.strokeStyle = "rgba(255,255,255,.55)"; c.lineWidth = 3; c.lineCap = "round"; c.lineJoin = "round";
       c.beginPath(); c.moveTo(x0 + 2, by + 26); c.lineTo(x0 + 2, by + 14); c.arcTo(x0 + 2, by, x0 + 16, by, 14); c.lineTo(cx - tw / 2 - 14, by); c.stroke();
       c.beginPath(); c.moveTo(cx + tw / 2 + 14, by); c.lineTo(x1 - 16, by); c.arcTo(x1 - 2, by, x1 - 2, by + 14, 14); c.lineTo(x1 - 2, by + 26); c.stroke();
-      c.fillStyle = "#cfdcf2"; c.textAlign = "center"; c.fillText(label, cx, ty); c.textAlign = "left";
+      c.fillStyle = "#c4dbf7"; c.textAlign = "center"; c.fillText(label, cx, ty); c.textAlign = "left";
       bx += w + deelgap;
     });
     y += 52;
@@ -765,11 +710,11 @@ async function maakDeelplaatje() {
       const gek = k.nr === keuze.bak, kopbak = k === deel[0], staart = k === deel[deel.length - 1]; // elk treindeel heeft zijn eigen afgeronde voor- en achterkant
       const r = [kopbak ? 46 : 14, staart ? 46 : 14, staart ? 14 : 14, kopbak ? 14 : 14];
       c.save();
-      if (gek) { c.shadowColor = "rgba(255,194,14,.55)"; c.shadowBlur = 22; }
+      if (gek) { c.shadowColor = "rgba(255,199,15,.55)"; c.shadowBlur = 22; }
       hoeken(c, x, y, bw, BLH, r); c.fillStyle = gek ? GEEL : "rgba(255,255,255,.14)"; c.fill();
       c.restore();
       if (!gek) { hoeken(c, x, y, bw, BLH, r); c.strokeStyle = "rgba(255,255,255,.22)"; c.lineWidth = 2; c.stroke(); }
-      c.fillStyle = gek ? "#10213a" : "#fff"; c.font = `700 ${bw < 70 ? 36 : 46}px ${kop}`; c.textAlign = "center";
+      c.fillStyle = gek ? "#333438" : "#fff"; c.font = `700 ${bw < 70 ? 36 : 46}px ${kop}`; c.textAlign = "center";
       c.fillText(String(k.nr), x + bw / 2, y + (BLH - 46) / 2 + 2); c.textAlign = "left";
       x += bw + gap;
     });
@@ -780,7 +725,7 @@ async function maakDeelplaatje() {
   // --- Grote afbeelding van de bak ---
   rondRect(c, P - 12, y - 12, IW + 24, bh + 24, 28); c.fillStyle = "#fff"; c.fill();
   c.save(); rondRect(c, P, y, IW, bh, 18); c.clip();
-  c.fillStyle = "#eef3f9"; c.fillRect(P, y, IW, bh);
+  c.fillStyle = "#ebf5ff"; c.fillRect(P, y, IW, bh);
   if (omgekeerd) { c.translate(P + IW, y); c.scale(-1, 1); c.drawImage(img, b.f0 * img.naturalWidth, 0, sw, sh, 0, 0, IW, bh); }
   else c.drawImage(img, b.f0 * img.naturalWidth, 0, sw, sh, P, y, IW, bh);
   c.restore();
@@ -791,7 +736,7 @@ async function maakDeelplaatje() {
   y += bh + 24 + 14;
 
   // richting in de bak zelf
-  c.font = `600 24px ${tekst}`; c.fillStyle = GEEL; c.lineWidth = 4; c.strokeStyle = GEEL; c.lineCap = "round"; c.lineJoin = "round";
+  c.font = `500 24px ${tekst}`; c.fillStyle = GEEL; c.lineWidth = 4; c.strokeStyle = GEEL; c.lineCap = "round"; c.lineJoin = "round";
   const my = y + 13;
   c.beginPath(); c.moveTo(P + 24, my); c.lineTo(P + 2, my); c.moveTo(P + 12, my - 9); c.lineTo(P + 2, my); c.lineTo(P + 12, my + 9); c.stroke();
   c.fillText("naar voren", P + 34, y);
@@ -799,7 +744,7 @@ async function maakDeelplaatje() {
   c.beginPath(); c.moveTo(P + IW - 24, my); c.lineTo(P + IW - 2, my); c.moveTo(P + IW - 12, my - 9); c.lineTo(P + IW - 2, my); c.lineTo(P + IW - 12, my + 9); c.stroke();
   y += 36 + 40;
 
-  c.font = `400 26px ${tekst}`; c.fillStyle = "rgba(157,182,224,.8)"; c.textAlign = "center";
+  c.font = `400 26px ${tekst}`; c.fillStyle = "rgba(196,219,247,.8)"; c.textAlign = "center";
   c.fillText("Treinplek: waar zit ik in de trein?", W / 2, y);
   return cv;
 }
@@ -1022,7 +967,7 @@ function leesNabij(j) {
   })).filter(t => t.nr && typeof t.lat === "number" && typeof t.lng === "number");
 }
 // ====== DRUKTE (verwachting van NS, per rit) ======
-const DRUKTE = {LOW: {niveau: 1, tekst: "Rustig", kleur: "var(--color-content-success)", hex: "#15803D"}, MEDIUM: {niveau: 2, tekst: "Gemiddeld", kleur: "var(--color-content-warning)", hex: "#C25800"}, HIGH: {niveau: 3, tekst: "Druk", kleur: "var(--color-content-error)", hex: "#BE1E1E"}}; // kleur = Tractie-token (volgt licht/donker), hex = voor het deelplaatje
+const DRUKTE = {LOW: {niveau: 1, tekst: "Rustig", kleur: "#3e7f67", css: "var(--c-content-success)"}, MEDIUM: {niveau: 2, tekst: "Gemiddeld", kleur: "#f05c00", css: "var(--c-content-warning)"}, HIGH: {niveau: 3, tekst: "Druk", kleur: "#ce092d", css: "var(--c-content-error)"}};
 const drukteVan = w => DRUKTE[String(w || "").toUpperCase()] || null;
 // Drukte op het stuk waar de trein nu rijdt: het vertrek van de vorige halte, anders dat van de volgende. Geen waarde? Dan laten we niets zien.
 function ritDrukte(r) {
@@ -1035,7 +980,7 @@ function drukteIcoon(niveau, kleur, hoogte) { // drie poppetjes, zoveel gekleurd
   const svg = document.createElementNS(SVGNS, "svg"); svg.setAttribute("viewBox", "0 0 54 24"); svg.setAttribute("height", hoogte); svg.setAttribute("width", hoogte * 54 / 24); svg.setAttribute("aria-hidden", "true");
   for (let i = 0; i < 3; i++) {
     const g = document.createElementNS(SVGNS, "g"), c = document.createElementNS(SVGNS, "circle"), p = document.createElementNS(SVGNS, "path"), x = 9 + i * 18;
-    g.style.fill = i < niveau ? kleur : "var(--color-border-emphasis)";
+    g.style.fill = i < niveau ? kleur : "var(--c-background-alpha-default)";
     c.setAttribute("cx", x); c.setAttribute("cy", 5); c.setAttribute("r", 4);
     p.setAttribute("d", `M${x - 6} 23 v-7 a6 6 0 0 1 12 0 v7 z`);
     g.append(c, p); svg.append(g);
@@ -1043,8 +988,8 @@ function drukteIcoon(niveau, kleur, hoogte) { // drie poppetjes, zoveel gekleurd
   return svg;
 }
 function drukteLabel(d, klein) { // pilletje: poppetjes en het woord
-  const el = h("span", {className: "drukte" + (klein ? " klein" : ""), title: "Verwachte drukte (NS)", ariaLabel: "Verwachte drukte: " + d.tekst}, drukteIcoon(d.niveau, d.kleur, klein ? 15 : 20), h("b", {textContent: d.tekst}));
-  el.style.setProperty("--dk", d.kleur); return el;
+  const el = h("span", {className: "drukte" + (klein ? " klein" : ""), title: "Verwachte drukte (NS)", ariaLabel: "Verwachte drukte: " + d.tekst}, drukteIcoon(d.niveau, d.css, klein ? 15 : 20), h("b", {textContent: d.tekst}));
+  el.style.setProperty("--dk", d.css); return el;
 }
 function leesRit(j) {
   const p = j.payload || j, ruw = p.stops || [];
@@ -1238,46 +1183,157 @@ $("f-station").onsubmit = async e => {
 
 $("draai").onclick = () => { omgekeerd = !omgekeerd; keuze = null; tekenKaart(); };
 // ====== TREIN RIJDT BINNEN EN WEG ======
-const RIJ = {bezig: false, uitgesteld: false}, STAP = 85; // STAP = ms tussen twee bakken
-// De animatie volgt bewust NIET de iPhone-instelling "Beperk beweging" (die zette hem uit). Aan/uit-knop onderaan de startpagina.
-const BEW = "treinplek-beweging";
-const bewLees = () => { try { return localStorage.getItem(BEW) || "aan"; } catch (_) { return "aan"; } };
-const minderBeweging = () => bewLees() === "uit";
-const bewTekst = () => $("beweging").setAttribute("aria-checked", String(bewLees() === "aan"));
-$("beweging").onclick = () => { try { localStorage.setItem(BEW, bewLees() === "aan" ? "uit" : "aan"); } catch (_) {} bewTekst(); };
-bewTekst();
+const RIJ = {bezig: false, uitgesteld: false}, STAP = 30; // standaard ms tussen twee bakken
+// Animatie staat standaard altijd aan (de gebruiker wil de trein zien, ook met "Beperk beweging"). In Instellingen kun je kiezen: Altijd aan, Volg mijn toestel (Tractie-regel) of Uit.
+const BEW = "treinplek-beweging", THEMA = "treinplek-thema";
+const keuzeLees = (sleutel, toegestaan, standaard = "volg") => { try { const w = localStorage.getItem(sleutel); return toegestaan.includes(w) || w === "volg" ? w : standaard; } catch (_) { return standaard; } };
+const bewLees = () => keuzeLees(BEW, ["aan", "uit"], "aan"); // standaard altijd aan, ook als de iPhone "Beperk beweging" aan heeft
+const minderBeweging = () => { const w = bewLees(); return w === "uit" || (w === "volg" && matchMedia("(prefers-reduced-motion: reduce)").matches); };
+const themaLees = () => keuzeLees(THEMA, ["licht", "donker"]);
+function themaToepassen() {
+  const w = themaLees(), donker = w === "donker" || (w === "volg" && matchMedia("(prefers-color-scheme: dark)").matches);
+  document.documentElement.setAttribute("data-thema", donker ? "donker" : "licht");
+  const m = document.querySelector('meta[name="theme-color"]');
+  if (m) m.content = getComputedStyle(document.documentElement).getPropertyValue("--c-background-elevated-2").trim() || "#ffffff";
+}
+$("beweging").value = bewLees(); $("thema").value = themaLees();
+$("beweging").onchange = () => { try { localStorage.setItem(BEW, $("beweging").value); } catch (_) {} };
+$("thema").onchange = () => { try { localStorage.setItem(THEMA, $("thema").value); } catch (_) {} themaToepassen(); };
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change", themaToepassen);
+themaToepassen();
 // Instellingen: tandwiel rechtsboven.
-// Weergave: Auto volgt je telefoon, of kies zelf Licht of Donker. De statusbalk kleurt mee via de theme-color regels.
-document.getElementById("applogo").src = document.querySelector("link[rel=apple-touch-icon]").href; // het logo in de kop is hetzelfde icoon
-const THEMA = "treinplek-thema";
-const themaLees = () => { try { const t = localStorage.getItem(THEMA); return t === "licht" || t === "donker" ? t : "systeem"; } catch (_) { return "systeem"; } };
-function themaMeta() {
-  const eigen = document.documentElement.dataset.thema;
-  document.querySelectorAll('meta[name="theme-color"]').forEach(m => { const stand = eigen || (m.media.includes("dark") ? "donker" : "licht"); m.setAttribute("content", stand === "donker" ? "#000000" : "#F7F7F8"); });
+// ====== MIJN REIZEN (bewaard op dit toestel in localStorage, geen account nodig) ======
+const REIZEN_SLEUTEL = "treinplek-reizen", REIZEN_MAX = 300;
+const reizenLees = () => { try { const a = JSON.parse(localStorage.getItem(REIZEN_SLEUTEL)); return Array.isArray(a) ? a : []; } catch (_) { return []; } };
+const reizenSchrijf = a => { try { localStorage.setItem(REIZEN_SLEUTEL, JSON.stringify(a)); return true; } catch (_) { return false; } };
+let HUIDIGE = {trein: null, id: null}; // welke bewaarde reis hoort bij de trein op het scherm (opnieuw bewaren = bijwerken)
+const posTekst = x => x < 1/3 ? "voorin" : x > 2/3 ? "achterin" : "in het midden";
+const reisTotaal = r => r.delen.reduce((s, d) => s + d.n, 0);
+function reizenTel() {
+  const n = reizenLees().length, b = $("reizen-teller");
+  b.textContent = n > 99 ? "99+" : String(n); b.hidden = !n;
+  $("reizen-knop").setAttribute("aria-label", n ? `Mijn reizen, ${n} bewaard` : "Mijn reizen");
 }
-function themaZet(t) {
-  const root = document.documentElement; if (t === "systeem") delete root.dataset.thema; else root.dataset.thema = t;
-  try { if (t === "systeem") localStorage.removeItem(THEMA); else localStorage.setItem(THEMA, t); } catch (_) {}
-  document.querySelectorAll(".seg button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.thema === t)));
-  themaMeta();
+function reisBewaren() {
+  if (!keuze) return deelMelding("Tik eerst op je plek in de trein.");
+  if (HUIDIGE.trein !== trein) HUIDIGE = {trein, id: null};
+  const nu = Date.now();
+  const reis = {
+    id: HUIDIGE.id || nu.toString(36) + Math.random().toString(36).slice(2, 6),
+    opgeslagen: nu, titel: titel(),
+    info: {nr: String(info.nr || ""), soort: String(info.soort || ""), naar: String(info.naar || ""), tijd: String(info.tijd || ""), spoor: String(info.spoor || "")},
+    delen: trein.delen.map(d => { const o = {type: String(d.type || ""), n: d.n}; for (const k of ["groep", "variant", "naam", "nummer"]) if (d[k]) o[k] = String(d[k]); return o; }),
+    omgekeerd: !!omgekeerd, keuze: {bak: keuze.bak, x: +keuze.x.toFixed(4), y: +keuze.y.toFixed(4)}
+  };
+  const oud = reizenLees(), bijgewerkt = oud.some(r => r.id === reis.id);
+  const lijst = [reis, ...oud.filter(r => r.id !== reis.id)].slice(0, REIZEN_MAX);
+  if (!reizenSchrijf(lijst)) return deelMelding("Bewaren lukt niet: de opslag van dit toestel is vol of uitgeschakeld.");
+  HUIDIGE.id = reis.id; reizenTel();
+  try { navigator.storage && navigator.storage.persist && navigator.storage.persist(); } catch (_) {}
+  deelMelding(bijgewerkt ? "Reis bijgewerkt in Mijn reizen." : "Reis bewaard in Mijn reizen.", true);
 }
-document.querySelectorAll(".seg button").forEach(b => b.onclick = () => themaZet(b.dataset.thema));
-themaZet(themaLees());
+function reizenTeken() {
+  const lijst = reizenLees().sort((a, b) => b.opgeslagen - a.opgeslagen), ul = $("r-lijst");
+  ul.replaceChildren(); $("r-leeg").hidden = lijst.length > 0;
+  for (const r of lijst) {
+    const d = new Date(r.opgeslagen), wanneer = d.toLocaleDateString("nl-NL", {weekday: "short", day: "numeric", month: "short", year: "numeric"}) + ", " + d.toLocaleTimeString("nl-NL", {hour: "2-digit", minute: "2-digit"});
+    const soort = r.info.soort && r.info.soort.length <= 4 ? r.info.soort : "TR";
+    const stellen = r.delen.map(x => x.naam ? x.naam + (x.nummer ? ` (${x.nummer})` : "") : x.type).join(" + ");
+    ul.append(h("li", {className: "r-item"},
+      h("button", {type: "button", className: "rit", onclick: () => reisOpenen(r.id)},
+        h("span", {className: "soort s-" + soort.toLowerCase(), textContent: soort}),
+        h("span", {}, h("strong", {textContent: r.titel}), h("small", {textContent: `Bak ${r.keuze.bak} van ${reisTotaal(r)}, ${posTekst(r.keuze.x)}`}),
+          h("small", {textContent: stellen}), h("small", {textContent: wanneer}))),
+      h("button", {type: "button", className: "r-weg", ariaLabel: "Verwijder reis " + r.titel, textContent: "✕", onclick: () => reisVerwijderen(r.id)})));
+  }
+}
+function reisOpenen(id) {
+  const r = reizenLees().find(x => x.id === id); if (!r) return;
+  reizenSluit(); autoStop(); $("f-auto").hidden = true; melding("");
+  trein = {delen: r.delen.map(d => ({...d, img: null, breedtes: Array(d.n).fill(1)}))};
+  info = {...r.info}; omgekeerd = !!r.omgekeerd; keuze = {...r.keuze};
+  HUIDIGE = {trein, id: r.id};
+  $("treinen").hidden = true; $("onder").hidden = true; $("kaart").hidden = false;
+  deelMelding(""); tekenKaart(); kaartIn(); $("kaart").scrollIntoView({behavior: "smooth"});
+}
+function reisVerwijderen(id) {
+  if (!confirm("Deze reis verwijderen?")) return;
+  reizenSchrijf(reizenLees().filter(r => r.id !== id));
+  if (HUIDIGE.id === id) HUIDIGE.id = null;
+  reizenTel(); reizenTeken();
+}
+const reizenMelding = t => { $("r-melding").textContent = t || ""; };
+async function reizenExport() {
+  const lijst = reizenLees(); if (!lijst.length) return reizenMelding("Er zijn nog geen reizen om te bewaren.");
+  const blob = new Blob([JSON.stringify({app: "treinplek", versie: 1, gemaakt: new Date().toISOString(), reizen: lijst}, null, 1)], {type: "application/json"});
+  const naam = `treinplek-reizen-${new Date().toISOString().slice(0, 10)}.json`, file = new File([blob], naam, {type: "application/json"});
+  try { if (navigator.canShare && navigator.canShare({files: [file]})) { await navigator.share({files: [file], title: "Mijn treinreizen"}); return reizenMelding("Back-up gedeeld."); } }
+  catch (e) { if (e.name === "AbortError") return; }
+  const a = h("a", {href: URL.createObjectURL(blob), download: naam}); document.body.append(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 4000); reizenMelding("Back-up gedownload als " + naam + ".");
+}
+// Controleert en schoont één reis uit een back-up; geeft null als hij niet klopt.
+function reisSchoon(r) {
+  if (!r || typeof r !== "object" || typeof r.id !== "string" || !r.id || r.id.length > 40) return null;
+  if (!Array.isArray(r.delen) || !r.delen.length || r.delen.length > 6) return null;
+  const delen = [];
+  for (const d of r.delen) {
+    if (!d || typeof d.type !== "string" || !Number.isInteger(d.n) || d.n < 1 || d.n > 14) return null;
+    const o = {type: d.type.slice(0, 40), n: d.n};
+    for (const k of ["groep", "variant", "naam", "nummer"]) if (typeof d[k] === "string") o[k] = d[k].slice(0, 60);
+    delen.push(o);
+  }
+  const totaal = delen.reduce((p, d) => p + d.n, 0), k = r.keuze || {}, i = r.info || {};
+  if (!Number.isInteger(k.bak) || k.bak < 1 || k.bak > totaal || !(k.x >= 0 && k.x <= 1) || !(k.y >= 0 && k.y <= 1)) return null;
+  return {id: r.id, opgeslagen: Number.isFinite(r.opgeslagen) ? r.opgeslagen : Date.now(), titel: String(r.titel || "Reis").slice(0, 120),
+    info: {nr: String(i.nr || "").slice(0, 20), soort: String(i.soort || "").slice(0, 30), naar: String(i.naar || "").slice(0, 60), tijd: String(i.tijd || "").slice(0, 40), spoor: String(i.spoor || "").slice(0, 8)},
+    delen, omgekeerd: !!r.omgekeerd, keuze: {bak: k.bak, x: k.x, y: k.y}};
+}
+async function reizenImport(file) {
+  try {
+    const j = JSON.parse(await file.text()), ruw = Array.isArray(j) ? j : j.reizen;
+    if (!Array.isArray(ruw)) throw new Error("geen reizen");
+    const kaart = new Map(reizenLees().map(r => [r.id, r])); let nieuw = 0, bijgewerkt = 0, fout = 0;
+    for (const x of ruw) {
+      const r = reisSchoon(x); if (!r) { fout++; continue; }
+      const oud = kaart.get(r.id);
+      if (!oud) nieuw++; else if (r.opgeslagen > oud.opgeslagen) bijgewerkt++; else continue;
+      kaart.set(r.id, r);
+    }
+    const alles = [...kaart.values()].sort((a, b) => b.opgeslagen - a.opgeslagen).slice(0, REIZEN_MAX);
+    if (!reizenSchrijf(alles)) throw new Error("opslag vol");
+    reizenTel(); reizenTeken();
+    reizenMelding(`Back-up gelezen: ${nieuw} nieuw, ${bijgewerkt} bijgewerkt${fout ? `, ${fout} overgeslagen (ongeldig)` : ""}.`);
+  } catch (e) { reizenMelding("Dit bestand kan ik niet lezen. Kies een back-up van Treinplek (.json)."); }
+}
+function reizenWis() {
+  const n = reizenLees().length;
+  if (!n || !confirm(`Alle ${n} bewaarde reizen verwijderen? Dit kan niet ongedaan worden gemaakt.`)) return;
+  reizenSchrijf([]); HUIDIGE.id = null; reizenTel(); reizenTeken(); reizenMelding("Alles verwijderd.");
+}
+const reizenOpen = () => { reizenTeken(); reizenMelding(""); $("reizen").hidden = false; document.body.style.overflow = "hidden"; $("reizen-sluit").focus(); };
+const reizenSluit = () => { $("reizen").hidden = true; document.body.style.overflow = ""; };
+$("reizen-knop").onclick = reizenOpen; $("reizen-sluit").onclick = reizenSluit; $("bewaar").onclick = reisBewaren;
+$("r-export").onclick = reizenExport; $("r-wis").onclick = reizenWis; $("r-imp-knop").onclick = () => $("r-import").click();
+$("r-import").onchange = e => { const f = e.target.files[0]; e.target.value = ""; if (f) reizenImport(f); };
+document.addEventListener("keydown", e => { if (e.key === "Escape" && !$("reizen").hidden) reizenSluit(); });
+reizenTel();
+
 const instOpen = () => { $("inst").hidden = false; document.body.style.overflow = "hidden"; $("inst-sluit").focus(); };
 const instSluit = () => { $("inst").hidden = true; document.body.style.overflow = ""; };
 $("inst-knop").onclick = instOpen; $("inst-sluit").onclick = instSluit;
 document.addEventListener("keydown", e => { if (e.key === "Escape" && !$("inst").hidden) instSluit(); });
 $("f-zelf").addEventListener("submit", instSluit);
-function rijAnimatie(klasse, duur) {
+function rijAnimatie(klasse, duur, stap = STAP) {
   const baks = [...document.querySelectorAll("#bakken .bak")];
   if (!baks.length || minderBeweging()) return Promise.resolve();
   RIJ.bezig = true; document.documentElement.classList.add("rijdt");
-  baks.forEach((b, i) => { b.style.animationDelay = i * STAP + "ms"; b.classList.add(klasse); });
-  return new Promise(klaar => setTimeout(() => { document.documentElement.classList.remove("rijdt"); RIJ.bezig = false; klaar(); }, (baks.length - 1) * STAP + duur + 60));
+  baks.forEach((b, i) => { b.style.animationDelay = i * stap + "ms"; b.classList.add(klasse); });
+  return new Promise(klaar => setTimeout(() => { document.documentElement.classList.remove("rijdt"); RIJ.bezig = false; klaar(); }, (baks.length - 1) * stap + duur + 60));
 }
 // Voorkant eerst: de trein rijdt van rechts naar links het scherm op.
 function kaartIn() {
-  rijAnimatie("rij-in", 800).then(() => {
+  rijAnimatie("rij-in", 400, 30).then(() => {
     document.querySelectorAll("#bakken .bak").forEach(b => { b.classList.remove("rij-in"); b.style.animationDelay = ""; });
     if (RIJ.uitgesteld) { RIJ.uitgesteld = false; tekenKaart(); }
   });
@@ -1290,7 +1346,7 @@ function naarHome() {
   if (modus === "auto") { $("f-auto").hidden = false; autoStart(); }
   window.scrollTo({top: 0, behavior: "smooth"});
 }
-const wegRijden = () => rijAnimatie("rij-uit", 750).then(naarHome);
+const wegRijden = () => rijAnimatie("rij-uit", 200, 20).then(naarHome);
 $("terug").onclick = naarHome;
 $("deel").onclick = async () => {
   if (RIJ.bezig) return;
@@ -1392,18 +1448,17 @@ async function dControleer() {
   const app = matchMedia("(display-mode: standalone)").matches || navigator.standalone === true;
   rij(location.protocol === "https:" || location.hostname === "localhost", "Veilige verbinding (https)", location.href);
   rij(null, app ? "Je opent dit als app" : "Je opent dit in een browservenster, niet als app", app ? "Beginscherm of Dock." : "Staat de app op je beginscherm? Dan ben je nu niet in die app.");
-  let hrefs = [], ingebakken = null;
+  let hrefs = [];
   try { // wat staat er in de pagina op de website?
     const t = await (await fetch("index.html?" + vers(), geen)).text(), links = [...t.matchAll(/<link[^>]+rel="(apple-touch-icon|icon|manifest)"[^>]*>/g)];
-    for (const m of links) { const x = (m[0].match(/href="([^"]+)"/) || [])[1]; if (x && x.startsWith("data:")) ingebakken = x; else if (x) hrefs.push(x); }
+    for (const m of links) { const x = (m[0].match(/href="([^"]+)"/) || [])[1]; if (x) hrefs.push(x); }
     const heeft = n => links.some(m => m[1] === n);
     rij(heeft("apple-touch-icon"), "Regel apple-touch-icon in de pagina", heeft("apple-touch-icon") ? "Gevonden." : "Ontbreekt! Zonder deze regel maakt de iPhone een letter T.");
     rij(heeft("manifest"), "Regel manifest in de pagina", heeft("manifest") ? "Gevonden." : "Ontbreekt.");
-    if (ingebakken) { // het beginschermicoon zit in de pagina zelf: afmeting en transparantie nakijken
-      const img = new Image(); await new Promise(ok => { img.onload = img.onerror = ok; img.src = ingebakken; });
-      let doorzichtig = null;
-      try { const cv = document.createElement("canvas"); cv.width = img.naturalWidth; cv.height = img.naturalHeight; const cx = cv.getContext("2d"); cx.drawImage(img, 0, 0); const px = cx.getImageData(0, 0, cv.width, cv.height).data; doorzichtig = false; for (let i = 3; i < px.length; i += 4) if (px[i] < 255) { doorzichtig = true; break; } } catch (_) {}
-      rij(img.naturalWidth === 180 && img.naturalHeight === 180 && doorzichtig === false, "Beginschermicoon zit in de pagina zelf", `${img.naturalWidth} x ${img.naturalHeight} pixels, ` + (doorzichtig === null ? "transparantie onbekend." : doorzichtig ? "MET transparantie: iOS maakt de doorzichtige delen zwart." : "zonder transparantie.") + " (verwacht 180 x 180 zonder transparantie)", ingebakken);
+    for (const m of links) { // iconen die in de pagina zelf zitten (data-URI): geen los bestand nodig
+      const x = (m[0].match(/href="([^"]+)"/) || [])[1]; if (!x || !x.startsWith("data:")) continue;
+      const afm = await new Promise(ok => { const i = new Image(); i.onload = () => ok(i.naturalWidth + "×" + i.naturalHeight); i.onerror = () => ok(null); i.src = x; });
+      rij(!!afm, `Icoon zit in de pagina zelf (${m[1]})`, afm ? `${afm} pixels, ${Math.round(x.length / 1365)} KB. Geen los bestand nodig.` : "Het ingebouwde icoon kan niet gelezen worden.", afm ? x : null);
     }
   } catch (e) { rij(false, "index.html niet te lezen", e.message); }
   try { // manifest
@@ -1414,7 +1469,7 @@ async function dControleer() {
       rij(start.startsWith(scope) && new URL(start).origin === location.origin, "Startadres en bereik kloppen", `start_url ${start} | scope ${scope} | display ${m.display}`);
     }
   } catch (e) { rij(false, "Manifest lezen mislukt", e.message); }
-  for (const f of [...new Set(["icon-180.png", "icon-192.png", "icon-512.png", "manifest.webmanifest", "sw.js", ...hrefs.map(x => x.split("?")[0])])]) { // bestaan de bestanden?
+  for (const f of [...new Set(["icon-180.png", "icon-192.png", "icon-512.png", "manifest.webmanifest", "sw.js", ...hrefs.filter(x => !x.startsWith("data:")).map(x => x.split("?")[0])])]) { // bestaan de bestanden?
     try {
       const r = await fetch(f + "?" + vers(), geen), ct = r.headers.get("content-type") || "", b = await r.blob();
       rij(r.ok, f, r.ok ? `Gevonden (${Math.round(b.size / 102.4) / 10} KB, ${ct || "onbekend type"}).` : `NIET GEVONDEN (fout ${r.status}). Dit bestand staat niet in de map op GitHub.`, r.ok && /\.png$/.test(f) && /image/.test(ct) ? URL.createObjectURL(b) : null);
