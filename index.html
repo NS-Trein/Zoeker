@@ -1310,7 +1310,7 @@ function autoTekenLijst() {
     const c = AUTO.ritten.get(t.nr), r = c && c.r, st = ritStand(r), jouw = d.jouw === t.nr;
     const tijd = x => fmt(x.vertrek || x.aankomst);
     ul.append(h("li", {}, h("button", {type: "button", className: "rit k-" + (t.soort || "x").toLowerCase() + (jouw ? " jouw" : ""), onclick: e => autoKies(t, e.currentTarget.parentNode)},
-      h("span", {className: "kol"}, h("span", {className: "soort s-" + (t.soort || "x").toLowerCase(), textContent: t.soort || "?"}), miniTrein(r)),
+      h("span", {className: "kol"}, h("span", {className: "soort s-" + (t.soort || "x").toLowerCase(), textContent: t.soort || "?"}), miniTrein(r, t.soort)),
       h("span", {}, jouw ? h("span", {className: "jouwtag", textContent: "Waarschijnlijk jouw trein"}) : "",
         h("strong", {textContent: r && r.eind ? `naar ${r.eind}` : `Trein ${t.nr}`}),
         st.vorig ? h("small", {}, "Vertrok ", h("b", {textContent: tijd(st.vorig)}), ` uit ${st.vorig.naam}`) : "",
@@ -1322,10 +1322,14 @@ function autoTekenLijst() {
   if (kanAnimeren()) lijstAnimeer(ul, oud, ulTop);
 }
 // Voorste bak van de trein als miniatuur in de lijst (alleen uit eigen plaatjes; geen plaatje = niets tonen)
-function miniTrein(r) {
+// Arriva (ARR) geeft NS geen stelnummers door, dus voor die treinen tonen we een vast plaatje. Verander ARR_PLAAT naar een ander bestand uit PLAATJES (bijv. "lint41_arriva.png") als het niet klopt.
+const ARR_PLAAT = "gtw_6_achterhoek.png";
+function miniTrein(r, soort) {
   try {
-    if (!r || !r.stel || !r.stel.length) return "";
-    const st = stukkenVan(stellenNaarDelen(r.stel)[0])[0];
+    let st;
+    if (r && r.stel && r.stel.length) st = stukkenVan(stellenNaarDelen(r.stel)[0])[0];
+    else if (["ARR", "ARRIVA"].includes(String(soort || "").toUpperCase())) { const l = PLAATJES.find(x => x.bestand === ARR_PLAAT); st = l && uitSegmenten(l)[0]; }
+    else return "";
     if (!st || !/^plaatjes\//.test(st.src)) return "";
     const W = 72, b = st.f1 - st.f0, img = h("img", {src: st.src, alt: "", loading: "lazy", decoding: "async"});
     img.style.width = W / b + "px"; img.style.marginLeft = -st.f0 * W / b + "px";
