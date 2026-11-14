@@ -1,0 +1,35 @@
+Treinplek ("Waar zit ik in de trein?")
+Copyright (c) 2026 Treinplek, treinplek@gmail.com. Alle rechten voorbehouden. / All rights reserved.
+
+NEDERLANDS
+
+1. Gebruik. Je mag de app gebruiken zoals hij online wordt aangeboden, voor eigen gebruik.
+
+2. Wat niet mag zonder voorafgaande schriftelijke toestemming van de maker:
+   - de code, het ontwerp, de teksten, het icoon of de eigen plaatjes kopieren, aanpassen of opnieuw uploaden of publiceren,
+     ook niet op een andere website, in een app-winkel of als openbare kopie (fork);
+   - de app of delen ervan verkopen, verhuren of uitgeven als eigen werk;
+   - de app of delen ervan gebruiken om geld mee te verdienen, bijvoorbeeld met reclame, abonnementen,
+     betaalde apps, sponsoring of het doorverkopen van gegevens.
+   De maker kan hiervoor toestemming geven. Mail naar treinplek@gmail.com.
+
+3. GitHub. Binnen GitHub mag je de bestanden bekijken en (zonder te publiceren) forken, zoals de gebruiksvoorwaarden van GitHub dat toestaan.
+   Dat geeft je geen andere rechten dan in dit bestand staan.
+
+4. Onderdelen van anderen. Deze licentie geldt alleen voor het eigen werk van de maker. Voor onderdelen van anderen gelden hun eigen voorwaarden:
+   - het lettertype Roboto (Apache License 2.0, zie lettertype/LICENSE-Roboto.txt);
+   - gegevens en plaatjes van NS (rechten bij NS, gebruik volgens de voorwaarden van de NS API);
+   - het telscript van GoatCounter (eigen voorwaarden).
+   Je krijgt via dit bestand geen rechten op die onderdelen.
+
+5. Geen NS. Dit is een onofficiele app, niet van NS en niet verbonden met NS. NS en het NS-logo zijn van NS.
+
+6. Geen garantie. De app wordt geleverd zoals hij is, zonder garantie. Zie "Privacy en voorwaarden" in de app.
+
+ENGLISH (summary; the Dutch text above leads)
+
+You may use the app as offered online, for your own use. Without prior written permission from the author you may not copy, modify,
+re-upload or publish the code, design, texts, icon or own images (including on another website, in an app store, or as a public copy),
+and you may not sell the app or use it to make money (advertising, subscriptions, paid apps, sponsorship, reselling data).
+Third-party parts (Roboto font under Apache License 2.0, NS data and images, GoatCounter script) are covered by their own terms.
+This is an unofficial app, not affiliated with NS. Provided "as is", without warranty. Permission requests: treinplek@gmail.com.
